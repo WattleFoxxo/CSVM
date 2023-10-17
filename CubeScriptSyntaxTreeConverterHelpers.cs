@@ -24,7 +24,7 @@ public static class CubeScriptCompilerCheck
             File.AppendAllText("output.cusps", syntax1.Type + "\n");
         }
         return;
-
+        
     }
 
 
