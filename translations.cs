@@ -1,6 +1,8 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using FrooxEngine;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Newtonsoft.Json;
+using System.Xml.Linq;
 
 
 namespace ProtoGram
@@ -15,16 +17,25 @@ namespace ProtoGram
         public string Defaultvalue { get; set; }
         public string Returntype { get; set; }
 
+        public override string ToString()
+        {
+            return " Type: " + Type + " Value: " + Value;
+        }
+
     }
 
     public class CubeScriptSyntaxTree
     {
         public List<CubeScriptSyntax> Syntax { get; set; }
         public object RootNode { get; internal set; }
+        public override string ToString()
+        {
+            return string.Join("\n", Syntax.Select((s) => s.ToString()));
+        }
     }
-
     public class CubeScriptSyntaxTreeConverter
     {
+
         public static CubeScriptSyntaxTree Convert(string filePath)
         {
             // Create a list to store the tokens
@@ -54,7 +65,7 @@ namespace ProtoGram
                 var tokenValue = token.ValueText;
 
                 // Add the token to the list
-                
+
                 syntax.Add(new CubeScriptSyntax { Type = tokenType, Value = tokenValue });
             }
 
@@ -70,14 +81,17 @@ namespace ProtoGram
     // Create a new list to store the translated tokens
     List<CubeScriptSyntax> translatedSyntax = new List<CubeScriptSyntax>();
 
+    // Reverse the translation dictionary
+    var reversedDictionary = translationDictionary.Reverse();
+
     // Iterate over each token in the syntax tree
     foreach (CubeScriptSyntax token in syntaxTree.Syntax)
     {
-        // Check if the token's value is in the translation dictionary
-        if (translationDictionary.ContainsKey(token.Value))
+        // Check if the token's value is in the reversed translation dictionary
+        if (reversedDictionary.Any(x => x.Key == token.Type))
         {
             // If it is, replace the token's value with the translated value
-            translatedSyntax.Add(new CubeScriptSyntax { Type = token.Type, Value = translationDictionary[token.Value] });
+            translatedSyntax.Add(new CubeScriptSyntax { Type = token.Type, Value = reversedDictionary.First(x => x.Key == token.Type).Value });
         }
         else
         {
@@ -85,6 +99,7 @@ namespace ProtoGram
             translatedSyntax.Add(token);
         }
     }
+
 
     // Create a new CubeScriptSyntaxTree and add the translated tokens
     CubeScriptSyntaxTree translatedSyntaxTree = new CubeScriptSyntaxTree();
@@ -257,8 +272,8 @@ namespace ProtoGram
             // Return the translated CubeScriptSyntaxTree
             return translatedSyntaxTree;
         }
-        
-        
+
+
     }
 
 }

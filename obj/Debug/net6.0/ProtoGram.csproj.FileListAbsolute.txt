@@ -137,4 +137,4 @@ C:\Users\GAMER\source\repos\ProtoGram\bin\Debug\net6.0\System.Management.dll
 C:\Users\GAMER\source\repos\ProtoGram\bin\Debug\net6.0\System.Diagnostics.PerformanceCounter.dll
 C:\Users\GAMER\source\repos\ProtoGram\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
 C:\Users\GAMER\source\repos\ProtoGram\bin\Debug\net6.0\System.Configuration.Install.dll
-C:\Users\GAMER\source\repos\ProtoGram\bin\Debug\net6.0\Antlr3.Runtime.dll
+C:\Users\GAMER\source\repos\ProtoGram\bin\Debug\net6.0\Antlr4.Runtime.dll
