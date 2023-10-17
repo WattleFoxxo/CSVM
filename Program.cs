@@ -92,13 +92,10 @@ namespace Protogram
             };
             Console.WriteLine(syntaxTree);
             // Convert the CubeScript syntax tree to a C# syntax tree
-            CubeScriptSyntaxTree tree = CubeScriptSyntaxTreeConverter.ConvertToCSharp(syntaxTree, replacements);
+            var tree = CompilerFunctions.Compile(syntaxTree);
             
-            CubeScriptSyntaxTree finalisedcode = CubeScriptSyntaxTreeConverter.Translate(tree, replacements);
-
-
-
-            Console.WriteLine("CubeScript Syntax Tree:", finalisedcode);
+            Console.WriteLine("CubeScript Syntax Tree:", syntaxTree.ToString());
+            Console.WriteLine("C# Syntax Tree:", tree.ToString());
         }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Newtonsoft.Json;
+using System.Linq;
 using System.Xml.Linq;
 
 
@@ -14,9 +15,10 @@ namespace ProtoGram
         public string Name { get; set; }
         public string Type { get; set; }
         public string Value { get; set; }
+        public string Token { get; set; }
         public string Defaultvalue { get; set; }
         public string Returntype { get; set; }
-
+        
         public override string ToString()
         {
             return  " Type: " + Type + " Value: " + Value ;
@@ -28,6 +30,9 @@ namespace ProtoGram
     {
         public List<CubeScriptSyntax> Syntax { get; set; }
         public object RootNode { get; internal set; }
+        List<CubeScriptSyntax> translatedSyntax = new List<CubeScriptSyntax>();
+        internal object token;
+
         public override string ToString()
         {
             return string.Join("\n", Syntax.Select((s) => s .ToString()));
@@ -240,7 +245,7 @@ namespace ProtoGram
             VaribleDesignation.Add("UsingKeyword");
             return VaribleDesignation;
         }
-        public static CubeScriptSyntaxTree ConvertToCSharp(CubeScriptSyntaxTree syntaxTree, Dictionary<string, string> replacements)
+        public static CubeScriptSyntaxTree ReplaceValues(CubeScriptSyntaxTree syntaxTree, Dictionary<string, string> replacements)
         {
             // Create a new list to store the translated tokens
             List<CubeScriptSyntax> translatedSyntax = new List<CubeScriptSyntax>();
@@ -248,11 +253,11 @@ namespace ProtoGram
             // Iterate over each token in the syntax tree
             foreach (CubeScriptSyntax token in syntaxTree.Syntax)
             {
-                // Check if the token's value is in the translation dictionary
-                if (Template_VaribleDesignation().Contains(token.Type))
+                // Check if the token's type is in the translation dictionary
+                if (replacements.ContainsKey(token.Type))
                 {
                     // If it is, replace the token's value with the translated value
-                    translatedSyntax.Add(new CubeScriptSyntax { Type = token.Type, Value = token.Value });
+                    translatedSyntax.Add(new CubeScriptSyntax { Type = token.Type, Value = replacements[token.Type] });
                 }
                 else
                 {
@@ -268,8 +273,146 @@ namespace ProtoGram
             // Return the translated CubeScriptSyntaxTree
             return translatedSyntaxTree;
         }
-        
-        
+
+        //public static CubeScriptSyntaxTree ReplaceTargetOfClassOrMethod(string syntax, string replacement)
+        //{
+
+        //    // Get the target class or method and its contents
+        //    int indexOfClassOrMethod = -1;
+        //    for (int i = 0; i < syntax.Count; i++)
+        //    {
+        //        if ((syntax[i].Type == "ClassKeyword" || syntax[i].Type == "OpenBraceToken") && syntax[i].Value == target)
+        //        {
+        //            indexOfClassOrMethod = i;
+        //            break;
+        //        }
+        //    }
+        //    if (indexOfClassOrMethod == -1)
+        //    {
+        //        return; // Target not found, do nothing
+        //    }
+        //    int indexOfOpeningBrace = -1, indexOfClosingBrace = -1, depth = 1;
+        //    for (int i = indexOfClassOrMethod; i < syntax.Count; i++)
+        //    {
+        //        if (syntax[i].Type == "OpenBraceToken")
+        //        {
+        //            if (indexOfOpeningBrace == -1)
+        //            {
+        //                indexOfOpeningBrace = i;
+        //            }
+        //            depth++;
+        //        }
+        //        else if (syntax[i].Type == "CloseBraceToken")
+        //        {
+        //            depth--;
+        //            if (depth == 0)
+        //            {
+        //                indexOfClosingBrace = i;
+        //                break;
+        //            }
+        //        }
+        //    }
+        //    if (indexOfOpeningBrace == -1 || indexOfClosingBrace == -1)
+        //    {
+        //        return; // Error in syntax, do nothing
+        //    }
+        //    // Insert the replacement code between the opening and closing braces
+        //    translatedSyntax.InsertRange(indexOfOpeningBrace + 1, CSharpSyntaxTree.ParseText(replacement).GetRoot().DescendantTokens()
+        //        .Select(token => new CubeScriptSyntax { Type = token.Kind().ToString(), Value = token.ValueText }));
+        //    // Remove the old class or method and its content
+        //    translatedSyntax.RemoveRange(indexOfClassOrMethod, indexOfClosingBrace - indexOfClassOrMethod);
+        //    return translatedSyntaxTree;
+        //}
+
+        //public static void ReplaceCodeInsideForEachLoop(string forEach)
+        //{
+        //    // Get the opening and closing parenthesis of the foreach loop
+        //    int indexOfOpeningParen = -1, indexOfClosingParen = -1, depth = 1;
+        //    for (int i = 0; i < syntax.Count; i++)
+        //    {
+        //        if (syntax[i].Type == "ForEachKeyword" && syntax[i].Value == forEach)
+        //        {
+        //            indexOfOpeningParen = i + 1;
+        //            break;
+        //        }
+        //    }
+        //    if (indexOfOpeningParen == -1)
+        //    {
+        //        return; // Foreach not found, do nothing
+        //    }
+        //    for (int i = indexOfOpeningParen; i < syntax.Count; i++)
+        //    {
+        //        if (syntax[i].Type == "OpenParenToken")
+        //        {
+        //            depth++;
+        //        }
+        //        else if (syntax[i].Type == "CloseParenToken")
+        //        {
+        //            depth--;
+        //            if (depth == 0)
+        //            {
+        //                indexOfClosingParen = i;
+        //                break;
+        //            }
+        //        }
+        //    }
+        //    if (indexOfClosingParen == -1)
+        //    {
+        //        return; // Error in syntax, do nothing
+        //    }
+        //    // Get the index of opening brace after the foreach loop variable declaration
+        //    int indexOfOpeningBrace = -1;
+        //    for (int i = indexOfClosingParen; i < syntax.Count; i++)
+        //    {
+        //        if (syntax[i].Type == "OpenBraceToken")
+        //        {
+        //            indexOfOpeningBrace = i;
+        //            break;
+        //        }
+        //    }
+        //    if (indexOfOpeningBrace == -1)
+        //    {
+        //        return; // Error in syntax, do nothing
+        //    }
+        //    // Insert a new line and a tab character at the index of the opening brace
+        //    translatedSyntax.Insert(indexOfOpeningBrace, new CubeScriptSyntax { Type = "WhitespaceTrivia", Value = "\n\t" });
+        //    // Get the index of the closing brace
+        //    int indexOfClosingBrace = -1, scopeCount = 1;
+        //    for (int i = indexOfOpeningBrace; i < syntax.Count; i++)
+        //    {
+        //        if (syntax[i].Type == "OpenBraceToken")
+        //        {
+        //            scopeCount++;
+        //        }
+        //        else if (syntax[i].Type == "CloseBraceToken")
+        //        {
+        //            scopeCount--;
+        //            if (scopeCount == 0)
+        //            {
+        //                indexOfClosingBrace = i;
+        //                break;
+        //            }
+        //        }
+        //    }
+        //    if (indexOfClosingBrace == -1)
+        //    {
+        //        return; // Error in syntax, do nothing
+        //    }
+        //    // Get the content between the opening and closing braces
+        //    string codeInsideForeach = string.Join("", syntax.GetRange(indexOfOpeningBrace + 1, indexOfClosingBrace - indexOfOpeningBrace - 1)
+        //        .Select(foreachToken => foreachToken.Value));
+        //    // Remove the content inside the braces
+        //    translatedSyntax.RemoveRange(indexOfOpeningBrace + 1, indexOfClosingBrace - indexOfOpeningBrace - 1);
+        //    // Insert a new line and a tab character at the index of the opening brace
+        //    translatedSyntax.Insert(indexOfOpeningBrace + 1, new CubeScriptSyntax { Type = "WhitespaceTrivia", Value = "\n\t" });
+        //    // Insert the content inside the braces with a tab character prefix
+        //    translatedSyntax.InsertRange(indexOfOpeningBrace + 2, CSharpSyntaxTree.ParseText(codeInsideForeach).GetRoot().DescendantTokens()
+        //        .Select(token => new CubeScriptSyntax { Type = token.Kind().ToString(), Value = "\t" + token.ValueText }));
+        //    // Insert a new line and a tab character at the index of the closing brace
+        //    translatedSyntax.Insert(indexOfClosingBrace, new CubeScriptSyntax { Type = "WhitespaceTrivia", Value = "\n\t" });
+        //}
+
+
     }
 
 }
