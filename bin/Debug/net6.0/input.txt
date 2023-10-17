@@ -1,5 +1,4 @@
-# Open the input file for reading
-input = """ {"using", "UsingKeyword"},
+{"using", "UsingKeyword"},
 {"typeof", "TypeOfKeyword"},
 {"try", "TryKeyword"},
 {"true", "TrueKeyword"},
@@ -63,15 +62,4 @@ input = """ {"using", "UsingKeyword"},
 {"&", "AmpersandToken"},
 {"&&", "AmpersandAmpersandToken"},
 {"endtemplate", "endfunctiontemplate"},
-{"template", "functiontemplate"},"""
-def main():
-    # take the input string and remove duplicate lines
-    lines = input.splitlines()
-    lines = list(dict.fromkeys(lines))
-    # print the output without the keys
-    for line in lines:
-        print(line.split(',')[0].strip())
-
-
-
-main()
+{"template", "functiontemplate"},

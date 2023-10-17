@@ -19,7 +19,7 @@ namespace ProtoGram
 
         public override string ToString()
         {
-            return " Type: " + Type + " Value: " + Value;
+            return  " Type: " + Type + " Value: " + Value ;
         }
 
     }
@@ -30,7 +30,7 @@ namespace ProtoGram
         public object RootNode { get; internal set; }
         public override string ToString()
         {
-            return string.Join("\n", Syntax.Select((s) => s.ToString()));
+            return string.Join("\n", Syntax.Select((s) => s .ToString()));
         }
     }
     public class CubeScriptSyntaxTreeConverter
@@ -65,7 +65,7 @@ namespace ProtoGram
                 var tokenValue = token.ValueText;
 
                 // Add the token to the list
-
+                
                 syntax.Add(new CubeScriptSyntax { Type = tokenType, Value = tokenValue });
             }
 
@@ -81,17 +81,14 @@ namespace ProtoGram
     // Create a new list to store the translated tokens
     List<CubeScriptSyntax> translatedSyntax = new List<CubeScriptSyntax>();
 
-    // Reverse the translation dictionary
-    var reversedDictionary = translationDictionary.Reverse();
-
     // Iterate over each token in the syntax tree
     foreach (CubeScriptSyntax token in syntaxTree.Syntax)
     {
-        // Check if the token's value is in the reversed translation dictionary
-        if (reversedDictionary.Any(x => x.Key == token.Type))
+        // Check if the token's value is in the translation dictionary
+        if (translationDictionary.ContainsKey(token.Type))
         {
             // If it is, replace the token's value with the translated value
-            translatedSyntax.Add(new CubeScriptSyntax { Type = token.Type, Value = reversedDictionary.First(x => x.Key == token.Type).Value });
+            translatedSyntax.Add(new CubeScriptSyntax { Type = token.Type, Value = translationDictionary[token.Value] });
         }
         else
         {
@@ -99,7 +96,6 @@ namespace ProtoGram
             translatedSyntax.Add(token);
         }
     }
-
 
     // Create a new CubeScriptSyntaxTree and add the translated tokens
     CubeScriptSyntaxTree translatedSyntaxTree = new CubeScriptSyntaxTree();
@@ -272,8 +268,8 @@ namespace ProtoGram
             // Return the translated CubeScriptSyntaxTree
             return translatedSyntaxTree;
         }
-
-
+        
+        
     }
 
 }
