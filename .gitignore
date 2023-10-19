@@ -1,0 +1,40 @@
+# Ignore Visual Studio files
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.dll
+*.exe
+
+# Ignore NuGet packages
+packages/
+
+# Ignore build artifacts
+*.log
+*.txt
+*.nupkg
+*.zip
+*.rar
+*.7z
+*.bak
+*.tmp
+*.pdb
+*.xml
+*.csv
+*.json
+*.md
+*.html
+*.htm
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.ico
+*.pdf
+*.doc
+*.docx
+*.xls
+*.xlsx

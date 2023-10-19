@@ -1,101 +1,72 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using ProtoGram;
+using System;
+using Antlr4.Runtime;
+using Antlr4.Runtime.Tree;
+using Antlr4.Runtime.Misc;
+using System.Collections.Generic;
+using System.Linq;
+using static Protogram.CubeScriptVisitor;
+using System.Text;
+using System.Threading.Tasks;
+using System.Reflection;
+using System.IO;
 
+namespace Protogram;
 
-namespace Protogram
+   public class MyListener : CubeScriptBaseListener
 {
-    class Program
+    public override void EnterAssignment([NotNull] CubeScriptParser.AssignmentContext context)
     {
+        // extract information from an assignment statement
+        string variableName = context.IDENTIFIER().GetText();
+        string value = context.expression().GetText();
+        Console.WriteLine("Assignment: {0} = {1}", variableName, value);
+    }
 
-
-
-
-        static void Main(string[] args)
+    public override void EnterFunctioncallexprs([NotNull] CubeScriptParser.FunctioncallexprsContext context)
+    {
+        // extract information from a function call
+        string functionName = context.IDENTIFIER(0).GetText();
+        string namespaceName = null;
+        if (context.IDENTIFIER().Length > 1)
         {
-
-            // Get the path to the CubeScript code file
-            string filePath = args[0];
-
-            // Convert the CubeScript code file to a syntax tree
-            CubeScriptSyntaxTree syntaxTree = CubeScriptSyntaxTreeConverter.Convert(filePath);
-            // Print the syntax tree
-            //CubeScriptSyntaxTreeConverter.Print(syntaxTree);
-
-            // setup
-            Dictionary<string, string> replacements = new Dictionary<string, string>()
-            {
-            {"using", "UsingKeyword"},
-            {"typeof", "TypeOfKeyword"},
-            {"try", "TryKeyword"},
-            {"true", "TrueKeyword"},
-            {"~", "TildeToken"},
-            {"throw", "ThrowKeyword"},
-            {"public", "StructKeyword"},
-            {"", "StringLiteralToken"},
-            {"string", "StringKeyword"},
-            {"static", "StaticKeyword"},
-            {"/", "SlashToken"},
-            {";", "SemicolonToken"},
-            {"return", "ReturnKeyword"},
-            {"readonly", "ReadOnlyKeyword"},
-            {"?", "QuestionToken"},
-            {"??", "QuestionQuestionToken"},      
-            {"private", "PrivateKeyword"},
-            {"+", "PlusToken"},
-            {"++", "PlusPlusToken"},
-            {"+=", "PlusEqualsToken"},
-            {")", "OpenParenToken"},
-            {"]", "OpenBracketToken"},
-           
-            {"  ", "OmittedArraySizeExpressionToken"},
-            {"object", "ObjectKeyword"},
-            {" ", "NumericLiteralToken"},
-            {"null", "NullKeyword"},
-            {"new", "NewKeyword"},
-            {"lock", "LockKeyword"},
-            {"<", "LessThanToken"},
-            {"   ", "InterpolatedStringTextToken"},
-            {"{", "InterpolatedStringStartToken"},
-            {"}", "InterpolatedStringEndToken"},
-            {"internal", "InternalKeyword"},
-            {"int", "IntKeyword"},
-            {"in", "InKeyword"},
-            {"if", "IfKeyword"},
-            {">", "GreaterThanToken"},
-            {"for", "ForKeyword"},
-            {"foreach", "ForEachKeyword"},
-            {"false", "FalseKeyword"},
-            {"!", "ExclamationToken"},
-            {"!=", "ExclamationEqualsToken"},
-            {"=", "EqualsToken"},
-            {"=>", "EqualsGreaterThanToken"},
-            {"==", "EqualsEqualsToken"},
-            {"enum", "EnumKeyword"},
-            {"     ", "EndOfFileToken"},
-            {"else", "ElseKeyword"},
-            {".", "DotToken"},
-            {",", "CommaToken"},
-            {":", "ColonToken"},
-            {"class", "ClassKeyword"},
-            {"char", "CharKeyword"},
-            {"catch", "CatchKeyword"},
-            {"byte", "ByteKeyword"},
-            {"bool", "BoolKeyword"},
-            {"||", "BarBarToken"},
-            {"*", "AsteriskToken"},
-             {"&", "AmpersandToken"},
-             {"&&", "AmpersandAmpersandToken"},
-             {"endtemplate", "endfunctiontemplate"},
-             {"template", "functiontemplate"},
-             
-            };
-            Console.WriteLine(syntaxTree);
-            // Convert the CubeScript syntax tree to a C# syntax tree
-            var tree = CompilerFunctions.Compile(syntaxTree);
-            
-            Console.WriteLine("CubeScript Syntax Tree:", syntaxTree.ToString());
-            Console.WriteLine("C# Syntax Tree:", tree.ToString());
+            namespaceName = context.IDENTIFIER(0).GetText();
+            functionName = context.IDENTIFIER(1).GetText();
+        }
+        Console.WriteLine("Function call: {0}.{1}", namespaceName, functionName);
+        foreach (var expression in context.expression())
+        {
+            Console.WriteLine("Argument: {0}", expression.GetText());
         }
     }
+
+
+static void Main(string[] args)
+{
+    // Get the path to the CubeScript code file
+    string filePath = "trial2.cusp";
+
+    // create a stream of your input code
+    var inputStream = new AntlrInputStream(File.ReadAllText(filePath));
+
+    // create a lexer that reads from the input stream
+    var lexer = new CubeScriptLexer(inputStream);
+
+    // create a token stream from the lexer
+    var tokenStream = new CommonTokenStream(lexer);
+
+    // create a parser that reads from the token stream
+    var parser = new CubeScriptParser(tokenStream);
+
+    // call the appropriate method on the parser to parse your input code
+    var tree = parser.program();
+
+    // create an instance of your listener class
+    var listener = new MyListener();
+
+    // traverse the parse tree using the listener
+    var walker = new ParseTreeWalker();
+    walker.Walk(listener, tree);
+}
 }

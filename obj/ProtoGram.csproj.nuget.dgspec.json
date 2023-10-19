@@ -45,21 +45,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "Antlr4": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+            "Antlr4.Runtime.Standard": {
+              "target": "Package",
+              "version": "[4.13.1, )"
+            },
+            "Antlr4BuildTasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[4.6.6, )"
-            },
-            "Antlr4.CodeGenerator": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[4.6.6, )"
-            },
-            "Antlr4.Runtime": {
-              "target": "Package",
-              "version": "[4.6.6, )"
+              "version": "[12.3.0, )"
             },
             "Microsoft.CodeAnalysis.CSharp": {
               "target": "Package",

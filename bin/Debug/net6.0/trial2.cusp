@@ -1,23 +1,20 @@
-// trial file for the cubescript launguage
-// take in a file and print the contents with line numbers
-
 using Home;
 using Home.Letterbox;
+
 house: ArrayProgram
 
 struct main()
 {
-    public string file = "test.txt"; // setup the test.txt file for public access
+    string file = "test.txt"; // setup the test.txt file for public access
 
-    public int line = 0; // setup the line number for the file
+     int line = 0; // setup the line number for the file
 
-    public string{} lines = Letterbox.read(file); // read all the lines in the file
+    string lines = Letterbox.read(file); // read all the lines in the file
 
-    foreach (line in lines) // for each line in the file
+    for (line > lines) // for each line in the file
     {
-        line = +1; // increment the line number
+        line = line +1 // increment the line number
 
         print(line + ": " + line); // print the line number and the line
     }
-main()
 }
