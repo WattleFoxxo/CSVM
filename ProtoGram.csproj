@@ -32,6 +32,9 @@
 
   <ItemGroup>
     <None Remove="code\**" />
+    <None Update="trial2.cusp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

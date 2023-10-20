@@ -66,6 +66,17 @@ public partial class CubeScriptBaseVisitor<Result> : AbstractParseTreeVisitor<Re
 	/// <return>The visitor result.</return>
 	public virtual Result VisitAssignmentexpr([NotNull] CubeScriptParser.AssignmentexprContext context) { return VisitChildren(context); }
 	/// <summary>
+	/// Visit a parse tree produced by the <c>importstatement</c>
+	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitImportstatement([NotNull] CubeScriptParser.ImportstatementContext context) { return VisitChildren(context); }
+	/// <summary>
 	/// Visit a parse tree produced by the <c>forstatement</c>
 	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
 	/// <para>
@@ -131,17 +142,6 @@ public partial class CubeScriptBaseVisitor<Result> : AbstractParseTreeVisitor<Re
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	public virtual Result VisitStringarray([NotNull] CubeScriptParser.StringarrayContext context) { return VisitChildren(context); }
-	/// <summary>
-	/// Visit a parse tree produced by the <c>importstatement</c>
-	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
-	/// <para>
-	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
-	/// on <paramref name="context"/>.
-	/// </para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	public virtual Result VisitImportstatement([NotNull] CubeScriptParser.ImportstatementContext context) { return VisitChildren(context); }
 	/// <summary>
 	/// Visit a parse tree produced by the <c>returnstatement</c>
 	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
@@ -336,6 +336,28 @@ public partial class CubeScriptBaseVisitor<Result> : AbstractParseTreeVisitor<Re
 	/// <return>The visitor result.</return>
 	public virtual Result VisitParenthesisexpr([NotNull] CubeScriptParser.ParenthesisexprContext context) { return VisitChildren(context); }
 	/// <summary>
+	/// Visit a parse tree produced by the <c>decrementexpr</c>
+	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitDecrementexpr([NotNull] CubeScriptParser.DecrementexprContext context) { return VisitChildren(context); }
+	/// <summary>
+	/// Visit a parse tree produced by the <c>incrementexpr</c>
+	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitIncrementexpr([NotNull] CubeScriptParser.IncrementexprContext context) { return VisitChildren(context); }
+	/// <summary>
 	/// Visit a parse tree produced by the <c>multexpr</c>
 	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
 	/// <para>
@@ -368,6 +390,17 @@ public partial class CubeScriptBaseVisitor<Result> : AbstractParseTreeVisitor<Re
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	public virtual Result VisitArrayassignment([NotNull] CubeScriptParser.ArrayassignmentContext context) { return VisitChildren(context); }
+	/// <summary>
+	/// Visit a parse tree produced by the <c>identifierexpression</c>
+	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
+	/// <para>
+	/// The default implementation returns the result of calling <see cref="AbstractParseTreeVisitor{Result}.VisitChildren(IRuleNode)"/>
+	/// on <paramref name="context"/>.
+	/// </para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	public virtual Result VisitIdentifierexpression([NotNull] CubeScriptParser.IdentifierexpressionContext context) { return VisitChildren(context); }
 	/// <summary>
 	/// Visit a parse tree produced by the <c>dotfunctioncallexprs</c>
 	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.

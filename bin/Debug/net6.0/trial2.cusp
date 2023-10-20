@@ -15,6 +15,6 @@ struct main()
     {
         line = line +1 // increment the line number
 
-        print(line + ": " + line); // print the line number and the line
+        print(line + lines); // print the line number and the line
     }
 }

@@ -5,6 +5,7 @@ program: line* EOF;
 line: statement | ifBlock | whileBlock;
 
 statement : assignment #assignmentexpr
+    | 'using' IDENTIFIER? ('.' IDENTIFIER?)* ';' #importstatement
     | 'for' '(' IDENTIFIER?  expression  IDENTIFIER? ')' block #forstatement
     | 'struct' IDENTIFIER? '(' IDENTIFIER? (',' IDENTIFIER?)* ')' '{' line* '}' #functioncallstatment
     | 'struct' IDENTIFIER? '(' TYPE? (',' TYPE?)* ')' '{' line* '}' #functioncallstatement
@@ -14,9 +15,8 @@ statement : assignment #assignmentexpr
     // array string{} thing = function call
     | IDENTIFIER? 'string' IDENTIFIER? ARRAY? '=' functionCall ';' #stringarray
     | 'string' IDENTIFIER? ARRAY? '=' STRING ';' #stringarray
-    | IMPORT IDENTIFIER ';' #importstatement
+    | IMPORT? IDENTIFIER? ';' #importstatement
     // IMPORT with any amount of . and identifiers
-    | IMPORT IDENTIFIER ('.' IDENTIFIER)* ';' #importstatement
     | 'return' expression ';' #returnstatement
     | 'break' ';' #breakstatement
     | 'continue' ';' #continuestatement
@@ -49,6 +49,7 @@ expression
     : constant #constantexpr
     
     | IDENTIFIER constant '=' expression #varibleassignment
+    | IDENTIFIER #identifierexpression
     | functionCall #functioncallexpr
     | '(' expression ')' #parenthesisexpr
     | '!' expression #notexpr
@@ -59,13 +60,22 @@ expression
     | expression '?' expression ':' expression #ternaryexpr
     | expression '[' expression ']' #arrayexpr
     | expression '.' IDENTIFIER #dotexpr
-    | expression '.' IDENTIFIER '(' (expression (',' expression)*)? ')' #dotfunctioncallexprs
-    | expression '.' IDENTIFIER '(' (expression (',' expression)*)? ')' '.' IDENTIFIER #dotfunctioncallexprs
+    | expression '.' IDENTIFIER? '('? (expression (',' expression)*)? ')'? #dotfunctioncallexprs
+    | expression '.' IDENTIFIER? '('? (expression (',' expression)*)? ')'? '.'? IDENTIFIER? #dotfunctioncallexprs
+    // expression++ and expression--
+    | expression '++' #incrementexpr
+    | expression '--' #decrementexpr
+    // identifier++ and identifier--
+    | IDENTIFIER '++' #incrementexpr
+    | IDENTIFIER '--' #decrementexpr
+    //constant++ and constant--
+    | constant '++' #incrementexpr
+    | constant '--' #decrementexpr
     //array 
-    | expression '[' expression ']' '=' expression #arrayassignment
-    | expression '[' expression ']' '=' functionCall #arrayassignment
-    | expression '{' expression '}' '=' expression #arrayassignment
-    | expression '{' expression* '}' '=' functionCall #arrayassignment
+    | expression '[' expression? ']' '=' expression #arrayassignment
+    | expression '[' expression? ']' '=' functionCall #arrayassignment
+    | expression '{' expression ?'}' '=' expression #arrayassignment
+    | expression '{' expression* ?'}' '=' functionCall #arrayassignment
     //varibles in functions
     | IDENTIFIER '.' IDENTIFIER #dotexpr
     | IDENTIFIER '.' IDENTIFIER '(' (expression (',' expression)*)? ')' #dotfunctioncallexprs
@@ -79,10 +89,10 @@ Comment
     |  '/*' .*? '*/'
       |  '#' ~( '\r' | '\n' )*)
       -> skip
-  ;    
-multOp: '*' | '/' | '%' | '^' | '<<' | '>>' |'&' | '|' | '&&' | '||' | '='| '+=' | '-=' | '*=' | '/=' | '%=' | '^=' | '<<=' | '>>=' | '&=' | '|=';
-addOp: '+' | '-';
-cmpOp: '<' | '>' | '<=' | '>=' | '==' | '!=';
+  ;  
+multOp: '*' | '/' | '%' | '^' | '<<' | '>>' |'&' | '|' | '&&' | '||' | '='| '+=' | '-=' | '*='; 
+addOp: '+' | '-'; 
+cmpOp: '<' | '>' | '<=' | '>=' | '==' | '!='; 
 boolOp: BOOL_OPERATOR;
 //array definition
 BOOL_OPERATOR: 'and' | 'or' | 'xor';

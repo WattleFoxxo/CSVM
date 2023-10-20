@@ -74,6 +74,20 @@ public partial class CubeScriptBaseListener : ICubeScriptListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitAssignmentexpr([NotNull] CubeScriptParser.AssignmentexprContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by the <c>importstatement</c>
+	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterImportstatement([NotNull] CubeScriptParser.ImportstatementContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>importstatement</c>
+	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitImportstatement([NotNull] CubeScriptParser.ImportstatementContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by the <c>forstatement</c>
 	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
 	/// <para>The default implementation does nothing.</para>
@@ -157,20 +171,6 @@ public partial class CubeScriptBaseListener : ICubeScriptListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitStringarray([NotNull] CubeScriptParser.StringarrayContext context) { }
-	/// <summary>
-	/// Enter a parse tree produced by the <c>importstatement</c>
-	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterImportstatement([NotNull] CubeScriptParser.ImportstatementContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by the <c>importstatement</c>
-	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitImportstatement([NotNull] CubeScriptParser.ImportstatementContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by the <c>returnstatement</c>
 	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
@@ -414,6 +414,34 @@ public partial class CubeScriptBaseListener : ICubeScriptListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitParenthesisexpr([NotNull] CubeScriptParser.ParenthesisexprContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by the <c>decrementexpr</c>
+	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterDecrementexpr([NotNull] CubeScriptParser.DecrementexprContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>decrementexpr</c>
+	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitDecrementexpr([NotNull] CubeScriptParser.DecrementexprContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by the <c>incrementexpr</c>
+	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterIncrementexpr([NotNull] CubeScriptParser.IncrementexprContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>incrementexpr</c>
+	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitIncrementexpr([NotNull] CubeScriptParser.IncrementexprContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by the <c>multexpr</c>
 	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
 	/// <para>The default implementation does nothing.</para>
@@ -455,6 +483,24 @@ public partial class CubeScriptBaseListener : ICubeScriptListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitArrayassignment([NotNull] CubeScriptParser.ArrayassignmentContext context) { }
+
+	/// <summary>
+	/// Enter a parse tree produced by the <c>identifierexpression</c>
+	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual object EnterIdentifierexpression([NotNull] CubeScriptParser.IdentifierexpressionContext context)
+	{
+		return null;
+	}
+	/// <summary>
+	/// Exit a parse tree produced by the <c>identifierexpression</c>
+	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitIdentifierexpression([NotNull] CubeScriptParser.IdentifierexpressionContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by the <c>dotfunctioncallexprs</c>
 	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.

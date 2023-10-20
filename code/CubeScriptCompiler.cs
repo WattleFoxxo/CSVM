@@ -100,7 +100,6 @@ namespace ProtoGram
                     return "for";
                 case "ForEachKeyword":
                     return "foreach";
-
                 case "FalseKeyword":
                     return "false";
                 case "ExclamationToken":
