@@ -17,14 +17,74 @@ namespace Protogram;
    public class MyListener : CubeScriptBaseListener
     {
         //varibles array
-        public Dictionary<string, object?> Varibles { get; } = new();
+        public Dictionary<string, object?> Varibles { get; set;} = new();
         //function array
-        public Dictionary<string, object?> Functions { get; } = new();
+        public Dictionary<string, object?> Functions { get; set;} = new();
         //converted code array?
-        public List<string> ConvertedCode { get; } = new();
+        public List<string> ConvertedCode { get; set; } = new();
         //loaded assemblies array
-        public List<Assembly> LoadedAssemblies { get; } = new();
+        public List<Assembly> LoadedAssemblies { get;set; } = new();
         //function name
+    static void Main(string[] args)
+{
+    // Get the path to the CubeScript code file
+    string filePath = "trial2.cusp";
+
+    // create a stream of your input code
+    var inputStream = new AntlrInputStream(File.ReadAllText(filePath));
+
+    // create a lexer that reads from the input stream
+    var lexer = new CubeScriptLexer(inputStream);
+
+    // create a token stream from the lexer
+    var tokenStream = new CommonTokenStream(lexer);
+
+    // create a parser that reads from the token stream
+    var parser = new CubeScriptParser(tokenStream);
+
+    // call the appropriate method on the parser to parse your input code
+    var tree = parser.program();
+
+    // create an instance of your listener class
+    var listener = new MyListener();
+
+    // traverse the parse tree using the listener
+    var walker = new ParseTreeWalker();
+    walker.Walk(listener, tree);
+
+   //convert the code using the listener and switch statements
+
+//    if (listener.LoadedAssemblies.Count > 0)
+//     {
+//          //get the loaded assemblies and convert them to c#
+//         foreach (var assembly in listener.LoadedAssemblies)// printing the loaded assemblies will make you think that it's loaded more then once but it's not
+//         {
+//             if (assembly == null)
+//             {
+//                 throw new Exception("Assembly is null");
+//             }
+//             else 
+//             {
+//                 Console.WriteLine("C# Assembly: {0}", assembly);
+//                 listener.LoadedAssemblies.Add(assembly);
+               
+//             }
+//         }
+
+
+        
+//     }
+        //compiled code gets writed to a file with the same name as the input file
+
+    Console.WriteLine(filePath);
+    File.WriteAllLines(filePath + ".csc", listener.ConvertedCode);
+    //get the converted code and print it
+    var convertedCodeString = string.Join(Environment.NewLine, listener.ConvertedCode);
+    Console.WriteLine("C# Program: {0}", convertedCodeString);
+    Console.WriteLine("C# Program varibles: {0}", string.Join(", ", listener.Varibles.Select(kv => $"{kv.Key}={kv.Value}")));
+    
+    string variables = string.Join(", ", listener.Varibles.Select(kv => $"{kv.Key}={kv.Value}"));
+}
 
     public override void EnterVaribleassignment([NotNull] CubeScriptParser.VaribleassignmentContext context)
     {
@@ -33,11 +93,10 @@ namespace Protogram;
         string value = context.expression().GetText();
 
         // convert the assignment statement to C#
-        string csharpStatement = $"{variableName} = {value};";
-        //save the converted code to the dictionary
-        ConvertedCode.Add(csharpStatement);
+        string csharpStatement = $"var {variableName} = {value};";
 
         Console.WriteLine("C# varible Assignment: {0}", csharpStatement);
+        Varibles.Add(variableName, value);
     }
     //get the string things from #varibledeclaration
     public override void EnterVaribledeclaration([NotNull] CubeScriptParser.VaribledeclarationContext context)
@@ -45,30 +104,48 @@ namespace Protogram;
         // extract information from an assignment statement
         string variableName = context.IDENTIFIER().GetText();
         string value = context.expression().GetText();
-
+         Varibles.Add(variableName, value);
         // convert the assignment statement to C#
-        string csharpStatement = $"{variableName} = {value};";
+        string csharpStatement = $" var {variableName} = {value};";
         //save the converted code to the dictionary
         ConvertedCode.Add(csharpStatement);
 
         Console.WriteLine("C# varible Assignment: {0}", csharpStatement);
     }
-    
 
+    public override void ExitForeachstatement([NotNull] CubeScriptParser.ForeachstatementContext context)
+    {
+      if (context.IDENTIFIER() != null)
+        {
+            // extract information from an assignment statement
+            string variableName = context.IDENTIFIER().GetText();
+            string value = context.expression().GetText();
+            //add the varible to the dictionary
+            Varibles.Add(variableName, value);
+            // convert the assignment statement to C#
+            string csharpStatement = $" var {variableName} = {value};";
+            //save the converted code to the dictionary
+            ConvertedCode.Add(csharpStatement);
+
+            Console.WriteLine("C# varible Assignment: {0}", csharpStatement);
+        }
+    }
+    
 
     //finished converting to c#
     public override void EnterProgram([NotNull] CubeScriptParser.ProgramContext context)
         {
-            Console.WriteLine("C# Program: {0}", context.GetText());
+            Console.WriteLine("CubeScript Program: {0}", context.GetText());
         }
     public override void EnterAssignment([NotNull] CubeScriptParser.AssignmentContext context)
     {
         // extract information from an assignment statement
         string variableName = context.IDENTIFIER().GetText();
         string value = context.expression().GetText();
-
+        //add the varible to the dictionary
+        Varibles.Add(variableName, value);
         // convert the assignment statement to C#
-        string csharpStatement = $"{variableName} = {value};";
+        string csharpStatement = $" var {variableName} = {value};";
         //save the converted code to the dictionary
         ConvertedCode.Add(csharpStatement);
 
@@ -129,7 +206,7 @@ namespace Protogram;
         
     }
 
-    public override object? EnterIdentifierexpression(CubeScriptParser.IdentifierexpressionContext context)
+    public override void EnterIdentifierexpression(CubeScriptParser.IdentifierexpressionContext context)
     {
         var varname = context.IDENTIFIER().GetText();
         if (!Varibles.ContainsKey(varname))
@@ -138,7 +215,8 @@ namespace Protogram;
         }
         Console.WriteLine("C# Assignment: {0}", varname);
         ConvertedCode.Add(varname);
-        return Varibles[varname];
+        
+        return;
     }
 
     public override void EnterFunctioncallexprs(CubeScriptParser.FunctioncallexprsContext context)
@@ -171,6 +249,7 @@ namespace Protogram;
                 if (string.IsNullOrEmpty(functionName))
                 {
                     // Do something for empty function name
+                    Console.WriteLine("woops! something went wrong");
                 }
                 else
                 {
@@ -181,6 +260,7 @@ namespace Protogram;
 
         Console.WriteLine("C# Function Call: {0}", csharpStatement);
         ConvertedCode.Add(csharpStatement);
+        Varibles.Add(functionName, arguments);
         
     }
     public override void EnterImportstatement(CubeScriptParser.ImportstatementContext context)
@@ -218,69 +298,22 @@ namespace Protogram;
 
 }
     public override void EnterFunctioncallstatment(CubeScriptParser.FunctioncallstatmentContext context)
-    {
-        // This method is called when the parser enters a function declaration rule in the parse tree
-        string functionName = context.IDENTIFIER()[0].GetText();
-        string parameters = string.Join(", ", context.IDENTIFIER().Skip(1).Select(i => i.GetText()));
-        //replace with c# code
-        string csharpStatement = $"public void {functionName}({parameters}) {{ }}";
-        Console.WriteLine("C# Function Declaration: {0}", csharpStatement);
-
-        Console.WriteLine("Function Declaration: {0}({1})", functionName, parameters);
-        ConvertedCode.Add(csharpStatement);
-    }
-
-    static void Main(string[] args)
 {
-    // Get the path to the CubeScript code file
-    string filePath = "trial2.cusp";
+    // This method is called when the parser enters a function declaration rule in the parse tree
+    string functionName = context.IDENTIFIER()[0].GetText();
+    string parameters = string.Join(", ", context.IDENTIFIER().Skip(1).Select(i => i.GetText()));
 
-    // create a stream of your input code
-    var inputStream = new AntlrInputStream(File.ReadAllText(filePath));
+    // Add variables from the Varibles dictionary to the function body
+    string variables = Varibles.Count > 0 ? string.Join("\n", Varibles.Select(kv => $"var {kv.Key} = {kv.Value};\n")) : "";
 
-    // create a lexer that reads from the input stream
-    var lexer = new CubeScriptLexer(inputStream);
+    // Replace null with an empty string to avoid null reference exception and add the variables to the function body
+    string csharpStatement = $"public void {functionName}({parameters}) {{\n{variables}\n}}";
 
-    // create a token stream from the lexer
-    var tokenStream = new CommonTokenStream(lexer);
+    Console.WriteLine("C# Function Declaration: {0}", csharpStatement);
+    Console.WriteLine("function call body {0}", variables);
 
-    // create a parser that reads from the token stream
-    var parser = new CubeScriptParser(tokenStream);
-
-    // call the appropriate method on the parser to parse your input code
-    var tree = parser.program();
-
-    // create an instance of your listener class
-    var listener = new MyListener();
-
-    // traverse the parse tree using the listener
-    var walker = new ParseTreeWalker();
-    walker.Walk(listener, tree);
-
-   //convert the code using the listener and switch statements
-
-   if (listener.LoadedAssemblies.Count > 0)
-    {
-         //get the loaded assemblies and convert them to c#
-        foreach (var assembly in listener.LoadedAssemblies)// printing the loaded assemblies will make you think that it's loaded more then once but it's not
-        {
-            if (assembly == null)
-            {
-                throw new Exception("Assembly is null");
-            }
-            else 
-            {
-                Console.WriteLine("C# Assembly: {0}", assembly);
-                listener.ConvertedCode.Add(assembly.ToString());
-                return;
-            }
-        }
-
-        
-    }
-    //get the converted code and print it
-    var convertedCodeString = string.Join(Environment.NewLine, listener.ConvertedCode);
-    Console.WriteLine("C# Program: {0}", convertedCodeString);
-    
+    Console.WriteLine("Function Declaration: {0}({1})", functionName, parameters);
+    ConvertedCode.Add(csharpStatement);
 }
+
 }

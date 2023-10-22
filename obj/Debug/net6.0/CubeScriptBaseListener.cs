@@ -483,17 +483,13 @@ public partial class CubeScriptBaseListener : ICubeScriptListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitArrayassignment([NotNull] CubeScriptParser.ArrayassignmentContext context) { }
-
 	/// <summary>
 	/// Enter a parse tree produced by the <c>identifierexpression</c>
 	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual object EnterIdentifierexpression([NotNull] CubeScriptParser.IdentifierexpressionContext context)
-	{
-		return null;
-	}
+	public virtual void EnterIdentifierexpression([NotNull] CubeScriptParser.IdentifierexpressionContext context) { }
 	/// <summary>
 	/// Exit a parse tree produced by the <c>identifierexpression</c>
 	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.

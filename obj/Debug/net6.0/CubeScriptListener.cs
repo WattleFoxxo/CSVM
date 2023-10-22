@@ -412,13 +412,12 @@ public interface ICubeScriptListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitArrayassignment([NotNull] CubeScriptParser.ArrayassignmentContext context);
-
 	/// <summary>
 	/// Enter a parse tree produced by the <c>identifierexpression</c>
 	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	object EnterIdentifierexpression([NotNull] CubeScriptParser.IdentifierexpressionContext context);
+	void EnterIdentifierexpression([NotNull] CubeScriptParser.IdentifierexpressionContext context);
 	/// <summary>
 	/// Exit a parse tree produced by the <c>identifierexpression</c>
 	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
