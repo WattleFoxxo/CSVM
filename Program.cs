@@ -20,10 +20,15 @@ namespace Protogram;
         public Dictionary<string, object?> Varibles { get; set;} = new();
         //function array
         public Dictionary<string, object?> Functions { get; set;} = new();
+        public Dictionary<string, object?> FunctionBody { get; set;} = new();
+        public Dictionary<string, object?> FunctionVariables { get; set;} = new();
+        public List<string> codeName { get; set;} = new();
+        public List<string> FunctionName { get; set;} = new();
         //converted code array?
         public List<string> ConvertedCode { get; set; } = new();
         //loaded assemblies array
         public List<Assembly> LoadedAssemblies { get;set; } = new();
+        public List<string> finishedvar { get; set;} = new();
         //function name
     static void Main(string[] args)
 {
@@ -74,6 +79,10 @@ namespace Protogram;
 
         
 //     }
+
+
+    // Replace null with an empty string to avoid null reference exception and add the variables to the function body
+
         //compiled code gets writed to a file with the same name as the input file
 
     Console.WriteLine(filePath);
@@ -84,8 +93,37 @@ namespace Protogram;
     Console.WriteLine("C# Program varibles: {0}", string.Join(", ", listener.Varibles.Select(kv => $"{kv.Key}={kv.Value}")));
     
     string variables = string.Join(", ", listener.Varibles.Select(kv => $"{kv.Key}={kv.Value}"));
-}
 
+    //create the function
+  
+    // get the function name
+    var functionName = listener.codeName[0].ToString();
+    var fnvaribles = string.Join(", ", listener.FunctionVariables.Select(kv => $"{kv.Key}={kv.Value}"));
+
+    var cat = CreateFunction(functionName,fnvaribles, convertedCodeString, listener.Varibles, listener.Functions);
+    Console.WriteLine("C# Programsa: {0}", cat);
+
+
+
+
+}
+public static string CreateFunction(string functionName, string parameters, string functionBody, Dictionary<string, object?> variables, Dictionary<string, object?> functions)
+{
+    // Replace variables and functions in the function body
+    foreach (var variable in variables)
+    {
+        functionBody = functionBody.Replace(variable.Key, variable.Value?.ToString() ?? "");
+    }
+    foreach (var function in functions)
+    {
+        functionBody = functionBody.Replace(function.Key, function.Value?.ToString() ?? "");
+    }
+
+    // Create the function declaration
+    string functionDeclaration = $"public static void {functionName}({(string.IsNullOrEmpty(parameters) ? "" : parameters)}) {{ {functionBody} }}";
+
+    return functionDeclaration;
+}
     public override void EnterVaribleassignment([NotNull] CubeScriptParser.VaribleassignmentContext context)
     {
         // extract information from an assignment statement
@@ -223,6 +261,10 @@ namespace Protogram;
     {
         // extract information from a function call
         string functionName = context.IDENTIFIER(0).GetText();
+
+        //write the function name to the dictionary
+        //FunctionName.Add(functionName);
+
         string namespaceName = null;
         if (context.IDENTIFIER().Length > 1)
         {
@@ -239,7 +281,8 @@ namespace Protogram;
             case "print":
                 csharpStatement = $"Console.WriteLine({arguments});";
                 break;
-            case "input":
+            case "read":
+                csharpStatement = $"Console.ReadLine({arguments});";
                
                 break;
             case "random":
@@ -303,17 +346,14 @@ namespace Protogram;
     string functionName = context.IDENTIFIER()[0].GetText();
     string parameters = string.Join(", ", context.IDENTIFIER().Skip(1).Select(i => i.GetText()));
 
-    // Add variables from the Varibles dictionary to the function body
-    string variables = Varibles.Count > 0 ? string.Join("\n", Varibles.Select(kv => $"var {kv.Key} = {kv.Value};\n")) : "";
 
-    // Replace null with an empty string to avoid null reference exception and add the variables to the function body
-    string csharpStatement = $"public void {functionName}({parameters}) {{\n{variables}\n}}";
+//write the functionname and parameters to the dictionary
+Functions.Add(functionName, parameters);
+    string catz = functionName.ToString();
+    //save the function name to the dictionary
+    codeName.Add(catz);//add the name of the function to the list as dictonary's are horrible for this
+Console.WriteLine("C# Function Declaration: {0}", catz);
 
-    Console.WriteLine("C# Function Declaration: {0}", csharpStatement);
-    Console.WriteLine("function call body {0}", variables);
-
-    Console.WriteLine("Function Declaration: {0}({1})", functionName, parameters);
-    ConvertedCode.Add(csharpStatement);
 }
 
 }

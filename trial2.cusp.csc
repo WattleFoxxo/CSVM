@@ -1,7 +1,4 @@
-public void main() {
-
-}
  var line = 0;
-Letterbox.read(file);
+Console.ReadLine(file);
  var lineh = line+1;
 Console.WriteLine(line+lines);
