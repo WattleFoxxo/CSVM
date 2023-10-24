@@ -75,65 +75,77 @@ public interface ICubeScriptListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitImportstatement([NotNull] CubeScriptParser.ImportstatementContext context);
 	/// <summary>
-	/// Enter a parse tree produced by the <c>forstatement</c>
+	/// Enter a parse tree produced by the <c>namespacestatement</c>
 	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterForstatement([NotNull] CubeScriptParser.ForstatementContext context);
+	void EnterNamespacestatement([NotNull] CubeScriptParser.NamespacestatementContext context);
 	/// <summary>
-	/// Exit a parse tree produced by the <c>forstatement</c>
+	/// Exit a parse tree produced by the <c>namespacestatement</c>
 	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitForstatement([NotNull] CubeScriptParser.ForstatementContext context);
+	void ExitNamespacestatement([NotNull] CubeScriptParser.NamespacestatementContext context);
 	/// <summary>
-	/// Enter a parse tree produced by the <c>functioncallstatment</c>
+	/// Enter a parse tree produced by the <c>functiondefine</c>
 	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterFunctioncallstatment([NotNull] CubeScriptParser.FunctioncallstatmentContext context);
+	void EnterFunctiondefine([NotNull] CubeScriptParser.FunctiondefineContext context);
 	/// <summary>
-	/// Exit a parse tree produced by the <c>functioncallstatment</c>
+	/// Exit a parse tree produced by the <c>functiondefine</c>
 	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitFunctioncallstatment([NotNull] CubeScriptParser.FunctioncallstatmentContext context);
+	void ExitFunctiondefine([NotNull] CubeScriptParser.FunctiondefineContext context);
 	/// <summary>
-	/// Enter a parse tree produced by the <c>functioncallstatement</c>
+	/// Enter a parse tree produced by the <c>forloop</c>
 	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterFunctioncallstatement([NotNull] CubeScriptParser.FunctioncallstatementContext context);
+	void EnterForloop([NotNull] CubeScriptParser.ForloopContext context);
 	/// <summary>
-	/// Exit a parse tree produced by the <c>functioncallstatement</c>
+	/// Exit a parse tree produced by the <c>forloop</c>
 	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitFunctioncallstatement([NotNull] CubeScriptParser.FunctioncallstatementContext context);
+	void ExitForloop([NotNull] CubeScriptParser.ForloopContext context);
 	/// <summary>
-	/// Enter a parse tree produced by the <c>foreachstatement</c>
+	/// Enter a parse tree produced by the <c>variblecallexpr</c>
 	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterForeachstatement([NotNull] CubeScriptParser.ForeachstatementContext context);
+	void EnterVariblecallexpr([NotNull] CubeScriptParser.VariblecallexprContext context);
 	/// <summary>
-	/// Exit a parse tree produced by the <c>foreachstatement</c>
+	/// Exit a parse tree produced by the <c>variblecallexpr</c>
 	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitForeachstatement([NotNull] CubeScriptParser.ForeachstatementContext context);
+	void ExitVariblecallexpr([NotNull] CubeScriptParser.VariblecallexprContext context);
 	/// <summary>
-	/// Enter a parse tree produced by the <c>varibledeclaration</c>
+	/// Enter a parse tree produced by the <c>functioncallexprr</c>
 	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterVaribledeclaration([NotNull] CubeScriptParser.VaribledeclarationContext context);
+	void EnterFunctioncallexprr([NotNull] CubeScriptParser.FunctioncallexprrContext context);
 	/// <summary>
-	/// Exit a parse tree produced by the <c>varibledeclaration</c>
+	/// Exit a parse tree produced by the <c>functioncallexprr</c>
 	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitVaribledeclaration([NotNull] CubeScriptParser.VaribledeclarationContext context);
+	void ExitFunctioncallexprr([NotNull] CubeScriptParser.FunctioncallexprrContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>varibleexpr</c>
+	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterVaribleexpr([NotNull] CubeScriptParser.VaribleexprContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>varibleexpr</c>
+	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitVaribleexpr([NotNull] CubeScriptParser.VaribleexprContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>stringarray</c>
 	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
@@ -146,54 +158,6 @@ public interface ICubeScriptListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitStringarray([NotNull] CubeScriptParser.StringarrayContext context);
-	/// <summary>
-	/// Enter a parse tree produced by the <c>returnstatement</c>
-	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterReturnstatement([NotNull] CubeScriptParser.ReturnstatementContext context);
-	/// <summary>
-	/// Exit a parse tree produced by the <c>returnstatement</c>
-	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitReturnstatement([NotNull] CubeScriptParser.ReturnstatementContext context);
-	/// <summary>
-	/// Enter a parse tree produced by the <c>breakstatement</c>
-	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterBreakstatement([NotNull] CubeScriptParser.BreakstatementContext context);
-	/// <summary>
-	/// Exit a parse tree produced by the <c>breakstatement</c>
-	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitBreakstatement([NotNull] CubeScriptParser.BreakstatementContext context);
-	/// <summary>
-	/// Enter a parse tree produced by the <c>continuestatement</c>
-	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterContinuestatement([NotNull] CubeScriptParser.ContinuestatementContext context);
-	/// <summary>
-	/// Exit a parse tree produced by the <c>continuestatement</c>
-	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitContinuestatement([NotNull] CubeScriptParser.ContinuestatementContext context);
-	/// <summary>
-	/// Enter a parse tree produced by the <c>housestatement</c>
-	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterHousestatement([NotNull] CubeScriptParser.HousestatementContext context);
-	/// <summary>
-	/// Exit a parse tree produced by the <c>housestatement</c>
-	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitHousestatement([NotNull] CubeScriptParser.HousestatementContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>arraydefinition</c>
 	/// labeled alternative in <see cref="CubeScriptParser.statement"/>.
@@ -237,6 +201,16 @@ public interface ICubeScriptListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitWhileBlock([NotNull] CubeScriptParser.WhileBlockContext context);
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="CubeScriptParser.functiondefinition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFunctiondefinition([NotNull] CubeScriptParser.FunctiondefinitionContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="CubeScriptParser.functiondefinition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFunctiondefinition([NotNull] CubeScriptParser.FunctiondefinitionContext context);
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="CubeScriptParser.assignment"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -269,102 +243,6 @@ public interface ICubeScriptListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitBlock([NotNull] CubeScriptParser.BlockContext context);
 	/// <summary>
-	/// Enter a parse tree produced by the <c>notexpr</c>
-	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterNotexpr([NotNull] CubeScriptParser.NotexprContext context);
-	/// <summary>
-	/// Exit a parse tree produced by the <c>notexpr</c>
-	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitNotexpr([NotNull] CubeScriptParser.NotexprContext context);
-	/// <summary>
-	/// Enter a parse tree produced by the <c>ternaryexpr</c>
-	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterTernaryexpr([NotNull] CubeScriptParser.TernaryexprContext context);
-	/// <summary>
-	/// Exit a parse tree produced by the <c>ternaryexpr</c>
-	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitTernaryexpr([NotNull] CubeScriptParser.TernaryexprContext context);
-	/// <summary>
-	/// Enter a parse tree produced by the <c>addexpr</c>
-	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterAddexpr([NotNull] CubeScriptParser.AddexprContext context);
-	/// <summary>
-	/// Exit a parse tree produced by the <c>addexpr</c>
-	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitAddexpr([NotNull] CubeScriptParser.AddexprContext context);
-	/// <summary>
-	/// Enter a parse tree produced by the <c>constantexpr</c>
-	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterConstantexpr([NotNull] CubeScriptParser.ConstantexprContext context);
-	/// <summary>
-	/// Exit a parse tree produced by the <c>constantexpr</c>
-	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitConstantexpr([NotNull] CubeScriptParser.ConstantexprContext context);
-	/// <summary>
-	/// Enter a parse tree produced by the <c>functioncallexpr</c>
-	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterFunctioncallexpr([NotNull] CubeScriptParser.FunctioncallexprContext context);
-	/// <summary>
-	/// Exit a parse tree produced by the <c>functioncallexpr</c>
-	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitFunctioncallexpr([NotNull] CubeScriptParser.FunctioncallexprContext context);
-	/// <summary>
-	/// Enter a parse tree produced by the <c>boolexpr</c>
-	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterBoolexpr([NotNull] CubeScriptParser.BoolexprContext context);
-	/// <summary>
-	/// Exit a parse tree produced by the <c>boolexpr</c>
-	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitBoolexpr([NotNull] CubeScriptParser.BoolexprContext context);
-	/// <summary>
-	/// Enter a parse tree produced by the <c>parenthesisexpr</c>
-	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterParenthesisexpr([NotNull] CubeScriptParser.ParenthesisexprContext context);
-	/// <summary>
-	/// Exit a parse tree produced by the <c>parenthesisexpr</c>
-	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitParenthesisexpr([NotNull] CubeScriptParser.ParenthesisexprContext context);
-	/// <summary>
-	/// Enter a parse tree produced by the <c>decrementexpr</c>
-	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterDecrementexpr([NotNull] CubeScriptParser.DecrementexprContext context);
-	/// <summary>
-	/// Exit a parse tree produced by the <c>decrementexpr</c>
-	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitDecrementexpr([NotNull] CubeScriptParser.DecrementexprContext context);
-	/// <summary>
 	/// Enter a parse tree produced by the <c>incrementexpr</c>
 	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
 	/// </summary>
@@ -377,17 +255,29 @@ public interface ICubeScriptListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitIncrementexpr([NotNull] CubeScriptParser.IncrementexprContext context);
 	/// <summary>
-	/// Enter a parse tree produced by the <c>multexpr</c>
+	/// Enter a parse tree produced by the <c>negationexpr</c>
 	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterMultexpr([NotNull] CubeScriptParser.MultexprContext context);
+	void EnterNegationexpr([NotNull] CubeScriptParser.NegationexprContext context);
 	/// <summary>
-	/// Exit a parse tree produced by the <c>multexpr</c>
+	/// Exit a parse tree produced by the <c>negationexpr</c>
 	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitMultexpr([NotNull] CubeScriptParser.MultexprContext context);
+	void ExitNegationexpr([NotNull] CubeScriptParser.NegationexprContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>ternaryexpr</c>
+	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterTernaryexpr([NotNull] CubeScriptParser.TernaryexprContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>ternaryexpr</c>
+	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitTernaryexpr([NotNull] CubeScriptParser.TernaryexprContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>dotexpr</c>
 	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
@@ -413,18 +303,6 @@ public interface ICubeScriptListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitArrayassignment([NotNull] CubeScriptParser.ArrayassignmentContext context);
 	/// <summary>
-	/// Enter a parse tree produced by the <c>identifierexpression</c>
-	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void EnterIdentifierexpression([NotNull] CubeScriptParser.IdentifierexpressionContext context);
-	/// <summary>
-	/// Exit a parse tree produced by the <c>identifierexpression</c>
-	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	void ExitIdentifierexpression([NotNull] CubeScriptParser.IdentifierexpressionContext context);
-	/// <summary>
 	/// Enter a parse tree produced by the <c>dotfunctioncallexprs</c>
 	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
 	/// </summary>
@@ -449,29 +327,65 @@ public interface ICubeScriptListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitArrayexpr([NotNull] CubeScriptParser.ArrayexprContext context);
 	/// <summary>
-	/// Enter a parse tree produced by the <c>varibleassignment</c>
+	/// Enter a parse tree produced by the <c>binaryexpr</c>
 	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterVaribleassignment([NotNull] CubeScriptParser.VaribleassignmentContext context);
+	void EnterBinaryexpr([NotNull] CubeScriptParser.BinaryexprContext context);
 	/// <summary>
-	/// Exit a parse tree produced by the <c>varibleassignment</c>
+	/// Exit a parse tree produced by the <c>binaryexpr</c>
 	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitVaribleassignment([NotNull] CubeScriptParser.VaribleassignmentContext context);
+	void ExitBinaryexpr([NotNull] CubeScriptParser.BinaryexprContext context);
 	/// <summary>
-	/// Enter a parse tree produced by the <c>cmpexpr</c>
+	/// Enter a parse tree produced by the <c>constantexpr</c>
 	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void EnterCmpexpr([NotNull] CubeScriptParser.CmpexprContext context);
+	void EnterConstantexpr([NotNull] CubeScriptParser.ConstantexprContext context);
 	/// <summary>
-	/// Exit a parse tree produced by the <c>cmpexpr</c>
+	/// Exit a parse tree produced by the <c>constantexpr</c>
 	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	void ExitCmpexpr([NotNull] CubeScriptParser.CmpexprContext context);
+	void ExitConstantexpr([NotNull] CubeScriptParser.ConstantexprContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>functioncallexpr</c>
+	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterFunctioncallexpr([NotNull] CubeScriptParser.FunctioncallexprContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>functioncallexpr</c>
+	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitFunctioncallexpr([NotNull] CubeScriptParser.FunctioncallexprContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>parenthesisexpr</c>
+	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterParenthesisexpr([NotNull] CubeScriptParser.ParenthesisexprContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>parenthesisexpr</c>
+	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitParenthesisexpr([NotNull] CubeScriptParser.ParenthesisexprContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>decrementexpr</c>
+	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterDecrementexpr([NotNull] CubeScriptParser.DecrementexprContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>decrementexpr</c>
+	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitDecrementexpr([NotNull] CubeScriptParser.DecrementexprContext context);
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="CubeScriptParser.multOp"/>.
 	/// </summary>

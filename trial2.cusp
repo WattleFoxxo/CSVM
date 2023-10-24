@@ -2,6 +2,8 @@ using Home;
 using Home.Letterbox;
 
 house: ArrayProgram
+{
+
 
 struct main()
 {
@@ -17,4 +19,5 @@ struct main()
 
         print(line + lines); // print the line number and the line
     }
+}
 }

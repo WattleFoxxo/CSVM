@@ -2,25 +2,34 @@
 
 program: line* EOF;
 
-line: statement | ifBlock | whileBlock;
+line: statement | ifBlock | whileBlock expression | Comment;
 
 statement : assignment #assignmentexpr
-    | 'using' IDENTIFIER? ('.' IDENTIFIER?)* ';' #importstatement
-    | 'for' '(' IDENTIFIER?  expression  IDENTIFIER? ')' block #forstatement
-    | 'struct' IDENTIFIER? '(' IDENTIFIER? (',' IDENTIFIER?)* ')' '{' line* '}' #functioncallstatment
-    | 'struct' IDENTIFIER? '(' TYPE? (',' TYPE?)* ')' '{' line* '}' #functioncallstatement
-    | 'for' '(' IDENTIFIER? '>' expression? ')' block #foreachstatement
-    | functionCall ';'#functioncallstatement
-    | TYPE IDENTIFIER? '=' expression ';' #varibledeclaration
-    // array string{} thing = function call
-    | IDENTIFIER? 'string' IDENTIFIER? ARRAY? '=' functionCall ';' #stringarray
-    | 'string' IDENTIFIER? ARRAY? '=' STRING ';' #stringarray
-    | IMPORT? IDENTIFIER? ';' #importstatement
-    // IMPORT with any amount of . and identifiers
-    | 'return' expression ';' #returnstatement
-    | 'break' ';' #breakstatement
-    | 'continue' ';' #continuestatement
-    | 'house' ':' IDENTIFIER?  #housestatement
+    //import statement
+    | IMPORT IDENTIFIER ';' #importstatement
+    | IMPORT IDENTIFIER '.' IDENTIFIER ';' #importstatement
+    //namespace statement
+    | 'house:' IDENTIFIER '{' line* '}' #namespacestatement
+    //function
+    |functiondefinition #functiondefine
+    
+    //for blank > blank
+    | 'for' '(' IDENTIFIER '>' IDENTIFIER')' block #forloop
+    //for blank < blank
+    | 'for' '(' IDENTIFIER '<' IDENTIFIER')' block #forloop
+    // function calls within varible assignment
+    | TYPE IDENTIFIER '=' functionCall ';' #variblecallexpr
+    //function calls
+    | functionCall ';' #functioncallexprr
+    //varibles
+    | IDENTIFIER '=' expression ';' #varibleexpr
+    //varibles with type
+    | TYPE IDENTIFIER '=' expression ';' #varibleexpr
+
+
+    
+    
+
     // for loop with optional identifiers
     //array string{} thing = function call
     | IDENTIFIER? TYPE IDENTIFIER? ARRAY? '=' functionCall ';' #stringarray
@@ -32,7 +41,7 @@ ifBlock: 'if' expression block ('else' elseifBlock)?;
 elseifBlock: block | ifBlock;
 
 whileBlock: WHILE expression block ('else' elseifBlock)?;
-
+functiondefinition: 'struct' IDENTIFIER '(' (IDENTIFIER (',' IDENTIFIER)*)? ')' block;
 
 WHILE: 'while' | 'until';
 assignment: IDENTIFIER '=' expression;
@@ -47,21 +56,25 @@ ARRAY: '['|']'|'{'|'}';
 block: '{' line* '}';
 expression
     : constant #constantexpr
-    
-    | IDENTIFIER constant '=' expression #varibleassignment
-    | IDENTIFIER #identifierexpression
     | functionCall #functioncallexpr
     | '(' expression ')' #parenthesisexpr
-    | '!' expression #notexpr
-    | expression multOp expression #multexpr
-    | expression addOp expression #addexpr
-    | expression cmpOp expression #cmpexpr
-    | expression boolOp expression #boolexpr
+
+    //binary expressions
+    | expression multOp expression #binaryexpr
+    | expression addOp expression #binaryexpr
+    | expression cmpOp expression #binaryexpr
+    | expression boolOp expression #binaryexpr
+    //negation
+    | '-' expression #negationexpr
+    | '!' expression #negationexpr
     | expression '?' expression ':' expression #ternaryexpr
-    | expression '[' expression ']' #arrayexpr
+    //varibles
     | expression '.' IDENTIFIER #dotexpr
-    | expression '.' IDENTIFIER? '('? (expression (',' expression)*)? ')'? #dotfunctioncallexprs
-    | expression '.' IDENTIFIER? '('? (expression (',' expression)*)? ')'? '.'? IDENTIFIER? #dotfunctioncallexprs
+    | expression '.' IDENTIFIER '(' (expression (',' expression)*)? ')' #dotfunctioncallexprs
+    //array
+    | expression '[' expression? ']' #arrayexpr
+    | expression '{' expression ?'}' #arrayexpr
+    
     // expression++ and expression--
     | expression '++' #incrementexpr
     | expression '--' #decrementexpr
