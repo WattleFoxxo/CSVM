@@ -1,0 +1,20 @@
+using Home;
+using Home.Letterbox;
+House: ConsoleApp
+{
+    struct main(string{} args)
+    {
+        var input = Letterbox.IO(); // Console.ReadLine();
+        switch(input)
+        {
+            AT "hello":
+                print("Hello World");
+            AT "help":
+                print("Help");
+
+            bland:
+                print("I don't understand");
+                stop;
+        }
+    }
+}
