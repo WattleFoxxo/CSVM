@@ -90,7 +90,54 @@ foreach (string line in lines)
     }
     public override void EnterFunctioncallexprs([NotNull] CubeScriptParser.FunctioncallexprsContext context)
     {
-         
+         //grab everything in the function call
+        string functioncall = context.GetText();
+        //split the function call into an array
+        string[] functioncallarray = functioncall.Split(' ');
+        //grab the function name
+        string functionname = functioncallarray[0];
+        //grab the function arguments
+        string functionargs = functioncallarray[1];
+        //split the function arguments into an array
+        string[] functionargsarray = functionargs.Split(',');
+        //grab the function body
+        string functionbody = FunctionBody[functionname].ToString();
+        //split the function body into an array
+        string[] functionbodyarray = functionbody.Split('\n');
+        //grab the function variables
+        string functionvariables = FunctionVariables[functionname].ToString();
+        //split the function variables into an array
+        string[] functionvariablesarray = functionvariables.Split(',');
+        //grab the function code
+        string functioncode = "";
+        //loop through the function body array
+        foreach (string line in functionbodyarray)
+        {
+            //loop through the function variables array
+            foreach (string variable in functionvariablesarray)
+            {
+                //if the line contains the variable
+                if (line.Contains(variable))
+                {
+                    //replace the variable with the argument
+                    functioncode += line.Replace(variable, functionargsarray[Array.IndexOf(functionvariablesarray, variable)]) + "\n";
+                }
+            }
+        }
+        //split the function code into an array
+        string[] functioncodearray = functioncode.Split('\n');
+        //loop through the function code array
+        foreach (string line in functioncodearray)
+        {
+            //add the line to the converted code array
+            ConvertedCode.Add(line);
+        }
+
+        //print the converted code
+        foreach (string line in ConvertedCode)
+        {
+            Console.WriteLine(line);
+        }
        
         
     }
