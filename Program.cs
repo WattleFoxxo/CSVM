@@ -73,10 +73,10 @@ public class MyListener : CubeScriptBaseListener
         Console.WriteLine("Finished Code: \n");
         foreach (string line in lines)
         {
-            
+
             Console.WriteLine(line);
         }
-        
+
 
     }
 
@@ -86,134 +86,147 @@ public class MyListener : CubeScriptBaseListener
 
         //get the program
         string program = context.GetText();
-        //split the lines after the word struct
+        //split the program into an array of strings
         string[] lines = program.Split('\n');
-        int startIndex = 0;
-        string word = "struct";
-        while (startIndex < program.Length)
-        {
-            int wordIndex = program.IndexOf(word, startIndex);
-            if (wordIndex == -1)
-            {
-                break;
-            }
 
-            int nextWordIndex = program.IndexOf(word, wordIndex + word.Length);
-            if (nextWordIndex == -1)
-            {
-                nextWordIndex = program.Length;
-            }
-
-            int start = wordIndex;
-            while (start > 0 && !char.IsWhiteSpace(program[start - 1]))
-            {
-                start--;
-            }
-
-            int end = nextWordIndex;
-            while (end < program.Length && !char.IsWhiteSpace(program[end]))
-            {
-                end++;
-            }
-
-            string result = program.Substring(start, end - start);
-            if (result.EndsWith("<EOF>"))
-            {
-                result = result.Substring(0, result.Length - "<EOF>".Length);
-            }
-            Console.WriteLine(result);
-
-            startIndex = end;
-
-
-            //switch each statement within the result
-            switch (result)
-            {
-                case "struct":
-                    //get the struct name
-                    string[] structname = result.Split(' ');
-                    string name = structname[1];
-                    //add the struct name to the code
-                    ConvertedCode.Add("public static void " + name + "()");
-                    break;
-                case "var":
-                    //get the var name
-                    string[] varname = result.Split(' ');
-                    string var = varname[1];
-                    //add the var name to the code
-                    ConvertedCode.Add("public " + var + ";");
-                    break;
-                case "function":
-                    //get the function name
-                    string[] functionname = result.Split(' ');
-                    string func = functionname[1];
-                    //add the function name to the code
-                    ConvertedCode.Add("public void " + func + "()");
-                    break;
-                case "end":
-                    //add the end to the code
-                    ConvertedCode.Add("}");
-                    break;
-                case "if":
-                    //get the if statement
-                    string[] ifstatement = result.Split(' ');
-                    string ifstate = ifstatement[1];
-                    //add the if statement to the code
-                    ConvertedCode.Add("if (" + ifstate + ")");
-                    break;
-                case "else":
-                    //add the else statement to the code
-                    ConvertedCode.Add("else");
-                    break;
-
-            }
-
-        }
-    }
-
-
-    public override void EnterBlock([NotNull] CubeScriptParser.BlockContext context)
-    {
-        Console.WriteLine("EnterBlock \n");
-        // get the block
-        string block = context.GetText();
-        Console.WriteLine(block);
-        Console.WriteLine("exitBlock \n");
-    }
-    public override void EnterFunctioncallexprs([NotNull] CubeScriptParser.FunctioncallexprsContext context)
-    {
-        Console.WriteLine("EnterFunctioncallexprs \n");
-        //grab everything in the function call
-        string functioncall = context.GetText();
-        //split the function call into an array
-        Console.WriteLine(functioncall);
-        Console.WriteLine("exitFunctioncallexprs \n");
-
-
-    }
-
-    public override void EnterAssignment([NotNull] CubeScriptParser.AssignmentContext context)
-    {
-        Console.WriteLine("EnterAssignment");
-        string assignment = context.GetText();
-        //take each assignment and add var at the start of the line
-        string[] lines = assignment.Split('\n');
         foreach (string line in lines)
         {
-            if (line.Contains("="))
+            //perform the same logic as before for each line
+            int startIndex = 0;
+            string word = "struct";
+            while (startIndex < line.Length)
             {
-                //get the first part of the line and add var to it
-                string[] parts = line.Split('=');
-                string varname = parts[0];
-                string varvalue = parts[1];
-                string newvar = "var " + varname + " = " + varvalue;
-                finishedvar.Add(newvar);
-                Console.WriteLine(newvar);
+                int wordIndex = line.IndexOf(word, startIndex);
+                if (wordIndex == -1)
+                {
+                    break;
+                }
+
+                int nextWordIndex = line.IndexOf(word, wordIndex + word.Length);
+                if (nextWordIndex == -1)
+                {
+                    nextWordIndex = line.Length;
+                }
+
+                int start = wordIndex;
+                while (start > 0 && !char.IsWhiteSpace(line[start - 1]))
+                {
+                    start--;
+                }
+
+                int end = nextWordIndex;
+                while (end < line.Length && !char.IsWhiteSpace(line[end]))
+                {
+                    end++;
+                }
+
+                string result = line.Substring(start, end - start);
+                if (result.EndsWith("<EOF>"))
+                {
+                    result = result.Substring(0, result.Length - "<EOF>".Length);
+                }
+              
+
+                startIndex = end;
+
+
+                for (int i = startIndex; i < end; i++)
+                {
+                   
+                    Console.WriteLine(lines[i]);
+                    Console.WriteLine("exitProgram \n");
+                    // perform logic on each line
+                switch (result)
+                {
+                    case "struct":
+                        //get the struct name
+                        string[] structname = result.Split(' ');
+                        string name = structname[1];
+                        //add the struct name to the code
+                        ConvertedCode.Add("public static void " + name + "()");
+                        break;
+                    case "var":
+                        //get the var name
+                        string[] varname = result.Split(' ');
+                        string var = varname[1];
+                        //add the var name to the code
+                        ConvertedCode.Add("public " + var + ";");
+                        break;
+                    case "function":
+                        //get the function name
+                        string[] functionname = result.Split(' ');
+                        string func = functionname[1];
+                        //add the function name to the code
+                        ConvertedCode.Add("public void " + func + "()");
+                        break;
+                    case "end":
+                        //add the end to the code
+                        ConvertedCode.Add("}");
+                        break;
+                    case "if":
+                        //get the if statement
+                        string[] ifstatement = result.Split(' ');
+                        string ifstate = ifstatement[1];
+                        //add the if statement to the code
+                        ConvertedCode.Add("if (" + ifstate + ")");
+                        break;
+                    case "else":
+                        //add the else statement to the code
+                        ConvertedCode.Add("else");
+                        break;
+
+                }
+                }
+
+                //switch each statement within the result
+                Console.WriteLine("exitProgram \n");
             }
         }
-        Console.WriteLine("exitAssignment \n");
-
     }
+
+
+    // public override void EnterBlock([NotNull] CubeScriptParser.BlockContext context)
+    // {
+    //     Console.WriteLine("EnterBlock \n");
+    //     // get the block
+    //     string block = context.GetText();
+    //     Console.WriteLine(block);
+    //     Console.WriteLine("exitBlock \n");
+    // }
+    // public override void EnterFunctioncallexprs([NotNull] CubeScriptParser.FunctioncallexprsContext context)
+    // {
+    //     Console.WriteLine("EnterFunctioncallexprs \n");
+    //     //grab everything in the function call
+    //     string functioncall = context.GetText();
+    //     //split the function call into an array
+    //     Console.WriteLine(functioncall);
+    //     Console.WriteLine("exitFunctioncallexprs \n");
+
+
+    // }
+
+    // public override void EnterAssignment([NotNull] CubeScriptParser.AssignmentContext context)
+    // {
+    //     Console.WriteLine("EnterAssignment");
+    //     string assignment = context.GetText();
+    //     //take each assignment and add var at the start of the line
+    //     string[] lines = assignment.Split('\n');
+    //     foreach (string line in lines)
+    //     {
+    //         if (line.Contains("="))
+    //         {
+    //             //get the first part of the line and add var to it
+    //             string[] parts = line.Split('=');
+    //             string varname = parts[0];
+    //             string varvalue = parts[1];
+    //             string newvar = "var " + varname + " = " + varvalue;
+    //             finishedvar.Add(newvar);
+    //             Console.WriteLine(newvar);
+    //         }
+    //     }
+    //     Console.WriteLine("exitAssignment \n");
+
+    // }
 
     public override void ExitProgram([NotNull] CubeScriptParser.ProgramContext context)
     {
