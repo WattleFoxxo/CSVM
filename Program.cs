@@ -159,7 +159,7 @@ public class MyListener : CubeScriptBaseListener
                         //add the function name to the code
                         ConvertedCode.Add("public void " + func + "()");
                         break;
-                    case "end":
+                    case "}":
                         //add the end to the code
                         ConvertedCode.Add("}");
                         break;
