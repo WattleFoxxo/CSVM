@@ -157,6 +157,41 @@ public interface ICubeScriptVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitBlock([NotNull] CubeScriptParser.BlockContext context);
 	/// <summary>
+	/// Visit a parse tree produced by the <c>ternaryexpr</c>
+	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitTernaryexpr([NotNull] CubeScriptParser.TernaryexprContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>constantexpr</c>
+	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitConstantexpr([NotNull] CubeScriptParser.ConstantexprContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>functioncallexpr</c>
+	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFunctioncallexpr([NotNull] CubeScriptParser.FunctioncallexprContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>parenthesisexpr</c>
+	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitParenthesisexpr([NotNull] CubeScriptParser.ParenthesisexprContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>decrementexpr</c>
+	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDecrementexpr([NotNull] CubeScriptParser.DecrementexprContext context);
+	/// <summary>
 	/// Visit a parse tree produced by the <c>incrementexpr</c>
 	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
 	/// </summary>
@@ -171,12 +206,12 @@ public interface ICubeScriptVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitNegationexpr([NotNull] CubeScriptParser.NegationexprContext context);
 	/// <summary>
-	/// Visit a parse tree produced by the <c>ternaryexpr</c>
+	/// Visit a parse tree produced by the <c>identifiereexpr</c>
 	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitTernaryexpr([NotNull] CubeScriptParser.TernaryexprContext context);
+	Result VisitIdentifiereexpr([NotNull] CubeScriptParser.IdentifiereexprContext context);
 	/// <summary>
 	/// Visit a parse tree produced by the <c>dotexpr</c>
 	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
@@ -212,34 +247,6 @@ public interface ICubeScriptVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitBinaryexpr([NotNull] CubeScriptParser.BinaryexprContext context);
-	/// <summary>
-	/// Visit a parse tree produced by the <c>constantexpr</c>
-	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitConstantexpr([NotNull] CubeScriptParser.ConstantexprContext context);
-	/// <summary>
-	/// Visit a parse tree produced by the <c>functioncallexpr</c>
-	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitFunctioncallexpr([NotNull] CubeScriptParser.FunctioncallexprContext context);
-	/// <summary>
-	/// Visit a parse tree produced by the <c>parenthesisexpr</c>
-	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitParenthesisexpr([NotNull] CubeScriptParser.ParenthesisexprContext context);
-	/// <summary>
-	/// Visit a parse tree produced by the <c>decrementexpr</c>
-	/// labeled alternative in <see cref="CubeScriptParser.expression"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitDecrementexpr([NotNull] CubeScriptParser.DecrementexprContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="CubeScriptParser.multOp"/>.
 	/// </summary>

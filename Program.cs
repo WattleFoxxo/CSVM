@@ -11,10 +11,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
 using System.IO;
+using Antlr4.Runtime.Sharpen;
+using Antlr4.Runtime.Atn;
+using Antlr4.Runtime.Dfa;
+
 
 namespace Protogram;
 
-public class MyListener : CubeScriptBaseListener
+public class MyListener : CubeScriptBaseListener, IAntlrErrorListener<int>
 {
     //varibles array
     public Dictionary<string, object?> Varibles { get; set; } = new();
@@ -52,10 +56,11 @@ public class MyListener : CubeScriptBaseListener
 
         // create a parser that reads from the token stream
         var parser = new CubeScriptParser(tokenStream);
+        
 
         // call the appropriate method on the parser to parse your input code
         var tree = parser.program();
-
+        parser.AddErrorListener(new MyListener());
         // create an instance of your listener class
         var listener = new MyListener();
 
@@ -126,7 +131,7 @@ public class MyListener : CubeScriptBaseListener
                     result = result.Substring(0, result.Length - "<EOF>".Length);
                 }
               
-
+                
                 startIndex = end;
 
 
@@ -184,53 +189,90 @@ public class MyListener : CubeScriptBaseListener
         }
     }
 
+    public override void EnterIdentifiereexpr(CubeScriptParser.IdentifiereexprContext context)
+    {
+        var varName = context.IDENTIFIER().GetText();
+        if (!Varibles.ContainsKey(varName))
+        {
+            throw new Exception($"varible {varName} is not ddefined");
+        }
+    
+        
+    }
 
-    // public override void EnterBlock([NotNull] CubeScriptParser.BlockContext context)
-    // {
-    //     Console.WriteLine("EnterBlock \n");
-    //     // get the block
-    //     string block = context.GetText();
-    //     Console.WriteLine(block);
-    //     Console.WriteLine("exitBlock \n");
-    // }
-    // public override void EnterFunctioncallexprs([NotNull] CubeScriptParser.FunctioncallexprsContext context)
-    // {
-    //     Console.WriteLine("EnterFunctioncallexprs \n");
-    //     //grab everything in the function call
-    //     string functioncall = context.GetText();
-    //     //split the function call into an array
-    //     Console.WriteLine(functioncall);
-    //     Console.WriteLine("exitFunctioncallexprs \n");
+     public override void EnterBlock([NotNull] CubeScriptParser.BlockContext context)
+     {
+         Console.WriteLine("EnterBlock \n");
+         // get the block
+         string block = context.GetText();
+         Console.WriteLine(block);
+         Console.WriteLine("exitBlock \n");
+     }
+     public override void EnterFunctioncallexprs([NotNull] CubeScriptParser.FunctioncallexprsContext context)
+     {
+         Console.WriteLine("EnterFunctioncallexprs \n");
+         //grab everything in the function call
+         string functioncall = context.GetText();
+         //split the function call into an array
+         Console.WriteLine(functioncall);
+         Console.WriteLine("exitFunctioncallexprs \n");
 
 
-    // }
+     }
 
-    // public override void EnterAssignment([NotNull] CubeScriptParser.AssignmentContext context)
-    // {
-    //     Console.WriteLine("EnterAssignment");
-    //     string assignment = context.GetText();
-    //     //take each assignment and add var at the start of the line
-    //     string[] lines = assignment.Split('\n');
-    //     foreach (string line in lines)
-    //     {
-    //         if (line.Contains("="))
-    //         {
-    //             //get the first part of the line and add var to it
-    //             string[] parts = line.Split('=');
-    //             string varname = parts[0];
-    //             string varvalue = parts[1];
-    //             string newvar = "var " + varname + " = " + varvalue;
-    //             finishedvar.Add(newvar);
-    //             Console.WriteLine(newvar);
-    //         }
-    //     }
-    //     Console.WriteLine("exitAssignment \n");
+     public override void EnterAssignment([NotNull] CubeScriptParser.AssignmentContext context)
+     {
+         Console.WriteLine("EnterAssignment");
+         string assignment = context.GetText();
+         //take each assignment and add var at the start of the line
+         string[] lines = assignment.Split('\n');
+         foreach (string line in lines)
+         {
+             if (line.Contains("="))
+             {
+                 //get the first part of the line and add var to it
+                 string[] parts = line.Split('=');
+                 string varname = parts[0];
+                 string varvalue = parts[1];
+                 string newvar = "var " + varname + " = " + varvalue;
+                 finishedvar.Add(newvar);
+                 Console.WriteLine(newvar);
+             }
+         }
+         Console.WriteLine("exitAssignment \n");
 
-    // }
+     }
 
     public override void ExitProgram([NotNull] CubeScriptParser.ProgramContext context)
     {
         Console.WriteLine("ExitProgram \n");
     }
 
+    public void SyntaxError(IRecognizer recognizer, int offendingSymbol, int line, int charPositionInLine, string msg, RecognitionException e)
+    {
+        Console.Error.WriteLine($"Syntax error at line {line}, position {charPositionInLine}: {msg}");
+    }
+
+    public void ReportAmbiguity(Parser recognizer, DFA dfa, int startIndex, int stopIndex, bool exact, BitSet ambigAlts, ATNConfigSet configs)
+    {
+        // Handle ambiguity errors here
+        Console.WriteLine($"Ambiguity error at line {startIndex}, position {stopIndex}");
+    }
+
+    public void ReportAttemptingFullContext(Parser recognizer, DFA dfa, int startIndex, int stopIndex, BitSet conflictingAlts, SimulatorState conflictState)
+    {
+        // Handle full context errors here
+        Console.WriteLine($"Attempting full context error at line {startIndex}, position {stopIndex}");
+    }
+
+    public void ReportContextSensitivity(Parser recognizer, DFA dfa, int startIndex, int stopIndex, int prediction, SimulatorState acceptState)
+    {
+        // Handle context sensitivity errors here
+        Console.WriteLine($"Context sensitivity error at line {startIndex}, position {stopIndex}");
+    }
+
+    public void SyntaxError(TextWriter output, IRecognizer recognizer, int offendingSymbol, int line, int charPositionInLine, string msg, RecognitionException e)
+    {
+        throw new NotImplementedException();
+    }
 }

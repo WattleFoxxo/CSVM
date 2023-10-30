@@ -58,7 +58,7 @@ expression
     : constant #constantexpr
     | functionCall #functioncallexpr
     | '(' expression ')' #parenthesisexpr
-
+| IDENTIFIER #identifiereexpr
     //binary expressions
     | expression multOp expression #binaryexpr
     | expression addOp expression #binaryexpr

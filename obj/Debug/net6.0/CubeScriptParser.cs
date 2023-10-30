@@ -29,6 +29,7 @@ using Antlr4.Runtime.Atn;
 using Antlr4.Runtime.Misc;
 using Antlr4.Runtime.Tree;
 using DFA = Antlr4.Runtime.Dfa.DFA;
+using Protogram;
 
 [System.CodeDom.Compiler.GeneratedCode("ANTLR", "4.13.1")]
 [System.CLSCompliant(false)]
@@ -1431,6 +1432,123 @@ public partial class CubeScriptParser : Parser {
 			base.CopyFrom(context);
 		}
 	}
+	public partial class TernaryexprContext : ExpressionContext {
+		[System.Diagnostics.DebuggerNonUserCode] public ExpressionContext[] expression() {
+			return GetRuleContexts<ExpressionContext>();
+		}
+		[System.Diagnostics.DebuggerNonUserCode] public ExpressionContext expression(int i) {
+			return GetRuleContext<ExpressionContext>(i);
+		}
+		public TernaryexprContext(ExpressionContext context) { CopyFrom(context); }
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override void EnterRule(IParseTreeListener listener) {
+			ICubeScriptListener typedListener = listener as ICubeScriptListener;
+			if (typedListener != null) typedListener.EnterTernaryexpr(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override void ExitRule(IParseTreeListener listener) {
+			ICubeScriptListener typedListener = listener as ICubeScriptListener;
+			if (typedListener != null) typedListener.ExitTernaryexpr(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			ICubeScriptVisitor<TResult> typedVisitor = visitor as ICubeScriptVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitTernaryexpr(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+	public partial class ConstantexprContext : ExpressionContext {
+		[System.Diagnostics.DebuggerNonUserCode] public ConstantContext constant() {
+			return GetRuleContext<ConstantContext>(0);
+		}
+		public ConstantexprContext(ExpressionContext context) { CopyFrom(context); }
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override void EnterRule(IParseTreeListener listener) {
+			ICubeScriptListener typedListener = listener as ICubeScriptListener;
+			if (typedListener != null) typedListener.EnterConstantexpr(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override void ExitRule(IParseTreeListener listener) {
+			ICubeScriptListener typedListener = listener as ICubeScriptListener;
+			if (typedListener != null) typedListener.ExitConstantexpr(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			ICubeScriptVisitor<TResult> typedVisitor = visitor as ICubeScriptVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitConstantexpr(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+	public partial class FunctioncallexprContext : ExpressionContext {
+		[System.Diagnostics.DebuggerNonUserCode] public FunctionCallContext functionCall() {
+			return GetRuleContext<FunctionCallContext>(0);
+		}
+		public FunctioncallexprContext(ExpressionContext context) { CopyFrom(context); }
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override void EnterRule(IParseTreeListener listener) {
+			ICubeScriptListener typedListener = listener as ICubeScriptListener;
+			if (typedListener != null) typedListener.EnterFunctioncallexpr(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override void ExitRule(IParseTreeListener listener) {
+			ICubeScriptListener typedListener = listener as ICubeScriptListener;
+			if (typedListener != null) typedListener.ExitFunctioncallexpr(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			ICubeScriptVisitor<TResult> typedVisitor = visitor as ICubeScriptVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitFunctioncallexpr(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+	public partial class ParenthesisexprContext : ExpressionContext {
+		[System.Diagnostics.DebuggerNonUserCode] public ExpressionContext expression() {
+			return GetRuleContext<ExpressionContext>(0);
+		}
+		public ParenthesisexprContext(ExpressionContext context) { CopyFrom(context); }
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override void EnterRule(IParseTreeListener listener) {
+			ICubeScriptListener typedListener = listener as ICubeScriptListener;
+			if (typedListener != null) typedListener.EnterParenthesisexpr(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override void ExitRule(IParseTreeListener listener) {
+			ICubeScriptListener typedListener = listener as ICubeScriptListener;
+			if (typedListener != null) typedListener.ExitParenthesisexpr(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			ICubeScriptVisitor<TResult> typedVisitor = visitor as ICubeScriptVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitParenthesisexpr(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
+	public partial class DecrementexprContext : ExpressionContext {
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode IDENTIFIER() { return GetToken(CubeScriptParser.IDENTIFIER, 0); }
+		[System.Diagnostics.DebuggerNonUserCode] public ConstantContext constant() {
+			return GetRuleContext<ConstantContext>(0);
+		}
+		[System.Diagnostics.DebuggerNonUserCode] public ExpressionContext expression() {
+			return GetRuleContext<ExpressionContext>(0);
+		}
+		public DecrementexprContext(ExpressionContext context) { CopyFrom(context); }
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override void EnterRule(IParseTreeListener listener) {
+			ICubeScriptListener typedListener = listener as ICubeScriptListener;
+			if (typedListener != null) typedListener.EnterDecrementexpr(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override void ExitRule(IParseTreeListener listener) {
+			ICubeScriptListener typedListener = listener as ICubeScriptListener;
+			if (typedListener != null) typedListener.ExitDecrementexpr(this);
+		}
+		[System.Diagnostics.DebuggerNonUserCode]
+		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
+			ICubeScriptVisitor<TResult> typedVisitor = visitor as ICubeScriptVisitor<TResult>;
+			if (typedVisitor != null) return typedVisitor.VisitDecrementexpr(this);
+			else return visitor.VisitChildren(this);
+		}
+	}
 	public partial class IncrementexprContext : ExpressionContext {
 		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode IDENTIFIER() { return GetToken(CubeScriptParser.IDENTIFIER, 0); }
 		[System.Diagnostics.DebuggerNonUserCode] public ConstantContext constant() {
@@ -1479,28 +1597,23 @@ public partial class CubeScriptParser : Parser {
 			else return visitor.VisitChildren(this);
 		}
 	}
-	public partial class TernaryexprContext : ExpressionContext {
-		[System.Diagnostics.DebuggerNonUserCode] public ExpressionContext[] expression() {
-			return GetRuleContexts<ExpressionContext>();
-		}
-		[System.Diagnostics.DebuggerNonUserCode] public ExpressionContext expression(int i) {
-			return GetRuleContext<ExpressionContext>(i);
-		}
-		public TernaryexprContext(ExpressionContext context) { CopyFrom(context); }
+	public partial class IdentifiereexprContext : ExpressionContext {
+		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode IDENTIFIER() { return GetToken(CubeScriptParser.IDENTIFIER, 0); }
+		public IdentifiereexprContext(ExpressionContext context) { CopyFrom(context); }
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			ICubeScriptListener typedListener = listener as ICubeScriptListener;
-			if (typedListener != null) typedListener.EnterTernaryexpr(this);
+			if (typedListener != null) typedListener.EnterIdentifiereexpr(this);
 		}
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			ICubeScriptListener typedListener = listener as ICubeScriptListener;
-			if (typedListener != null) typedListener.ExitTernaryexpr(this);
+			if (typedListener != null) typedListener.ExitIdentifiereexpr(this);
 		}
 		[System.Diagnostics.DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			ICubeScriptVisitor<TResult> typedVisitor = visitor as ICubeScriptVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitTernaryexpr(this);
+			if (typedVisitor != null) return typedVisitor.VisitIdentifiereexpr(this);
 			else return visitor.VisitChildren(this);
 		}
 	}
@@ -1649,98 +1762,6 @@ public partial class CubeScriptParser : Parser {
 			else return visitor.VisitChildren(this);
 		}
 	}
-	public partial class ConstantexprContext : ExpressionContext {
-		[System.Diagnostics.DebuggerNonUserCode] public ConstantContext constant() {
-			return GetRuleContext<ConstantContext>(0);
-		}
-		public ConstantexprContext(ExpressionContext context) { CopyFrom(context); }
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override void EnterRule(IParseTreeListener listener) {
-			ICubeScriptListener typedListener = listener as ICubeScriptListener;
-			if (typedListener != null) typedListener.EnterConstantexpr(this);
-		}
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override void ExitRule(IParseTreeListener listener) {
-			ICubeScriptListener typedListener = listener as ICubeScriptListener;
-			if (typedListener != null) typedListener.ExitConstantexpr(this);
-		}
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			ICubeScriptVisitor<TResult> typedVisitor = visitor as ICubeScriptVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitConstantexpr(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
-	public partial class FunctioncallexprContext : ExpressionContext {
-		[System.Diagnostics.DebuggerNonUserCode] public FunctionCallContext functionCall() {
-			return GetRuleContext<FunctionCallContext>(0);
-		}
-		public FunctioncallexprContext(ExpressionContext context) { CopyFrom(context); }
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override void EnterRule(IParseTreeListener listener) {
-			ICubeScriptListener typedListener = listener as ICubeScriptListener;
-			if (typedListener != null) typedListener.EnterFunctioncallexpr(this);
-		}
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override void ExitRule(IParseTreeListener listener) {
-			ICubeScriptListener typedListener = listener as ICubeScriptListener;
-			if (typedListener != null) typedListener.ExitFunctioncallexpr(this);
-		}
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			ICubeScriptVisitor<TResult> typedVisitor = visitor as ICubeScriptVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitFunctioncallexpr(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
-	public partial class ParenthesisexprContext : ExpressionContext {
-		[System.Diagnostics.DebuggerNonUserCode] public ExpressionContext expression() {
-			return GetRuleContext<ExpressionContext>(0);
-		}
-		public ParenthesisexprContext(ExpressionContext context) { CopyFrom(context); }
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override void EnterRule(IParseTreeListener listener) {
-			ICubeScriptListener typedListener = listener as ICubeScriptListener;
-			if (typedListener != null) typedListener.EnterParenthesisexpr(this);
-		}
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override void ExitRule(IParseTreeListener listener) {
-			ICubeScriptListener typedListener = listener as ICubeScriptListener;
-			if (typedListener != null) typedListener.ExitParenthesisexpr(this);
-		}
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			ICubeScriptVisitor<TResult> typedVisitor = visitor as ICubeScriptVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitParenthesisexpr(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
-	public partial class DecrementexprContext : ExpressionContext {
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode IDENTIFIER() { return GetToken(CubeScriptParser.IDENTIFIER, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public ConstantContext constant() {
-			return GetRuleContext<ConstantContext>(0);
-		}
-		[System.Diagnostics.DebuggerNonUserCode] public ExpressionContext expression() {
-			return GetRuleContext<ExpressionContext>(0);
-		}
-		public DecrementexprContext(ExpressionContext context) { CopyFrom(context); }
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override void EnterRule(IParseTreeListener listener) {
-			ICubeScriptListener typedListener = listener as ICubeScriptListener;
-			if (typedListener != null) typedListener.EnterDecrementexpr(this);
-		}
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override void ExitRule(IParseTreeListener listener) {
-			ICubeScriptListener typedListener = listener as ICubeScriptListener;
-			if (typedListener != null) typedListener.ExitDecrementexpr(this);
-		}
-		[System.Diagnostics.DebuggerNonUserCode]
-		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
-			ICubeScriptVisitor<TResult> typedVisitor = visitor as ICubeScriptVisitor<TResult>;
-			if (typedVisitor != null) return typedVisitor.VisitDecrementexpr(this);
-			else return visitor.VisitChildren(this);
-		}
-	}
 
 	[RuleVersion(0)]
 	public ExpressionContext expression() {
@@ -1759,7 +1780,7 @@ public partial class CubeScriptParser : Parser {
 			int _alt;
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 260;
+			State = 261;
 			ErrorHandler.Sync(this);
 			switch ( Interpreter.AdaptivePredict(TokenStream,26,Context) ) {
 			case 1:
@@ -1796,13 +1817,11 @@ public partial class CubeScriptParser : Parser {
 				break;
 			case 4:
 				{
-				_localctx = new NegationexprContext(_localctx);
+				_localctx = new IdentifiereexprContext(_localctx);
 				Context = _localctx;
 				_prevctx = _localctx;
 				State = 228;
-				Match(T__17);
-				State = 229;
-				expression(19);
+				Match(IDENTIFIER);
 				}
 				break;
 			case 5:
@@ -1810,115 +1829,126 @@ public partial class CubeScriptParser : Parser {
 				_localctx = new NegationexprContext(_localctx);
 				Context = _localctx;
 				_prevctx = _localctx;
+				State = 229;
+				Match(T__17);
 				State = 230;
-				Match(T__18);
-				State = 231;
-				expression(18);
+				expression(19);
 				}
 				break;
 			case 6:
 				{
-				_localctx = new IncrementexprContext(_localctx);
+				_localctx = new NegationexprContext(_localctx);
 				Context = _localctx;
 				_prevctx = _localctx;
+				State = 231;
+				Match(T__18);
 				State = 232;
-				Match(IDENTIFIER);
-				State = 233;
-				Match(T__21);
+				expression(18);
 				}
 				break;
 			case 7:
 				{
-				_localctx = new DecrementexprContext(_localctx);
+				_localctx = new IncrementexprContext(_localctx);
 				Context = _localctx;
 				_prevctx = _localctx;
-				State = 234;
+				State = 233;
 				Match(IDENTIFIER);
-				State = 235;
-				Match(T__22);
+				State = 234;
+				Match(T__21);
 				}
 				break;
 			case 8:
 				{
-				_localctx = new IncrementexprContext(_localctx);
+				_localctx = new DecrementexprContext(_localctx);
 				Context = _localctx;
 				_prevctx = _localctx;
+				State = 235;
+				Match(IDENTIFIER);
 				State = 236;
-				constant();
-				State = 237;
-				Match(T__21);
+				Match(T__22);
 				}
 				break;
 			case 9:
 				{
-				_localctx = new DecrementexprContext(_localctx);
+				_localctx = new IncrementexprContext(_localctx);
 				Context = _localctx;
 				_prevctx = _localctx;
-				State = 239;
+				State = 237;
 				constant();
-				State = 240;
-				Match(T__22);
+				State = 238;
+				Match(T__21);
 				}
 				break;
 			case 10:
 				{
-				_localctx = new DotexprContext(_localctx);
+				_localctx = new DecrementexprContext(_localctx);
 				Context = _localctx;
 				_prevctx = _localctx;
-				State = 242;
-				Match(IDENTIFIER);
-				State = 243;
-				Match(T__1);
-				State = 244;
-				Match(IDENTIFIER);
+				State = 240;
+				constant();
+				State = 241;
+				Match(T__22);
 				}
 				break;
 			case 11:
 				{
+				_localctx = new DotexprContext(_localctx);
+				Context = _localctx;
+				_prevctx = _localctx;
+				State = 243;
+				Match(IDENTIFIER);
+				State = 244;
+				Match(T__1);
+				State = 245;
+				Match(IDENTIFIER);
+				}
+				break;
+			case 12:
+				{
 				_localctx = new DotfunctioncallexprsContext(_localctx);
 				Context = _localctx;
 				_prevctx = _localctx;
-				State = 245;
-				Match(IDENTIFIER);
 				State = 246;
-				Match(T__1);
-				State = 247;
 				Match(IDENTIFIER);
+				State = 247;
+				Match(T__1);
 				State = 248;
+				Match(IDENTIFIER);
+				State = 249;
 				Match(T__6);
-				State = 257;
+				State = 258;
 				ErrorHandler.Sync(this);
 				_la = TokenStream.LA(1);
 				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 26669754044121216L) != 0)) {
 					{
-					State = 249;
+					State = 250;
 					expression(0);
-					State = 254;
+					State = 255;
 					ErrorHandler.Sync(this);
 					_la = TokenStream.LA(1);
 					while (_la==T__12) {
 						{
 						{
-						State = 250;
-						Match(T__12);
 						State = 251;
+						Match(T__12);
+						State = 252;
 						expression(0);
 						}
 						}
-						State = 256;
+						State = 257;
 						ErrorHandler.Sync(this);
 						_la = TokenStream.LA(1);
 					}
 					}
 				}
 
-				State = 259;
+				State = 260;
 				Match(T__8);
 				}
 				break;
 			}
 			Context.Stop = TokenStream.LT(-1);
-			State = 355;
+			State = 356;
 			ErrorHandler.Sync(this);
 			_alt = Interpreter.AdaptivePredict(TokenStream,36,Context);
 			while ( _alt!=2 && _alt!=global::Antlr4.Runtime.Atn.ATN.INVALID_ALT_NUMBER ) {
@@ -1927,18 +1957,18 @@ public partial class CubeScriptParser : Parser {
 						TriggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					State = 353;
+					State = 354;
 					ErrorHandler.Sync(this);
 					switch ( Interpreter.AdaptivePredict(TokenStream,35,Context) ) {
 					case 1:
 						{
 						_localctx = new BinaryexprContext(new ExpressionContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
-						State = 262;
-						if (!(Precpred(Context, 23))) throw new FailedPredicateException(this, "Precpred(Context, 23)");
 						State = 263;
-						multOp();
+						if (!(Precpred(Context, 23))) throw new FailedPredicateException(this, "Precpred(Context, 23)");
 						State = 264;
+						multOp();
+						State = 265;
 						expression(24);
 						}
 						break;
@@ -1946,11 +1976,11 @@ public partial class CubeScriptParser : Parser {
 						{
 						_localctx = new BinaryexprContext(new ExpressionContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
-						State = 266;
-						if (!(Precpred(Context, 22))) throw new FailedPredicateException(this, "Precpred(Context, 22)");
 						State = 267;
-						addOp();
+						if (!(Precpred(Context, 22))) throw new FailedPredicateException(this, "Precpred(Context, 22)");
 						State = 268;
+						addOp();
+						State = 269;
 						expression(23);
 						}
 						break;
@@ -1958,11 +1988,11 @@ public partial class CubeScriptParser : Parser {
 						{
 						_localctx = new BinaryexprContext(new ExpressionContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
-						State = 270;
-						if (!(Precpred(Context, 21))) throw new FailedPredicateException(this, "Precpred(Context, 21)");
 						State = 271;
-						cmpOp();
+						if (!(Precpred(Context, 21))) throw new FailedPredicateException(this, "Precpred(Context, 21)");
 						State = 272;
+						cmpOp();
+						State = 273;
 						expression(22);
 						}
 						break;
@@ -1970,11 +2000,11 @@ public partial class CubeScriptParser : Parser {
 						{
 						_localctx = new BinaryexprContext(new ExpressionContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
-						State = 274;
-						if (!(Precpred(Context, 20))) throw new FailedPredicateException(this, "Precpred(Context, 20)");
 						State = 275;
-						boolOp();
+						if (!(Precpred(Context, 20))) throw new FailedPredicateException(this, "Precpred(Context, 20)");
 						State = 276;
+						boolOp();
+						State = 277;
 						expression(21);
 						}
 						break;
@@ -1982,15 +2012,15 @@ public partial class CubeScriptParser : Parser {
 						{
 						_localctx = new TernaryexprContext(new ExpressionContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
-						State = 278;
-						if (!(Precpred(Context, 17))) throw new FailedPredicateException(this, "Precpred(Context, 17)");
 						State = 279;
-						Match(T__19);
+						if (!(Precpred(Context, 17))) throw new FailedPredicateException(this, "Precpred(Context, 17)");
 						State = 280;
-						expression(0);
+						Match(T__19);
 						State = 281;
-						Match(T__20);
+						expression(0);
 						State = 282;
+						Match(T__20);
+						State = 283;
 						expression(18);
 						}
 						break;
@@ -1998,25 +2028,25 @@ public partial class CubeScriptParser : Parser {
 						{
 						_localctx = new ArrayassignmentContext(new ExpressionContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
-						State = 284;
-						if (!(Precpred(Context, 6))) throw new FailedPredicateException(this, "Precpred(Context, 6)");
 						State = 285;
+						if (!(Precpred(Context, 6))) throw new FailedPredicateException(this, "Precpred(Context, 6)");
+						State = 286;
 						Match(T__11);
-						State = 287;
+						State = 288;
 						ErrorHandler.Sync(this);
 						_la = TokenStream.LA(1);
 						if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 26669754044121216L) != 0)) {
 							{
-							State = 286;
+							State = 287;
 							expression(0);
 							}
 						}
 
-						State = 289;
-						Match(T__13);
 						State = 290;
-						Match(T__10);
+						Match(T__13);
 						State = 291;
+						Match(T__10);
+						State = 292;
 						expression(7);
 						}
 						break;
@@ -2024,25 +2054,25 @@ public partial class CubeScriptParser : Parser {
 						{
 						_localctx = new ArrayassignmentContext(new ExpressionContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
-						State = 292;
-						if (!(Precpred(Context, 4))) throw new FailedPredicateException(this, "Precpred(Context, 4)");
 						State = 293;
+						if (!(Precpred(Context, 4))) throw new FailedPredicateException(this, "Precpred(Context, 4)");
+						State = 294;
 						Match(T__3);
-						State = 295;
+						State = 296;
 						ErrorHandler.Sync(this);
 						_la = TokenStream.LA(1);
 						if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 26669754044121216L) != 0)) {
 							{
-							State = 294;
+							State = 295;
 							expression(0);
 							}
 						}
 
-						State = 297;
-						Match(T__4);
 						State = 298;
-						Match(T__10);
+						Match(T__4);
 						State = 299;
+						Match(T__10);
+						State = 300;
 						expression(5);
 						}
 						break;
@@ -2050,11 +2080,11 @@ public partial class CubeScriptParser : Parser {
 						{
 						_localctx = new DotexprContext(new ExpressionContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
-						State = 300;
-						if (!(Precpred(Context, 16))) throw new FailedPredicateException(this, "Precpred(Context, 16)");
 						State = 301;
-						Match(T__1);
+						if (!(Precpred(Context, 16))) throw new FailedPredicateException(this, "Precpred(Context, 16)");
 						State = 302;
+						Match(T__1);
+						State = 303;
 						Match(IDENTIFIER);
 						}
 						break;
@@ -2062,41 +2092,41 @@ public partial class CubeScriptParser : Parser {
 						{
 						_localctx = new DotfunctioncallexprsContext(new ExpressionContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
-						State = 303;
-						if (!(Precpred(Context, 15))) throw new FailedPredicateException(this, "Precpred(Context, 15)");
 						State = 304;
-						Match(T__1);
+						if (!(Precpred(Context, 15))) throw new FailedPredicateException(this, "Precpred(Context, 15)");
 						State = 305;
-						Match(IDENTIFIER);
+						Match(T__1);
 						State = 306;
+						Match(IDENTIFIER);
+						State = 307;
 						Match(T__6);
-						State = 315;
+						State = 316;
 						ErrorHandler.Sync(this);
 						_la = TokenStream.LA(1);
 						if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 26669754044121216L) != 0)) {
 							{
-							State = 307;
+							State = 308;
 							expression(0);
-							State = 312;
+							State = 313;
 							ErrorHandler.Sync(this);
 							_la = TokenStream.LA(1);
 							while (_la==T__12) {
 								{
 								{
-								State = 308;
-								Match(T__12);
 								State = 309;
+								Match(T__12);
+								State = 310;
 								expression(0);
 								}
 								}
-								State = 314;
+								State = 315;
 								ErrorHandler.Sync(this);
 								_la = TokenStream.LA(1);
 							}
 							}
 						}
 
-						State = 317;
+						State = 318;
 						Match(T__8);
 						}
 						break;
@@ -2104,21 +2134,21 @@ public partial class CubeScriptParser : Parser {
 						{
 						_localctx = new ArrayexprContext(new ExpressionContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
-						State = 318;
-						if (!(Precpred(Context, 14))) throw new FailedPredicateException(this, "Precpred(Context, 14)");
 						State = 319;
+						if (!(Precpred(Context, 14))) throw new FailedPredicateException(this, "Precpred(Context, 14)");
+						State = 320;
 						Match(T__11);
-						State = 321;
+						State = 322;
 						ErrorHandler.Sync(this);
 						_la = TokenStream.LA(1);
 						if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 26669754044121216L) != 0)) {
 							{
-							State = 320;
+							State = 321;
 							expression(0);
 							}
 						}
 
-						State = 323;
+						State = 324;
 						Match(T__13);
 						}
 						break;
@@ -2126,21 +2156,21 @@ public partial class CubeScriptParser : Parser {
 						{
 						_localctx = new ArrayexprContext(new ExpressionContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
-						State = 324;
-						if (!(Precpred(Context, 13))) throw new FailedPredicateException(this, "Precpred(Context, 13)");
 						State = 325;
+						if (!(Precpred(Context, 13))) throw new FailedPredicateException(this, "Precpred(Context, 13)");
+						State = 326;
 						Match(T__3);
-						State = 327;
+						State = 328;
 						ErrorHandler.Sync(this);
 						_la = TokenStream.LA(1);
 						if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 26669754044121216L) != 0)) {
 							{
-							State = 326;
+							State = 327;
 							expression(0);
 							}
 						}
 
-						State = 329;
+						State = 330;
 						Match(T__4);
 						}
 						break;
@@ -2148,9 +2178,9 @@ public partial class CubeScriptParser : Parser {
 						{
 						_localctx = new IncrementexprContext(new ExpressionContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
-						State = 330;
-						if (!(Precpred(Context, 12))) throw new FailedPredicateException(this, "Precpred(Context, 12)");
 						State = 331;
+						if (!(Precpred(Context, 12))) throw new FailedPredicateException(this, "Precpred(Context, 12)");
+						State = 332;
 						Match(T__21);
 						}
 						break;
@@ -2158,9 +2188,9 @@ public partial class CubeScriptParser : Parser {
 						{
 						_localctx = new DecrementexprContext(new ExpressionContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
-						State = 332;
-						if (!(Precpred(Context, 11))) throw new FailedPredicateException(this, "Precpred(Context, 11)");
 						State = 333;
+						if (!(Precpred(Context, 11))) throw new FailedPredicateException(this, "Precpred(Context, 11)");
+						State = 334;
 						Match(T__22);
 						}
 						break;
@@ -2168,25 +2198,25 @@ public partial class CubeScriptParser : Parser {
 						{
 						_localctx = new ArrayassignmentContext(new ExpressionContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
-						State = 334;
-						if (!(Precpred(Context, 5))) throw new FailedPredicateException(this, "Precpred(Context, 5)");
 						State = 335;
+						if (!(Precpred(Context, 5))) throw new FailedPredicateException(this, "Precpred(Context, 5)");
+						State = 336;
 						Match(T__11);
-						State = 337;
+						State = 338;
 						ErrorHandler.Sync(this);
 						_la = TokenStream.LA(1);
 						if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 26669754044121216L) != 0)) {
 							{
-							State = 336;
+							State = 337;
 							expression(0);
 							}
 						}
 
-						State = 339;
-						Match(T__13);
 						State = 340;
-						Match(T__10);
+						Match(T__13);
 						State = 341;
+						Match(T__10);
+						State = 342;
 						functionCall();
 						}
 						break;
@@ -2194,38 +2224,38 @@ public partial class CubeScriptParser : Parser {
 						{
 						_localctx = new ArrayassignmentContext(new ExpressionContext(_parentctx, _parentState));
 						PushNewRecursionContext(_localctx, _startState, RULE_expression);
-						State = 342;
-						if (!(Precpred(Context, 3))) throw new FailedPredicateException(this, "Precpred(Context, 3)");
 						State = 343;
+						if (!(Precpred(Context, 3))) throw new FailedPredicateException(this, "Precpred(Context, 3)");
+						State = 344;
 						Match(T__3);
-						State = 347;
+						State = 348;
 						ErrorHandler.Sync(this);
 						_alt = Interpreter.AdaptivePredict(TokenStream,34,Context);
 						while ( _alt!=1 && _alt!=global::Antlr4.Runtime.Atn.ATN.INVALID_ALT_NUMBER ) {
 							if ( _alt==1+1 ) {
 								{
 								{
-								State = 344;
+								State = 345;
 								expression(0);
 								}
 								} 
 							}
-							State = 349;
+							State = 350;
 							ErrorHandler.Sync(this);
 							_alt = Interpreter.AdaptivePredict(TokenStream,34,Context);
 						}
-						State = 350;
-						Match(T__4);
 						State = 351;
-						Match(T__10);
+						Match(T__4);
 						State = 352;
+						Match(T__10);
+						State = 353;
 						functionCall();
 						}
 						break;
 					}
 					} 
 				}
-				State = 357;
+				State = 358;
 				ErrorHandler.Sync(this);
 				_alt = Interpreter.AdaptivePredict(TokenStream,36,Context);
 			}
@@ -2274,7 +2304,7 @@ public partial class CubeScriptParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 358;
+			State = 359;
 			_la = TokenStream.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 137422178304L) != 0)) ) {
 			ErrorHandler.RecoverInline(this);
@@ -2328,7 +2358,7 @@ public partial class CubeScriptParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 360;
+			State = 361;
 			_la = TokenStream.LA(1);
 			if ( !(_la==T__17 || _la==T__36) ) {
 			ErrorHandler.RecoverInline(this);
@@ -2382,7 +2412,7 @@ public partial class CubeScriptParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 362;
+			State = 363;
 			_la = TokenStream.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 4123168605440L) != 0)) ) {
 			ErrorHandler.RecoverInline(this);
@@ -2436,7 +2466,7 @@ public partial class CubeScriptParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 364;
+			State = 365;
 			Match(BOOL_OPERATOR);
 			}
 		}
@@ -2490,7 +2520,7 @@ public partial class CubeScriptParser : Parser {
 		try {
 			EnterOuterAlt(_localctx, 1);
 			{
-			State = 366;
+			State = 367;
 			_la = TokenStream.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 26669754043334656L) != 0)) ) {
 			ErrorHandler.RecoverInline(this);
@@ -2539,8 +2569,13 @@ public partial class CubeScriptParser : Parser {
 		return true;
 	}
 
-	private static int[] _serializedATN = {
-		4,1,54,369,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,6,2,7,
+    internal void AddErrorListener(MyListener myListener)
+    {
+        throw new NotImplementedException();
+    }
+
+    private static int[] _serializedATN = {
+		4,1,54,370,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,6,2,7,
 		7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,2,14,7,14,
 		2,15,7,15,1,0,5,0,34,8,0,10,0,12,0,37,9,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,
 		1,1,3,1,47,8,1,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,5,2,
@@ -2557,21 +2592,21 @@ public partial class CubeScriptParser : Parser {
 		3,8,211,8,8,1,9,1,9,5,9,215,8,9,10,9,12,9,218,9,9,1,9,1,9,1,10,1,10,1,
 		10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,
 		10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,
-		10,5,10,253,8,10,10,10,12,10,256,9,10,3,10,258,8,10,1,10,3,10,261,8,10,
-		1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,
-		1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,3,10,288,8,10,1,
-		10,1,10,1,10,1,10,1,10,1,10,3,10,296,8,10,1,10,1,10,1,10,1,10,1,10,1,10,
-		1,10,1,10,1,10,1,10,1,10,1,10,1,10,5,10,311,8,10,10,10,12,10,314,9,10,
-		3,10,316,8,10,1,10,1,10,1,10,1,10,3,10,322,8,10,1,10,1,10,1,10,1,10,3,
-		10,328,8,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,3,10,338,8,10,1,10,
-		1,10,1,10,1,10,1,10,1,10,5,10,346,8,10,10,10,12,10,349,9,10,1,10,1,10,
-		1,10,5,10,354,8,10,10,10,12,10,357,9,10,1,11,1,11,1,12,1,12,1,13,1,13,
-		1,14,1,14,1,15,1,15,1,15,1,347,1,20,16,0,2,4,6,8,10,12,14,16,18,20,22,
-		24,26,28,30,0,4,2,0,11,11,24,36,2,0,18,18,37,37,3,0,8,8,10,10,38,41,3,
-		0,46,47,49,52,54,54,424,0,35,1,0,0,0,2,46,1,0,0,0,4,142,1,0,0,0,6,144,
+		10,1,10,5,10,254,8,10,10,10,12,10,257,9,10,3,10,259,8,10,1,10,3,10,262,
+		8,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,
+		1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,3,10,289,8,
+		10,1,10,1,10,1,10,1,10,1,10,1,10,3,10,297,8,10,1,10,1,10,1,10,1,10,1,10,
+		1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,5,10,312,8,10,10,10,12,10,315,
+		9,10,3,10,317,8,10,1,10,1,10,1,10,1,10,3,10,323,8,10,1,10,1,10,1,10,1,
+		10,3,10,329,8,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,3,10,339,8,10,
+		1,10,1,10,1,10,1,10,1,10,1,10,5,10,347,8,10,10,10,12,10,350,9,10,1,10,
+		1,10,1,10,5,10,355,8,10,10,10,12,10,358,9,10,1,11,1,11,1,12,1,12,1,13,
+		1,13,1,14,1,14,1,15,1,15,1,15,1,348,1,20,16,0,2,4,6,8,10,12,14,16,18,20,
+		22,24,26,28,30,0,4,2,0,11,11,24,36,2,0,18,18,37,37,3,0,8,8,10,10,38,41,
+		3,0,46,47,49,52,54,54,426,0,35,1,0,0,0,2,46,1,0,0,0,4,142,1,0,0,0,6,144,
 		1,0,0,0,8,153,1,0,0,0,10,155,1,0,0,0,12,162,1,0,0,0,14,178,1,0,0,0,16,
-		210,1,0,0,0,18,212,1,0,0,0,20,260,1,0,0,0,22,358,1,0,0,0,24,360,1,0,0,
-		0,26,362,1,0,0,0,28,364,1,0,0,0,30,366,1,0,0,0,32,34,3,2,1,0,33,32,1,0,
+		210,1,0,0,0,18,212,1,0,0,0,20,261,1,0,0,0,22,359,1,0,0,0,24,361,1,0,0,
+		0,26,363,1,0,0,0,28,365,1,0,0,0,30,367,1,0,0,0,32,34,3,2,1,0,33,32,1,0,
 		0,0,34,37,1,0,0,0,35,33,1,0,0,0,35,36,1,0,0,0,36,38,1,0,0,0,37,35,1,0,
 		0,0,38,39,5,0,0,1,39,1,1,0,0,0,40,47,3,4,2,0,41,47,3,6,3,0,42,43,3,10,
 		5,0,43,44,3,20,10,0,44,47,1,0,0,0,45,47,5,44,0,0,46,40,1,0,0,0,46,41,1,
@@ -2622,51 +2657,51 @@ public partial class CubeScriptParser : Parser {
 		0,0,0,210,195,1,0,0,0,211,17,1,0,0,0,212,216,5,4,0,0,213,215,3,2,1,0,214,
 		213,1,0,0,0,215,218,1,0,0,0,216,214,1,0,0,0,216,217,1,0,0,0,217,219,1,
 		0,0,0,218,216,1,0,0,0,219,220,5,5,0,0,220,19,1,0,0,0,221,222,6,10,-1,0,
-		222,261,3,30,15,0,223,261,3,16,8,0,224,225,5,7,0,0,225,226,3,20,10,0,226,
-		227,5,9,0,0,227,261,1,0,0,0,228,229,5,18,0,0,229,261,3,20,10,19,230,231,
-		5,19,0,0,231,261,3,20,10,18,232,233,5,54,0,0,233,261,5,22,0,0,234,235,
-		5,54,0,0,235,261,5,23,0,0,236,237,3,30,15,0,237,238,5,22,0,0,238,261,1,
-		0,0,0,239,240,3,30,15,0,240,241,5,23,0,0,241,261,1,0,0,0,242,243,5,54,
-		0,0,243,244,5,2,0,0,244,261,5,54,0,0,245,246,5,54,0,0,246,247,5,2,0,0,
-		247,248,5,54,0,0,248,257,5,7,0,0,249,254,3,20,10,0,250,251,5,13,0,0,251,
-		253,3,20,10,0,252,250,1,0,0,0,253,256,1,0,0,0,254,252,1,0,0,0,254,255,
-		1,0,0,0,255,258,1,0,0,0,256,254,1,0,0,0,257,249,1,0,0,0,257,258,1,0,0,
-		0,258,259,1,0,0,0,259,261,5,9,0,0,260,221,1,0,0,0,260,223,1,0,0,0,260,
-		224,1,0,0,0,260,228,1,0,0,0,260,230,1,0,0,0,260,232,1,0,0,0,260,234,1,
-		0,0,0,260,236,1,0,0,0,260,239,1,0,0,0,260,242,1,0,0,0,260,245,1,0,0,0,
-		261,355,1,0,0,0,262,263,10,23,0,0,263,264,3,22,11,0,264,265,3,20,10,24,
-		265,354,1,0,0,0,266,267,10,22,0,0,267,268,3,24,12,0,268,269,3,20,10,23,
-		269,354,1,0,0,0,270,271,10,21,0,0,271,272,3,26,13,0,272,273,3,20,10,22,
-		273,354,1,0,0,0,274,275,10,20,0,0,275,276,3,28,14,0,276,277,3,20,10,21,
-		277,354,1,0,0,0,278,279,10,17,0,0,279,280,5,20,0,0,280,281,3,20,10,0,281,
-		282,5,21,0,0,282,283,3,20,10,18,283,354,1,0,0,0,284,285,10,6,0,0,285,287,
-		5,12,0,0,286,288,3,20,10,0,287,286,1,0,0,0,287,288,1,0,0,0,288,289,1,0,
-		0,0,289,290,5,14,0,0,290,291,5,11,0,0,291,354,3,20,10,7,292,293,10,4,0,
-		0,293,295,5,4,0,0,294,296,3,20,10,0,295,294,1,0,0,0,295,296,1,0,0,0,296,
-		297,1,0,0,0,297,298,5,5,0,0,298,299,5,11,0,0,299,354,3,20,10,5,300,301,
-		10,16,0,0,301,302,5,2,0,0,302,354,5,54,0,0,303,304,10,15,0,0,304,305,5,
-		2,0,0,305,306,5,54,0,0,306,315,5,7,0,0,307,312,3,20,10,0,308,309,5,13,
-		0,0,309,311,3,20,10,0,310,308,1,0,0,0,311,314,1,0,0,0,312,310,1,0,0,0,
-		312,313,1,0,0,0,313,316,1,0,0,0,314,312,1,0,0,0,315,307,1,0,0,0,315,316,
-		1,0,0,0,316,317,1,0,0,0,317,354,5,9,0,0,318,319,10,14,0,0,319,321,5,12,
-		0,0,320,322,3,20,10,0,321,320,1,0,0,0,321,322,1,0,0,0,322,323,1,0,0,0,
-		323,354,5,14,0,0,324,325,10,13,0,0,325,327,5,4,0,0,326,328,3,20,10,0,327,
-		326,1,0,0,0,327,328,1,0,0,0,328,329,1,0,0,0,329,354,5,5,0,0,330,331,10,
-		12,0,0,331,354,5,22,0,0,332,333,10,11,0,0,333,354,5,23,0,0,334,335,10,
-		5,0,0,335,337,5,12,0,0,336,338,3,20,10,0,337,336,1,0,0,0,337,338,1,0,0,
-		0,338,339,1,0,0,0,339,340,5,14,0,0,340,341,5,11,0,0,341,354,3,16,8,0,342,
-		343,10,3,0,0,343,347,5,4,0,0,344,346,3,20,10,0,345,344,1,0,0,0,346,349,
-		1,0,0,0,347,348,1,0,0,0,347,345,1,0,0,0,348,350,1,0,0,0,349,347,1,0,0,
-		0,350,351,5,5,0,0,351,352,5,11,0,0,352,354,3,16,8,0,353,262,1,0,0,0,353,
-		266,1,0,0,0,353,270,1,0,0,0,353,274,1,0,0,0,353,278,1,0,0,0,353,284,1,
-		0,0,0,353,292,1,0,0,0,353,300,1,0,0,0,353,303,1,0,0,0,353,318,1,0,0,0,
-		353,324,1,0,0,0,353,330,1,0,0,0,353,332,1,0,0,0,353,334,1,0,0,0,353,342,
-		1,0,0,0,354,357,1,0,0,0,355,353,1,0,0,0,355,356,1,0,0,0,356,21,1,0,0,0,
-		357,355,1,0,0,0,358,359,7,0,0,0,359,23,1,0,0,0,360,361,7,1,0,0,361,25,
-		1,0,0,0,362,363,7,2,0,0,363,27,1,0,0,0,364,365,5,45,0,0,365,29,1,0,0,0,
-		366,367,7,3,0,0,367,31,1,0,0,0,37,35,46,63,103,107,110,117,120,123,126,
-		135,138,142,149,153,160,170,173,189,192,204,207,210,216,254,257,260,287,
-		295,312,315,321,327,337,347,353,355
+		222,262,3,30,15,0,223,262,3,16,8,0,224,225,5,7,0,0,225,226,3,20,10,0,226,
+		227,5,9,0,0,227,262,1,0,0,0,228,262,5,54,0,0,229,230,5,18,0,0,230,262,
+		3,20,10,19,231,232,5,19,0,0,232,262,3,20,10,18,233,234,5,54,0,0,234,262,
+		5,22,0,0,235,236,5,54,0,0,236,262,5,23,0,0,237,238,3,30,15,0,238,239,5,
+		22,0,0,239,262,1,0,0,0,240,241,3,30,15,0,241,242,5,23,0,0,242,262,1,0,
+		0,0,243,244,5,54,0,0,244,245,5,2,0,0,245,262,5,54,0,0,246,247,5,54,0,0,
+		247,248,5,2,0,0,248,249,5,54,0,0,249,258,5,7,0,0,250,255,3,20,10,0,251,
+		252,5,13,0,0,252,254,3,20,10,0,253,251,1,0,0,0,254,257,1,0,0,0,255,253,
+		1,0,0,0,255,256,1,0,0,0,256,259,1,0,0,0,257,255,1,0,0,0,258,250,1,0,0,
+		0,258,259,1,0,0,0,259,260,1,0,0,0,260,262,5,9,0,0,261,221,1,0,0,0,261,
+		223,1,0,0,0,261,224,1,0,0,0,261,228,1,0,0,0,261,229,1,0,0,0,261,231,1,
+		0,0,0,261,233,1,0,0,0,261,235,1,0,0,0,261,237,1,0,0,0,261,240,1,0,0,0,
+		261,243,1,0,0,0,261,246,1,0,0,0,262,356,1,0,0,0,263,264,10,23,0,0,264,
+		265,3,22,11,0,265,266,3,20,10,24,266,355,1,0,0,0,267,268,10,22,0,0,268,
+		269,3,24,12,0,269,270,3,20,10,23,270,355,1,0,0,0,271,272,10,21,0,0,272,
+		273,3,26,13,0,273,274,3,20,10,22,274,355,1,0,0,0,275,276,10,20,0,0,276,
+		277,3,28,14,0,277,278,3,20,10,21,278,355,1,0,0,0,279,280,10,17,0,0,280,
+		281,5,20,0,0,281,282,3,20,10,0,282,283,5,21,0,0,283,284,3,20,10,18,284,
+		355,1,0,0,0,285,286,10,6,0,0,286,288,5,12,0,0,287,289,3,20,10,0,288,287,
+		1,0,0,0,288,289,1,0,0,0,289,290,1,0,0,0,290,291,5,14,0,0,291,292,5,11,
+		0,0,292,355,3,20,10,7,293,294,10,4,0,0,294,296,5,4,0,0,295,297,3,20,10,
+		0,296,295,1,0,0,0,296,297,1,0,0,0,297,298,1,0,0,0,298,299,5,5,0,0,299,
+		300,5,11,0,0,300,355,3,20,10,5,301,302,10,16,0,0,302,303,5,2,0,0,303,355,
+		5,54,0,0,304,305,10,15,0,0,305,306,5,2,0,0,306,307,5,54,0,0,307,316,5,
+		7,0,0,308,313,3,20,10,0,309,310,5,13,0,0,310,312,3,20,10,0,311,309,1,0,
+		0,0,312,315,1,0,0,0,313,311,1,0,0,0,313,314,1,0,0,0,314,317,1,0,0,0,315,
+		313,1,0,0,0,316,308,1,0,0,0,316,317,1,0,0,0,317,318,1,0,0,0,318,355,5,
+		9,0,0,319,320,10,14,0,0,320,322,5,12,0,0,321,323,3,20,10,0,322,321,1,0,
+		0,0,322,323,1,0,0,0,323,324,1,0,0,0,324,355,5,14,0,0,325,326,10,13,0,0,
+		326,328,5,4,0,0,327,329,3,20,10,0,328,327,1,0,0,0,328,329,1,0,0,0,329,
+		330,1,0,0,0,330,355,5,5,0,0,331,332,10,12,0,0,332,355,5,22,0,0,333,334,
+		10,11,0,0,334,355,5,23,0,0,335,336,10,5,0,0,336,338,5,12,0,0,337,339,3,
+		20,10,0,338,337,1,0,0,0,338,339,1,0,0,0,339,340,1,0,0,0,340,341,5,14,0,
+		0,341,342,5,11,0,0,342,355,3,16,8,0,343,344,10,3,0,0,344,348,5,4,0,0,345,
+		347,3,20,10,0,346,345,1,0,0,0,347,350,1,0,0,0,348,349,1,0,0,0,348,346,
+		1,0,0,0,349,351,1,0,0,0,350,348,1,0,0,0,351,352,5,5,0,0,352,353,5,11,0,
+		0,353,355,3,16,8,0,354,263,1,0,0,0,354,267,1,0,0,0,354,271,1,0,0,0,354,
+		275,1,0,0,0,354,279,1,0,0,0,354,285,1,0,0,0,354,293,1,0,0,0,354,301,1,
+		0,0,0,354,304,1,0,0,0,354,319,1,0,0,0,354,325,1,0,0,0,354,331,1,0,0,0,
+		354,333,1,0,0,0,354,335,1,0,0,0,354,343,1,0,0,0,355,358,1,0,0,0,356,354,
+		1,0,0,0,356,357,1,0,0,0,357,21,1,0,0,0,358,356,1,0,0,0,359,360,7,0,0,0,
+		360,23,1,0,0,0,361,362,7,1,0,0,362,25,1,0,0,0,363,364,7,2,0,0,364,27,1,
+		0,0,0,365,366,5,45,0,0,366,29,1,0,0,0,367,368,7,3,0,0,368,31,1,0,0,0,37,
+		35,46,63,103,107,110,117,120,123,126,135,138,142,149,153,160,170,173,189,
+		192,204,207,210,216,255,258,261,288,296,313,316,322,328,338,348,354,356
 	};
 
 	public static readonly ATN _ATN =
