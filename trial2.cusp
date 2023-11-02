@@ -1,8 +1,7 @@
-using Home;
-using Home.Letterbox;
+using static Home;
 
-house: ArrayProgram
-{
+
+
 
 
 struct main()
@@ -15,9 +14,8 @@ struct main()
 
     for (line > lines) // for each line in the file
     {
-        lineh = line +1 // increment the line number
+        lineh = line +1; // increment the line number
 
         print(line + lines); // print the line number and the line
     }
-}
 }
