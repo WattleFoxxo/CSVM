@@ -1,0 +1,26 @@
+using static Home;
+using System;
+
+struct main()
+{   
+    While(True)//setup a while true loop
+    {
+
+    var input = ReadLine(); // take in input 
+    
+    switch(input)
+    {
+        at "hello":
+            Print("hey there!");
+            stop;
+        at "goodbye":
+            Print("goodbye");
+            stop;
+        bland:
+            Print("invalid option");
+            stop;
+
+    }
+    }
+}
+main(); //call main for now
