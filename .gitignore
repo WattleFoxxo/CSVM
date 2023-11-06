@@ -10,8 +10,14 @@ obj/
 
 # Ignore NuGet packages
 packages/
+build
 
 # Ignore build artifacts
+*.build
+*.msi
+*.zip
+*.dist
+*.onefile-build
 *.log
 *.txt
 *.nupkg

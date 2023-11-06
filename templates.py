@@ -56,7 +56,7 @@ def create_project(name):
 
                 <ItemGroup>
                       <!-- .cs files -->
-                  <Compile Include="{name}.cs" />
+             
                   <Reference Include="System" />
                   <Reference Include="Home.dll" />
                 </ItemGroup>

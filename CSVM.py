@@ -4,12 +4,12 @@ import subprocess
 import sys
 import time
 import transpiler
-from transpiler import transpile, createoutput, Compileproject
+from transpiler import transpile, createoutput, Compileproject, Compileprojectwithoutput
 import templates
 from templates import create_project, CreateDll
-import pythonnet
+
 import argparse
-from pythonnet import *
+
 import re
 import requests
 import json
@@ -23,7 +23,8 @@ import ssl
 from colorama import Fore, Style
 __name__ = "CVSM"
 
-__version__ = "1.1"
+__version__ = "1.2.1"
+__dllversion__ = "1.0.0"
 
 ##important stuff##
 
@@ -36,9 +37,8 @@ def get_version(name):
         if item['Name'] == name:
             return item['Version']
 
-    return None
-
-def Update():
+    
+def CheckCSVM():
     #get a json file from a webserver
     #check if the version is the same
     #if not, update
@@ -51,6 +51,22 @@ def Update():
     else:
         print("\n")
         print_info("hey! there is a new version of CSVM!")
+        print("\n")
+        print_link("Click here to download the new version", "https://CubeScript.vercel.app/Download ")
+        print("\n")
+def CheckHomedll():
+    #get a json file from a webserver
+    #check if the version is the same
+    #if not, update
+
+    version = requests.get("https://raw.githubusercontent.com/OpenStudioCorp/NewOpenStudioCorpSite/main/OpenStudioCorpProjects.json")
+    name = 'home.dll'  
+    version = get_version(name)
+    if version == __dllversion__:
+        pass
+    else:
+        print("\n")
+        print_info("hey! there is a new version of the standard Home library!")
         print("\n")
         print_link("Click here to download the new version", "https://CubeScript.vercel.app/Download ")
         print("\n")
@@ -129,10 +145,10 @@ if args.t:
             continue
 
 
-
 def main():
     
-    Update()
+    CheckCSVM()
+    CheckHomedll()
     
     if args.compile:
         try:
@@ -151,5 +167,8 @@ def main():
         elif type == "exe":
             create_project(name)
             exit()
-
+    #elif args.input_file == "update":
+    elif args.input_file == "ouput":
+        Compileprojectwithoutput()
+        exit()
 main()
