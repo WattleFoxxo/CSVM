@@ -7,9 +7,7 @@ import transpiler
 from transpiler import transpile, createoutput, Compileproject, Compileprojectwithoutput
 import templates
 from templates import create_project, CreateDll
-
 import argparse
-
 import re
 import requests
 import json
@@ -17,6 +15,7 @@ import urllib.request
 import urllib.parse
 import urllib.error
 import templates
+import termios
 from errors import *
 from templates import create_project, CreateDll
 import ssl
@@ -51,7 +50,6 @@ def CheckCSVM():
     else:
         print("\n")
         print_info("hey! there is a new version of CSVM!")
-        print("\n")
         print_link("Click here to download the new version", "https://CubeScript.vercel.app/Download ")
         print("\n")
 def CheckHomedll():
@@ -67,7 +65,6 @@ def CheckHomedll():
     else:
         print("\n")
         print_info("hey! there is a new version of the standard Home library!")
-        print("\n")
         print_link("Click here to download the new version", "https://CubeScript.vercel.app/Download ")
         print("\n")
 
@@ -160,11 +157,11 @@ def main():
             exit()
     elif args.input_file == "new":
         name = input("Name of project: ")
-        type = input("Type of project (dll, exe): ")
+        type = input("Type of project (dll, executable): ")
         if type == "dll":
             CreateDll(name)
             exit()
-        elif type == "exe":
+        elif type == "executable":
             create_project(name)
             exit()
     #elif args.input_file == "update":

@@ -1,0 +1,1 @@
+python3 -m nuitka --onefile --follow-imports CSVM.py
