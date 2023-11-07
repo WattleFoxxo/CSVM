@@ -38,7 +38,7 @@ translation_dict = {
     'true': (' true '),
     'false': (' false '),
     'empty': (' null '),
-    'create': (' new '),
+
     'this': (' this '),
     'base': (' base '),
     'AT ': (' case '),
@@ -249,7 +249,7 @@ def Compileproject(): # this is used for compiling a full project full of files 
             subprocess.run(["c:/Program Files/dotnet/dotnet.exe", 'build'], shell=True)
         else:
             # if it is not, use dotnet
-            subprocess.Popen(['/usr/local/share/dotnet/dotnet', 'build'], shell=True)
+            subprocess.Popen(['/usr/bin/dotnet', 'build'], shell=True)
         # remove the .cs file
         
         # os.remove(file_name + ".cs")

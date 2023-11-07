@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 		        {
 		            using (Stream stream = await response.Content.ReadAsStreamAsync())
 		            {
-		                using (FileStream fileStream = new FileStream(destinationPath, FileMode. new ))
+		                using (FileStream fileStream = new FileStream(destinationPath, FileMode.Create))
 		                {
 		                    await stream.CopyToAsync(fileStream);
 		                }

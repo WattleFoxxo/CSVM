@@ -15,7 +15,7 @@ import urllib.request
 import urllib.parse
 import urllib.error
 import templates
-import termios
+
 from errors import *
 from templates import create_project, CreateDll
 import ssl
@@ -52,6 +52,7 @@ def CheckCSVM():
         print_info("hey! there is a new version of CSVM!")
         print_link("Click here to download the new version", "https://CubeScript.vercel.app/Download ")
         print("\n")
+        
 def CheckHomedll():
     #get a json file from a webserver
     #check if the version is the same
