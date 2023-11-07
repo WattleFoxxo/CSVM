@@ -147,13 +147,10 @@ def Compileprojectwithoutput(): # this is used for compiling a full project full
     except Exception as e:
         print_error(f"Error reading project file: {e}")
         exit()
-# each line is a file with a .cusp extension
-# we need to transpile each one of them into a .cs file
-
+# each line is a file with a .cusp extension. we need to transpile each one of them into a .cs file
     try:
         #get the name of the .csproj file within the same directory
        
-
         # get the current directory
         current_directory = os.getcwd()
 
@@ -225,7 +222,7 @@ def Compileproject(): # this is used for compiling a full project full of files 
             csproj_file_name = os.path.basename(csproj_files[0])
             print(f".csproj file found: {csproj_file_name}")
         else:
-            print_warning("No .csproj file found in the current directory.")
+            print_error("No .csproj file found in the current directory.")
             exit()
     except Exception as e:
         print_error(f"Error finding .csproj file: {e}")
@@ -244,15 +241,6 @@ def Compileproject(): # this is used for compiling a full project full of files 
         Compilee(file_name)
         
         #check if the os is windows or not
-        if os.name == "nt":
-            # if it is, use dotnet.exe
-            subprocess.run(["c:/Program Files/dotnet/dotnet.exe", 'build'], shell=True)
-        else:
-            # if it is not, use dotnet
-            subprocess.Popen(['/usr/bin/dotnet', 'build'], shell=True)
-        # remove the .cs file
-        
-        # os.remove(file_name + ".cs")
         
     except Exception as e:
         print_error(f"Error compiling file '{file_name}': {e}")

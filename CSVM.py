@@ -36,6 +36,13 @@ def get_version(name):
         if item['Name'] == name:
             return item['Version']
 
+def checkhomedll():
+    #check if the home dll is witiin the folder and if not return false
+    
+    if os.path.isfile("home.dll"):
+        return True
+    else:
+        return False
     
 def CheckCSVM():
     #get a json file from a webserver
@@ -88,6 +95,7 @@ parser.add_argument("-new", action="store_true", help="new project")
 parser.add_argument("-compile", action="store_true", help="compile")
 parser.add_argument("-r", action="store_true", help="run")
 parser.add_argument("-d", action="store_true", help="debug")
+parser.add_argument("-compout", action="store_true", help="compile")
 
 
 args = parser.parse_args()
@@ -148,10 +156,52 @@ def main():
     CheckCSVM()
     CheckHomedll()
     
+    # use checkhomedll to check if the home.dll is in the folder
+    if checkhomedll() == False:
+        print_error("home.dll not found! Please download it from the website")
+        exit()
+
+    
     if args.compile:
         try:
             print("Compiling...")
             Compileproject()
+            with open("Project.cspm", 'r') as file:
+                filedata = file.readlines()
+            if os.name == "nt":
+            # if it is, use dotnet.exe
+                subprocess.run(["c:/Program Files/dotnet/dotnet.exe", 'build'])
+            else:
+            # if it is not, use dotnet
+                subprocess.Popen(['/usr/bin/dotnet', 'build'])
+            # remove the .cs file
+            for line in filedata:
+                # get the file name
+                file_name = line.strip()
+                os.remove(file_name + ".cs")
+        
+            exit()
+    
+        except Exception as e:
+            print_error(f"Error compiling file: {e}")
+            exit()
+    if args.compout:
+        try:
+            print("Compiling...")
+            Compileproject()
+            with open("Project.cspm", 'r') as file:
+                filedata = file.readlines()
+            if os.name == "nt":
+            # if it is, use dotnet.exe
+                subprocess.run(["c:/Program Files/dotnet/dotnet.exe", 'build'])
+            else:
+            # if it is not, use dotnet
+                subprocess.Popen(['/usr/bin/dotnet', 'build'])
+            # remove the .cs file
+            for line in filedata:
+                # get the file name
+                file_name = line.strip()
+                os.remove(file_name + ".cs")
             exit()
         except Exception as e:
             print_error(f"Error compiling file: {e}")

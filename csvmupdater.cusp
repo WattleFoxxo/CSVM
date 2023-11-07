@@ -26,8 +26,16 @@ house updater
 		}	
 		 pubtask Main(string[] args)
 		{
+			try
+			{
+
+		    await DownloadFileFromGithubAsync("https://github.com/charlie-sans/CVSM-Repo/releases/download/v1.2.1/CSVM-linux.zip", "./");
+			}
+			catch (Exception ex)
+			{
+				Print(ex.Message);
+			}
 		    // app updater
-		    await DownloadFileFromGithubAsync("https://github.com/charlie-sans/CVSM-Repo/releases/download/v1.2/CubeScript-1.2.zip", "./");
 		}
 	}
 }

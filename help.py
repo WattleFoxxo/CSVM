@@ -41,9 +41,7 @@ it could be ether that you typed the file name wrong or that the file does not e
 try recompiling the file and if that does not work, try creating a new project.
 """
 E2= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
+CUSP 
 """
 E3= """
 # Lady Jessica
