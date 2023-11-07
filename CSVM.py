@@ -49,7 +49,7 @@ def get_version(name):
         if item['Name'] == name:
             return item['Version']
 
-def checkhomedll():
+def homedlllocation():
     #check if the home dll is witiin the folder and if not return false
     
     if os.path.isfile("home.dll"):
@@ -162,10 +162,12 @@ def main():
     
     CheckCSVM()
     CheckHomedll()
+    homedlllocation()
     
     # use checkhomedll to check if the home.dll is in the folder
     if checkhomedll() == False:
         print_error("home.dll not found! Please download it from the website")
+        webbrowser.open_new_tab("https://cubescript.vercel.app/Download")
         exit()
 
     

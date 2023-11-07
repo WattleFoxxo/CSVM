@@ -3,17 +3,19 @@
 bin/
 obj/
 *.user
-*.suo
+*.so
 *.cache
-*.dll
+
 *.exe
 *.bin
 __pycache__
+*.so
 
 # Ignore NuGet packages
 packages/
 build
-
+*.build
+*.dist.*.onefile-build
 # Ignore build artifacts
 *.build
 *.bin
