@@ -15,13 +15,25 @@ import urllib.request
 import urllib.parse
 import urllib.error
 import templates
-
 from errors import *
 from templates import create_project, CreateDll
 import ssl
 from colorama import Fore, Style
-__name__ = "CVSM"
 
+#################
+##CubeScript VM##
+#################
+
+# made by Charlie-sans
+# this is the main file for the CubeScript VM
+# other files include
+# - errors.py (for errors)
+# - templates.py (for templates)
+# - transpiler.py (for transpiling)
+# - tests.py (for testing) * not included within the final build
+
+
+__name__ = "CVSM"
 __version__ = "1.2.1"
 __dllversion__ = "1.0.0"
 

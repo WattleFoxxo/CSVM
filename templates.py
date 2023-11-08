@@ -20,9 +20,7 @@ def CreateDll(name):
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-</Project>
-
-                   """)
+</Project>""")
     with open(f"{name}.cusp", "w") as file:
         file.write(f"""using static Home;
                    
@@ -40,7 +38,7 @@ house {name} {{
             file.write(
                 f"""{name}""")
     print(f"Project {name} created! \n\n\n\n")
-    print("You can run './CSVM -c' to compile your project")
+    print("You can run './CSVM -compile' to compile your project")
     print("Or you can add the CVSM to your path and run it that way with -c")
     print("Please make sure that you have .NET 6.0 installed")
     print("You can download it from https://dotnet.microsoft.com/download/dotnet/6.0")
@@ -48,6 +46,9 @@ house {name} {{
     print("you should have been given a copy of Home.dll with this program from the zip file you downloaded")
     
 def create_project(name):
+    """_summary_
+    This function will create a Executible file for windows, linux and mac
+    """
     print("Creating project...")
 
     with open("{0}.csproj".format(name), "w") as file:

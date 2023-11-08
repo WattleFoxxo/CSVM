@@ -9,6 +9,9 @@ import argparse
 import re
 from errors import *
 import glob
+import os
+import glob
+import subprocess
 
 
 
@@ -38,10 +41,8 @@ translation_dict = {
     'true': (' true '),
     'false': (' false '),
     'empty': (' null '),
-
     'this': (' this '),
     'base': (' base '),
-    'AT ': (' case '),
     'bland': ('default'),
     'stop': ('break'),
     'at': ('case')
@@ -100,64 +101,26 @@ def Compilee(file_name): # this is for compiling a single file
     print("Compiling...")
   
     
-
-
-def start(cspm_file): # unused
-    # this sets up a sln like workspace for the user
-    # this will allow the user to create a new project
-
-    script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
-    
-    # now we check the file and if it contains exactly what we need
-    #<HEAD>
-    #    <version>1.2</version>
-    #    <encoding>UTF-8</encoding>
-    #    <stagingArea>
-    #        <Library>Home</Library> # as many libraries as you want
-    #        
-    #    </stagingArea>
-    #</HEAD>
-
-    with open(cspm_file, 'r') as file:
-        filedata = file.read()
-
-    # check the whole file and see if it contains the above, if not, error out
-
-    if "<HEAD>" in filedata:
-        print("Found <HEAD>")
-    else:
-        print("Error: <HEAD> not found")
-        sys.exit()
-    if "<version>" in filedata:
-        print("Found <version>")
-    else:
-        print("Error: <version> not found")
-        sys.exit()
-    if "<encoding>" in filedata:
-        print("Found <encoding>")
-    else:
-        print("Error: <encoding> not found")
-        sys.exit()
         
-def Compileprojectwithoutput(): # this is used for compiling a full project full of files that people would want to use
-    #read the project file
+
+def Compileprojectwithoutput():
+    # Read the project file
     try:
         with open("Project.cspm", 'r') as file:
             filedata = file.readlines()  # readlines instead of read
     except Exception as e:
         print_error(f"Error reading project file: {e}")
         exit()
-# each line is a file with a .cusp extension. we need to transpile each one of them into a .cs file
+
+    # Each line is a file with a .cusp extension. We need to transpile each one of them into a .cs file
     try:
-        #get the name of the .csproj file within the same directory
-       
-        # get the current directory
+        # Get the name of the .csproj file within the same directory
         current_directory = os.getcwd()
 
-        # find .csproj files in the current directory
+        # Find .csproj files in the current directory
         csproj_files = glob.glob(os.path.join(current_directory, "*.csproj"))
 
-        # get the first .csproj file name
+        # Get the first .csproj file name
         if csproj_files:
             csproj_file_name = os.path.basename(csproj_files[0])
             print(f".csproj file found: {csproj_file_name}")
@@ -170,27 +133,24 @@ def Compileprojectwithoutput(): # this is used for compiling a full project full
 
     try:
         for line in filedata:
-            # get the file name
-            file_name = line.strip()  # remove newline characters
+            # Get the file name
+            file_name = line.strip()  # Remove newline characters
             print(f"Compiling file '{file_name}'...")
-    except Exception as e:
-        print_error(f"Error reading project file: {e}")
-        exit()
-    try:
-        # open the file
-        Compilee(file_name)
-        
-        #check if the os is windows or not
-        if os.name == "nt":
-            # if it is, use dotnet.exe
-            subprocess.run(["c:/Program Files/dotnet/dotnet.exe", 'build'], shell=True)
-        else:
-            # if it is not, use dotnet
-            subprocess.Popen(['/usr/local/share/dotnet/dotnet', 'build'], shell=True)
-        # remove the .cs file
-        
-        # os.remove(file_name + ".cs")
-        
+
+            # Open the file
+            Compilee(file_name)
+
+            # Check if the OS is Windows or not
+            if os.name == "nt":
+                # If it is, use dotnet.exe
+                subprocess.run(["c:/Program Files/dotnet/dotnet.exe", 'build'], shell=True)
+            else:
+                # If it is not, use dotnet
+                subprocess.Popen(['/usr/local/share/dotnet/dotnet', 'build'], shell=True)
+
+            # Remove the .cs file * not available within --compout
+            # os.remove(file_name + ".cs")
+
     except Exception as e:
         print_error(f"Error compiling file '{file_name}': {e}")
         
