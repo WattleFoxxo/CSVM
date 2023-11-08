@@ -7,6 +7,8 @@ obj/
 *.cache
 *.dll
 *.exe
+*.bin
+__pycache__
 
 # Ignore NuGet packages
 packages/
@@ -14,33 +16,6 @@ build
 
 # Ignore build artifacts
 *.build
-*.msi
-*.zip
-*.dist
-*.onefile-build
-*.log
-*.txt
-*.nupkg
-*.zip
-*.rar
-*.7z
-*.bak
-*.tmp
-*.pdb
-*.xml
-*.csv
-*.json
-*.md
-*.html
-*.htm
-*.png
-*.jpg
-*.jpeg
-*.gif
-*.bmp
-*.ico
-*.pdf
-*.doc
-*.docx
-*.xls
-*.xlsx
+*.bin
+CSVM.bin
+*.spec

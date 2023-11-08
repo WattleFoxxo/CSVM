@@ -94,14 +94,10 @@ def CheckHomedll():
 
 # setup argument parser
 parser = argparse.ArgumentParser(description="Cubescript to C# transpiler")
-parser.add_argument(
-    "-o", type=str, nargs="?", help="the output file for the cusp program"
-)
+parser.add_argument("-o", type=str, nargs="?", help="the output file for the cusp program")
 parser.add_argument("-t", action="store_true", help="Termanial")
 parser.add_argument("-help", action="store_true", help="help")
-parser.add_argument(
-    "input_file", type=str, nargs="?", help="the input file for the cusp program"
-)
+parser.add_argument("input_file", type=str, nargs="?", help="the input file for the cusp program")
 parser.add_argument("-ve", action="store_true", help="version")
 parser.add_argument("-v", action="store_true", help="verbose")
 parser.add_argument("-new", action="store_true", help="new project")
@@ -109,8 +105,6 @@ parser.add_argument("-compile", action="store_true", help="compile")
 parser.add_argument("-r", action="store_true", help="run")
 parser.add_argument("-d", action="store_true", help="debug")
 parser.add_argument("-compout", action="store_true", help="compile")
-
-
 args = parser.parse_args()
 
 
