@@ -4,12 +4,10 @@ import subprocess
 import sys
 import time
 import transpiler
-from transpiler import transpile, createoutput, Compileproject
+from transpiler import transpile, createoutput, Compileproject, Compileprojectwithoutput
 import templates
 from templates import create_project, CreateDll
-import pythonnet
 import argparse
-from pythonnet import *
 import re
 import requests
 import json
@@ -21,9 +19,24 @@ from errors import *
 from templates import create_project, CreateDll
 import ssl
 from colorama import Fore, Style
-__name__ = "CVSM"
 
-__version__ = "1.1"
+#################
+##CubeScript VM##
+#################
+
+# made by Charlie-sans
+# this is the main file for the CubeScript VM
+# other files include
+# - errors.py (for errors)
+# - templates.py (for templates)
+# - transpiler.py (for transpiling)
+# - tests.py (for testing) * not included within the final build
+
+
+
+__name__ = "CVSM"
+__version__ = "1.2.1"
+__dllversion__ = "1.0.0"
 
 ##important stuff##
 
@@ -36,9 +49,15 @@ def get_version(name):
         if item['Name'] == name:
             return item['Version']
 
-    return None
-
-def Update():
+def homedlllocation():
+    #check if the home dll is witiin the folder and if not return false
+    
+    if os.path.isfile("home.dll"):
+        return True
+    else:
+        return False
+    
+def CheckCSVM():
     #get a json file from a webserver
     #check if the version is the same
     #if not, update
@@ -51,7 +70,22 @@ def Update():
     else:
         print("\n")
         print_info("hey! there is a new version of CSVM!")
+        print_link("Click here to download the new version", "https://CubeScript.vercel.app/Download ")
         print("\n")
+        
+def CheckHomedll():
+    #get a json file from a webserver
+    #check if the version is the same
+    #if not, update
+
+    version = requests.get("https://raw.githubusercontent.com/OpenStudioCorp/NewOpenStudioCorpSite/main/OpenStudioCorpProjects.json")
+    name = 'home.dll'  
+    version = get_version(name)
+    if version == __dllversion__:
+        pass
+    else:
+        print("\n")
+        print_info("hey! there is a new version of the standard Home library!")
         print_link("Click here to download the new version", "https://CubeScript.vercel.app/Download ")
         print("\n")
 
@@ -60,22 +94,17 @@ def Update():
 
 # setup argument parser
 parser = argparse.ArgumentParser(description="Cubescript to C# transpiler")
-parser.add_argument(
-    "-o", type=str, nargs="?", help="the output file for the cusp program"
-)
+parser.add_argument("-o", type=str, nargs="?", help="the output file for the cusp program")
 parser.add_argument("-t", action="store_true", help="Termanial")
 parser.add_argument("-help", action="store_true", help="help")
-parser.add_argument(
-    "input_file", type=str, nargs="?", help="the input file for the cusp program"
-)
+parser.add_argument("input_file", type=str, nargs="?", help="the input file for the cusp program")
 parser.add_argument("-ve", action="store_true", help="version")
 parser.add_argument("-v", action="store_true", help="verbose")
 parser.add_argument("-new", action="store_true", help="new project")
 parser.add_argument("-compile", action="store_true", help="compile")
 parser.add_argument("-r", action="store_true", help="run")
 parser.add_argument("-d", action="store_true", help="debug")
-
-
+parser.add_argument("-compout", action="store_true", help="compile")
 args = parser.parse_args()
 
 
@@ -129,27 +158,74 @@ if args.t:
             continue
 
 
-
 def main():
     
-    Update()
+    CheckCSVM()
+    CheckHomedll()
+    homedlllocation()
+    
+    # use checkhomedll to check if the home.dll is in the folder
+    if checkhomedll() == False:
+        print_error("home.dll not found! Please download it from the website")
+        webbrowser.open_new_tab("https://cubescript.vercel.app/Download")
+        exit()
+
     
     if args.compile:
         try:
             print("Compiling...")
             Compileproject()
+            with open("Project.cspm", 'r') as file:
+                filedata = file.readlines()
+            if os.name == "nt":
+            # if it is, use dotnet.exe
+                subprocess.run(["c:/Program Files/dotnet/dotnet.exe", 'build'])
+            else:
+            # if it is not, use dotnet
+                subprocess.Popen(['/usr/bin/dotnet', 'build'])
+            # remove the .cs file
+            for line in filedata:
+                # get the file name
+                file_name = line.strip()
+                os.remove(file_name + ".cs")
+        
+            exit()
+    
+        except Exception as e:
+            print_error(f"Error compiling file: {e}")
+            exit()
+    if args.compout:
+        try:
+            print("Compiling...")
+            Compileproject()
+            with open("Project.cspm", 'r') as file:
+                filedata = file.readlines()
+            if os.name == "nt":
+            # if it is, use dotnet.exe
+                subprocess.run(["c:/Program Files/dotnet/dotnet.exe", 'build'])
+            else:
+            # if it is not, use dotnet
+                subprocess.Popen(['/usr/bin/dotnet', 'build'])
+            # remove the .cs file
+            for line in filedata:
+                # get the file name
+                file_name = line.strip()
+                os.remove(file_name + ".cs")
             exit()
         except Exception as e:
             print_error(f"Error compiling file: {e}")
             exit()
     elif args.input_file == "new":
         name = input("Name of project: ")
-        type = input("Type of project (dll, exe): ")
+        type = input("Type of project (dll, executable): ")
         if type == "dll":
             CreateDll(name)
             exit()
-        elif type == "exe":
+        elif type == "executable":
             create_project(name)
             exit()
-
+    #elif args.input_file == "update":
+    elif args.input_file == "ouput":
+        Compileprojectwithoutput()
+        exit()
 main()
