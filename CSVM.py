@@ -33,6 +33,7 @@ from colorama import Fore, Style
 # - tests.py (for testing) * not included within the final build
 
 
+
 __name__ = "CVSM"
 __version__ = "1.2.1"
 __dllversion__ = "1.0.0"
