@@ -1,7 +1,7 @@
 import unittest
 from transpiler import  transpile, Runproject, Compilee, Compileprojectwithoutput,Compileproject
 from templates import create_project,CreateDll
-from csvm import *
+from CSVM import *
 import argparse
 from errors import *
 
