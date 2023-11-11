@@ -1,7 +1,12 @@
 def CreateDll(name):
-    """_summary_
-    This function will create a dll file from a few templates
     """
+    Creates a new project with the given name. 
+    The project consists of a .csproj file, a .cusp file and a Project.cspm file.
+    The .csproj file contains the project configuration and references to the Home.dll file.
+    The .cusp file contains the project code.
+    The Project.cspm file contains the name of the project.
+    """
+  
     print("Creating project...")
    
         
@@ -46,8 +51,11 @@ house {name} {{
     print("you should have been given a copy of Home.dll with this program from the zip file you downloaded")
     
 def create_project(name):
-    """_summary_
-    This function will create a Executible file for windows, linux and mac
+    """
+    This function creates a new project with the given name. It creates a .csproj file, a .cusp file and a Project.cspm file.
+    The .csproj file is a C# project file that can be used to build the project on Windows, Linux and Mac.
+    The .cusp file is a C# script file that contains a simple "Hello World!" program.
+    The Project.cspm file is a text file that contains the name of the project.
     """
     print("Creating project...")
 

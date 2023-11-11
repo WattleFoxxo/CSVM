@@ -1,3 +1,6 @@
+"""
+This script is the main file for the CubeScript VM. It includes other files such as errors.py, templates.py, and transpiler.py. The script provides functions to check if the current version of CSVM and the 'home.dll' library are up-to-date by comparing them with the latest version available on a web server. It also provides a function to get the version of a project with the given name, as listed in the OpenStudioCorpProjects.json file on GitHub. Additionally, the script includes an argument parser to handle various command-line arguments such as compiling, running, and creating new projects. Finally, the script calls the main() function to execute the program.
+"""
 import webbrowser
 import os
 import subprocess
@@ -41,27 +44,42 @@ __dllversion__ = "1.0.0"
 ##important stuff##
 
 def get_version(name):
+    """
+    Returns the version of a project with the given name, as listed in the OpenStudioCorpProjects.json file on GitHub.
+
+    Args:
+        name (str): The name of the project to get the version for.
+
+    Returns:
+        str: The version of the project with the given name, or None if no project with that name is found.
+    """
     version = requests.get("https://raw.githubusercontent.com/OpenStudioCorp/NewOpenStudioCorpSite/main/OpenStudioCorpProjects.json")
     data = json.loads(version.text)
-    
     
     for item in data:
         if item['Name'] == name:
             return item['Version']
 
+
 def homedlllocation():
-    #check if the home dll is witiin the folder and if not return false
-    
+    """
+    Check if the home.dll file is within the current directory.
+
+    Returns:
+    bool: True if the file exists, False otherwise.
+    """
     if os.path.isfile("home.dll"):
         return True
     else:
         return False
     
-def CheckCSVM():
-    #get a json file from a webserver
-    #check if the version is the same
-    #if not, update
 
+
+def CheckCSVM():
+    """
+    Check if the current version of CSVM is up-to-date by comparing it with the latest version available on a web server.
+    If the current version is outdated, prompt the user to download the latest version.
+    """
     version = requests.get("https://raw.githubusercontent.com/OpenStudioCorp/NewOpenStudioCorpSite/main/OpenStudioCorpProjects.json")
     name = 'CSVM'  
     version = get_version(name)
@@ -73,12 +91,13 @@ def CheckCSVM():
         print_link("Click here to download the new version", "https://CubeScript.vercel.app/Download ")
         print("\n")
         
-def CheckHomedll():
-    #get a json file from a webserver
-    #check if the version is the same
-    #if not, update
 
-    version = requests.get("https://raw.githubusercontent.com/OpenStudioCorp/NewOpenStudioCorpSite/main/OpenStudioCorpProjects.json")
+
+def CheckHomedll():
+    """
+    Check if the current version of the 'home.dll' library is up-to-date by comparing its version number with the one
+    available on a web server. If the version number is different, prompt the user to download the new version.
+    """
     name = 'home.dll'  
     version = get_version(name)
     if version == __dllversion__:
@@ -108,7 +127,14 @@ parser.add_argument("-compout", action="store_true", help="compile")
 args = parser.parse_args()
 
 
+
+
 def exit():
+    """
+    Exits the program.
+
+    This function prints a message indicating that the program is exiting, and then calls the sys.exit() function to terminate the program.
+    """
     print("Exiting...")
     sys.exit()
 
@@ -120,6 +146,8 @@ def help():
 
 
 if args.ve:
+    """prints the version
+    """
     print("CubeScript CSVM Version:" + __version__)
     exit()
 
@@ -159,7 +187,9 @@ if args.t:
 
 
 def main():
-    
+    """
+    The main function of the CSVM program. It checks for the presence of required files, compiles the project, and creates a new project if needed.
+    """
     CheckCSVM()
     CheckHomedll()
     homedlllocation()

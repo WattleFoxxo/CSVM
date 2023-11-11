@@ -1,3 +1,7 @@
+"""
+This module contains a CollapsibleApp class that displays help documentation for CubeScript.
+The class has a method to collapse or expand all sections and a collapsible container for the "How to get started" section.
+"""
 from textual.app import App, ComposeResult
 from textual.widgets import Collapsible, Footer, Label, Markdown
 

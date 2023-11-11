@@ -49,6 +49,14 @@ translation_dict = {
 
 }
 def transpile(event): # this is for transpiling
+    """ Transpile the input text into C# code.
+
+    Args:
+        event (_str_): The input text to transpile.
+
+    Returns:
+        _str_: The transpiled C# code.
+    """
     lines = event.splitlines()
 
     translated_lines = []
@@ -84,11 +92,21 @@ def transpile(event): # this is for transpiling
     
 
 def createoutput(translated_text): # this is for creating files
+    """Create the output file.`
+
+    Args:
+        translated_text (_str_): returns the translated text
+    """
     file_path = "Program.cs"
     with open(file_path, 'w') as file:
         file.write(translated_text)
 
-def Compilee(file_name): # this is for compiling a single file
+def Compilee(file_name): 
+    """
+    Compile the input file.
+    Args:
+        file_name (_str_): The name of the file to compile.
+    """
     file_path = file_name + ".cs"
     file_name = file_name + ".cusp"
     print(f"Compiling file '{file_name}'...")
@@ -104,6 +122,8 @@ def Compilee(file_name): # this is for compiling a single file
         
 
 def Compileprojectwithoutput():
+    """instead of deleting the file like in the other compile project function, this one keeps the file and saves it to the output folder
+    """
     # Read the project file
     try:
         with open("Project.cspm", 'r') as file:
@@ -156,7 +176,9 @@ def Compileprojectwithoutput():
         
 
 
-def Compileproject(): # this is used for compiling a full project full of files that people would want to use
+def Compileproject(): 
+    """ compile the whole project.cspm file
+    """
     #read the project file
     try:
         with open("Project.cspm", 'r') as file:
@@ -207,6 +229,12 @@ def Compileproject(): # this is used for compiling a full project full of files 
         
 
 def Runproject(name):
+    """runs a project
+
+    Args:
+        name (_str_): the name of the cspm file
+        
+    """
     #read the project file
     with open(name + ".cspm", 'r') as file:
         filedata = file.read()
