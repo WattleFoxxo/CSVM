@@ -5,6 +5,9 @@ def print_warning(message):
     print(f"{Fore.YELLOW}WARNING: {message}{Style.RESET_ALL}")
 def print_error(message):
     print(f"{Fore.RED}ERROR: {message}{Style.RESET_ALL}")
+    return 1
+def print_errors(message, message2):
+    print(f"{Fore.RED}ERROR: {message}{message2}{Style.RESET_ALL}")
 def print_info(message):
     print(f"{Fore.BLUE}INFO: {message}{Style.RESET_ALL}")
 def print_success(message):

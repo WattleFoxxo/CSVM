@@ -14,14 +14,8 @@ class TestTranspiler(unittest.TestCase):
         self.assertEqual(transpile('struct'), 'static void')
         self.assertEqual(transpile('revoid'), 'public static void')
         self.assertEqual(transpile('reint'), 'public static int' )
-        self.assertEqual(transpile('reint'), 'public static int' )
-        self.assertEqual(transpile('reint'), 'public static int' )
-        self.assertEqual(transpile('reint'), 'public static int' )
-        self.assertEqual(transpile('reint'), 'public static int' )
-        self.assertEqual(transpile('reint'), 'public static int' )
-        self.assertEqual(transpile('reint'), 'public static int' )
-        self.assertEqual(transpile('reint'), 'public static int' )
-        self.assertEqual(transpile('reint'), 'public static int' )
+        self.assertEqual(transpile('rebool'), 'public static bool' )
+
         
     def test_transpile_valid_code(self):
         # Test transpiling valid code
@@ -32,7 +26,11 @@ class TestTranspiler(unittest.TestCase):
     def test_transpile_invalid_code(self):
         # Test transpiling invalid code
         source_code = 'invalid syntax'
-        with self.assertRaises(SyntaxError):
+        with self.assertRaises(OSError):
             transpile(source_code)
+    def test_error_functions(self):
+        with self.assertRaises(EnvironmentError):
+            print_error("test error")
+    
 if __name__ == '__main__':
     unittest.main()

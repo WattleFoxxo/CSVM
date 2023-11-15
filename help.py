@@ -45,493 +45,54 @@ it could be ether that you typed the file name wrong or that the file does not e
 try recompiling the file and if that does not work, try creating a new project.
 """
 E2= """
-CUSP 
+CUSP 00002 invalid arguments
+
+This error means that you have passed invalid arguments to the transpiler.
+
+dont worry, i do the same when i work on CSVM
+
+
 """
 E3= """
-# Lady Jessica
+# CUSP 0003 Invalid syntax
 
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
+from version 1.3 CubeScript now implements a syntax Checker for you error hungry nerds
+
+this error means that you have invalid syntax in your code.
+
+this could be caused by a typo in your code or a missing semicolon.
+ 
+should print out a error somewhere in the console that you ran CSVM in so thats a great start.
+
+
 """
-E4= """
-# Lady Jessica
+E4 = """
+CUSP 00004: Invalid function arguments
 
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
+This error means that you have passed invalid arguments to a function. 
+
+Check the function definition to ensure that you are passing the correct number and type of arguments.
 """
-E5= """
-# Lady Jessica
 
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
+E5 = """
+CUSP 00005: Undefined variable
+
+This error means that you are trying to use a variable that has not been defined.
+
+Make sure that you have spelled the variable name correctly and that it has been defined before you try to use it.
 """
-E6= """
-# Lady Jessica
 
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
+E6 = """
+CUSP 00006: Type error
+
+This error means that you are trying to perform an operation on a value of the wrong type.
+
+For example, you might be trying to add a string to an integer, which is not allowed. Check the types of your values to make sure they are correct.
 """
 E7= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E8= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E9= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E10= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E11= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E12= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E13= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E14= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E15= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E16= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E17= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E18= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E19= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E20= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E21= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E22= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E23= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E24= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E25= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E26= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E27= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E28= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E29= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E30= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E31= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E32= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E33= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E34= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E35= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E36= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E37= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E38= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E39= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E40= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E41= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E42= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E43= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E44= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E45= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E46= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E47= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E48= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E49= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E50= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E51= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E52= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E53= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E54= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E55= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E56= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E57= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E58= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E59= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E60= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E61= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E62= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E63= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E64= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E65= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E66= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E67= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E68= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E69= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E70= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E71= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E72= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E73= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E74= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E75= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E76= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E77= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E78= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E79= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E80= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E81= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E82= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E83= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E84= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E85= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E86= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E87= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
+# CUSP 00007 
 """
-E88= """
-# Lady Jessica
 
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E89= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E90= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E91= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E92= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E93= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E94= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E95= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E96= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E97= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E98= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
-E99= """
-# Lady Jessica
-
-Bene Gesserit and concubine of Leto, and mother of Paul and Alia.
-"""
 
 class CollapsibleApp(App[None]):
     """help window"""
@@ -547,6 +108,39 @@ class CollapsibleApp(App[None]):
         
         with Collapsible(collapsed=True, title="How to get started"):
             yield Label(HowToGetStarted)
+        with Collapsible(collapsed=True, title="Cusp 00001"):
+            yield Label(E1)
+        with Collapsible(collapsed=True, title="Cusp 00002"):
+            yield Label(E2)
+        with Collapsible(collapsed=True, title="Cusp 00003"):
+            yield Label(E3)
+        with Collapsible(collapsed=True, title="Cusp 00004"):
+            yield Label(E4)
+        with Collapsible(collapsed=True, title="Cusp 00005"):
+            yield Label(E5)
+        with Collapsible(collapsed=True, title="Cusp 00006"):
+            yield Label(E6)
+        with Collapsible(collapsed=True, title="Cusp 00007"):
+            yield Label(E7)
+        with Collapsible(collapsed=True, title="Errors"):
+            yield Label(Errors)
+        yield Markdown(
+            """
+            # How to get started with CubeScript
+
+            Welcome to the official CubeScript documentation!
+            
+            i'm charlie-san, and i'm here to help explain anything you may need!
+
+            this is a work in progress, so please be patient.
+
+            In order to get started with CubeScript.
+
+            just run the program and type 'new' to create a new project.
+
+            please report any errors to the github page.
+            
+            """)
 
     def action_collapse_or_expand(self, collapse: bool) -> None:
         for child in self.walk_children(Collapsible):

@@ -195,7 +195,7 @@ def main():
     homedlllocation()
     
     # use checkhomedll to check if the home.dll is in the folder
-    if checkhomedll() == False:
+    if homedlllocation() == False:
         print_error("home.dll not found! Please download it from the website")
         webbrowser.open_new_tab("https://cubescript.vercel.app/Download")
         exit()
@@ -240,7 +240,7 @@ def main():
             for line in filedata:
                 # get the file name
                 file_name = line.strip()
-                os.remove(file_name + ".cs")
+                
             exit()
         except Exception as e:
             print_error(f"Error compiling file: {e}")

@@ -5,7 +5,7 @@ import time
 
 
 import argparse
-
+import ctypes
 import re
 from errors import *
 import glob
@@ -24,6 +24,18 @@ translation_dict = {
     'rehouse': ('public static namespace'),
     'refloat': ('public static float'),
     'rebool': ('public static bool'),
+    'redictionary': ('public static Dictionary'),
+    'relist': ('public static List'),
+    'rearray': ('public static Array'),
+    'reobject': ('public static object'),
+    'rechar': ('public static char'),
+    'rebyte': ('public static byte'),
+    'reuint': ('public static uint'),
+    'reulong': ('public static ulong'),
+    'reshort': ('public static short'),
+    'reushort': ('public static ushort'),
+    'relong': ('public static long'),
+    'redecimal': ('public static decimal'),
     'int': ('int'),
     'house': (' namespace '),
     'float': (' float '),
@@ -45,9 +57,114 @@ translation_dict = {
     'base': (' base '),
     'bland': ('default'),
     'stop': ('break'),
-    'at': ('case')
+    'at': ('case'),
+    'using': ('using'),
+    ';': (';'),
+    '//': ('//')
 
 }
+keywords = [
+    'struct',
+    'revoid',
+    'restring',
+    'reint',
+    'pubtask',
+    'rehouse',
+    'refloat',
+    'rebool',
+    'pubstring',
+    'pubbool',
+    'redictionary',
+    'relist',
+    'rearray',
+    'reobject',
+    'rechar',
+    'rebyte',
+    'reuint',
+    'reulong',
+    'reshort',
+    'reushort',
+    'relong',
+    'redecimal',
+    'public',
+    'private',
+    'protected',
+    'static',
+    'int',
+    'house',
+    'float',
+    'bool',
+    'var',
+    'if',
+    'else',
+    'room',
+    'while',
+    'for',
+    'void',
+    'return',
+    'stop',
+    'continue',
+    'true',
+    'false',
+    'empty',
+    'this',
+    'base',
+    'bland',
+    'stop',
+    'at',
+    'using',
+    'static',
+    ';',
+    'await',
+    'catch',
+    'Exception',
+    '//',
+    
+]
+def InvalidSystax(lnumber, error):
+    print_errors(lnumber, error)
+    
+    
+    
+def check_transpiled_code(non_transpiled_code, keywords, translation_dict):
+    """
+    Check if the transpiled code is valid by comparing it with a list of keywords and a translation dictionary.
+
+    Parameters:
+    non_transpiled_code (str): The code to be checked.
+    keywords (list): A list of valid keywords.
+    translation_dict (dict): A dictionary containing translations for certain keywords that dont fit within the keywords list.
+
+    Raises:
+    SyntaxError: If an unknown keyword is found in the code.
+
+    Returns:
+    bool: True if the code is valid, False otherwise.
+    """
+    
+
+    inside_string = False
+    word = ''
+    ignore_line = False
+    for char in non_transpiled_code:
+        if char == '\n':
+       
+            ignore_line = False
+        elif char == '"':
+            inside_string = not inside_string
+        elif not inside_string and (char.isalnum() or char == '_'):
+            word += char
+        elif not inside_string and (char == ' ' or char == '\n') and word:
+            if word in keywords or word in translation_dict.keys():
+                ignore_line = True
+            elif not ignore_line:
+                raise SyntaxError(f"Invalid syntax CUSP 00003: Unknown keyword '{word}'")
+            word = ''
+    return True
+    
+    
+    
+
 def transpile(event): # this is for transpiling
     """ Transpile the input text into C# code.
 
@@ -67,7 +184,10 @@ def transpile(event): # this is for transpiling
         # Split the line into words and punctuation marks
         words = re.split(r'(\W+)', line)
         translated_words = []
-
+        try:
+            check_transpiled_code(line, keywords,translation_dict)
+        except Exception as e:
+            print_errors(line, e)
         for word in words: # get the input text
             try:
                 # Convert word to lower case
@@ -184,7 +304,7 @@ def Compileproject():
         with open("Project.cspm", 'r') as file:
             filedata = file.readlines()  # readlines instead of read
     except Exception as e:
-        print_error(f"Error reading project file: {e}")
+        print_error(f"CUSP 00001`: {e}")
         exit()
 # each line is a file with a .cusp extension
 # we need to transpile each one of them into a .cs file
@@ -227,6 +347,13 @@ def Compileproject():
     except Exception as e:
         print_error(f"Error compiling file '{file_name}': {e}")
         
+def is_admin():
+    try:
+        return ctypes.windll.shell32.IsUserAnAdmin()
+    except:
+        return False
+
+
 
 def Runproject(name):
     """runs a project
