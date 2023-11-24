@@ -60,3 +60,11 @@ if there ever is more then one library, then i will include a libs folder.
 
 CubeScript is a programming language designed to make coding easy and better.
 you can visit the [CubeScript website](https://cubescript.vercel.app) for more information.
+
+
+# thanks
+
+thanks to david callahan for the tutorial on how to make a compiler: [Make YOUR OWN Programming Language](https://www.youtube.com/watch?v=Eythq9848Fg)
+ive gone and used some of his code located here: [GitHub](https://github.com/davidcallanan/py-myopl-code)
+
+thanks to david for making a easy to understand tutorial!
