@@ -13,8 +13,10 @@ from templates import create_project, CreateDll
 import argparse
 import re
 import requests
+import version
 import json
 import urllib.request
+from version import __CSVM__, __HOME__,__name__
 import urllib.parse
 import urllib.error
 import templates
@@ -32,14 +34,14 @@ from colorama import Fore, Style
 # other files include
 # - errors.py (for errors)
 # - templates.py (for templates)
+# - version.py (for versions of CubeScript)
 # - transpiler.py (for transpiling)
 # - tests.py (for testing) * not included within the final build
 
 
 
 __name__ = "CVSM"
-__version__ = "1.2.1"
-__dllversion__ = "1.0.0"
+
 
 ##important stuff##
 
@@ -83,7 +85,7 @@ def CheckCSVM():
     version = requests.get("https://raw.githubusercontent.com/OpenStudioCorp/NewOpenStudioCorpSite/main/OpenStudioCorpProjects.json")
     name = 'CSVM'  
     version = get_version(name)
-    if version == __version__:
+    if version == __CSVM__:
         pass
     else:
         print("\n")
@@ -100,7 +102,7 @@ def CheckHomedll():
     """
     name = 'home.dll'  
     version = get_version(name)
-    if version == __dllversion__:
+    if version == __HOME__:
         pass
     else:
         print("\n")
@@ -148,7 +150,7 @@ def help():
 if args.ve:
     """prints the version
     """
-    print("CubeScript CSVM Version:" + __version__)
+    print("CubeScript CSVM Version:" + __CSVM__)
     exit()
 
 # get the directory of the script for later use
