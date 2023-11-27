@@ -15,6 +15,7 @@ import subprocess
 
 
 
+
 translation_dict = {
     'struct': ('static void'),
     'revoid': ('public static void'),
@@ -139,43 +140,25 @@ def InvalidSystax(lnumber, error):
     
     
     
+
+
 def check_transpiled_code(non_transpiled_code, keywords, translation_dict):
-    """
-    Check if the transpiled code is valid by comparing it with a list of keywords and a translation dictionary.
-
-    Parameters:
-    non_transpiled_code (str): The code to be checked.
-    keywords (list): A list of valid keywords.
-    translation_dict (dict): A dictionary containing translations for certain keywords that dont fit within the keywords list.
-
-    Raises:
-    SyntaxError: If an unknown keyword is found in the code.
-
-    Returns:
-    bool: True if the code is valid, False otherwise.
-    """
-    
-
     inside_string = False
-    word = ''
     ignore_line = False
-    for char in non_transpiled_code:
-        if char == '\n':
-            if word.startswith('//'):
-                ignore_line = True
-            elif word.startswith("// "):
-                ignore_line = True
-        elif char == '"':
-            inside_string = not inside_string
-        elif not inside_string and (char.isalnum() or char == '_'):
-            word += char
-            ignore_line = False
-        elif not inside_string and (char == ' ' or char == '\n') and word:
-            if word in keywords or word in translation_dict.keys():
-                ignore_line = True
-            elif not ignore_line:
-                raise SyntaxError(f"Invalid syntax CUSP 00003: Unknown keyword '{word}'")
-            word = ''
+    for line in non_transpiled_code.split('\n'):
+        if line.startswith('//'):
+            ignore_line = True
+        elif line.startswith("// "):
+            ignore_line = True
+        else:
+            matches = re.findall(r'\b\w+\b', line)
+            for word in matches:
+                if word in keywords or word in translation_dict.keys():
+                    ignore_line = True
+                elif not ignore_line:
+                    if not re.match(r'^[a-zA-Z_][a-zA-Z0-9_]*$', word):
+                        raise SyntaxError(f"Invalid syntax CUSP 00003: Unknown keyword '{word}'")
+        ignore_line = False
     return True
 
 class Token:

@@ -1,4 +1,5 @@
 from httpx import get
+from downloader import download_nupkg
 from errors import *
 import os, socket, socketserver, sys, requests, json, urllib.request, urllib.parse, urllib.error, platform, version, time, webbrowser, subprocess,argparse,concurrent
 from version import __CSVM__, __HOME__, __name__
@@ -87,20 +88,57 @@ def main():
             if home != __HOME__:
                 slow("there is a new version of Home.dll available!")
                 slow("ill go grab that for you now")
-                url = ""
+                url = "https://github.com/OpenStudioCorp/CSVM/raw/main/raw/main/Home.dll"
                 filename = "home.dll"
+                download(filename, url)
+            if CSVM != __CSVM__:
+                slow("there is a new version of CSVM available!")
+                slow("ill go grab that for you now")
+                url = "https://github.com/OpenStudioCorp/CSVM/raw/main/raw/main/CSVM.exe"
+                filename = "CSVM.exe"
+                download(filename, url)
+                slow("done!")
+            else:
+                slow("you are up to date!")
+                sys.exit()
+                
                 
         except Exception as e:
             print_error(f"could not get version info: {e}")
             slow("well, thats weird... seems like i can't get the version info?")
     elif operating == "linux":
-        operating = "linux"
+        try:
+            CSVM = get_version("CSVM")
+            home = get_version("Home.dll")
+            if home != __HOME__:
+                slow("there is a new version of Home.dll available!")
+                slow("ill go grab that for you now")
+                url = "https://github.com/OpenStudioCorp/CSVM/raw/main/raw/main/Home.dll"
+                filename = "home.dll"
+                download(filename, url)
+            if CSVM != __CSVM__:
+                slow("there is a new version of CSVM available!")
+                slow("ill go grab that for you now")
+                url = "https://github.com/OpenStudioCorp/CSVM/raw/main/raw/main/CSVM.bin"
+                filename = "CSVM.exe"
+                download(filename, url)
+                slow("done!")
+            else:
+                slow("you are up to date!")
+                sys.exit()
+                
+                
+        except Exception as e:
+            print_error(f"could not get version info: {e}")
+            slow("well, thats weird... seems like i can't get the version info?")
+            slow("i'd say try again, if this keeps happening then you might have to update manually")
+            slow("you can do this by going to the github page and downloading the latest release")
+            slow("oh and please make a issue on github if this keeps happening")
+            
     else:
-        slow("invalid operating system")
+        slow("hmmmmm, there doesnt seem to be a operating system with that name within my files...")
+        slow("i'd say try again.")
         exit()
-    
-    
-    
     
 main()
     
