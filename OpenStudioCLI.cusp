@@ -1,40 +1,20 @@
-
-using static Home;
-using Newtonsoft.Json;
-using System.Net.Http;
-using System.Threading.Tasks;
 using internet;
-house cli // namespace
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+// CubeScript is just C# with some extra features
+// just like how typescript is just javascript with some extra features
+
+public struct Main(string[] args)
 {
-    room Program //class
+    string input = ReadLine();
+    switch (input)
     {
-        pubtask Main(string[] args)
-{
-            while (true)
-            {
-            Print("-----");
-            string input = ReadLine();
-
-                switch(input)
-                {
-                    at "help":
-                        Print("\nWelcome to the OpenStudioCLI!\ntyping help will bring you here\n");
-                        stop;
-
-                    at "get_csvm":
-                        Print("Checking for updates...");
-                        letterbox.Write("./csvm.txt", "this is text");
-                        Print("done");
-                        stop;
-                        
-                    bland:
-                        Print("Invalid command");
-                        stop;
-                }
-            }
-        }
-        
+        at "1":
+            Print("Hey!");
+            stop;
 
     }
-    
 }

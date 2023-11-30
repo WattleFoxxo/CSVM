@@ -1,0 +1,152 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> statement
+Rule 2     statement -> HOUSE IDENTIFIER DOT ROOM IDENTIFIER OPENBRACKET CLOSEBRACKET
+Rule 3     statement -> PUBTASK AT IDENTIFIER BLAND IDENTIFIER OPENBRACKET CLOSEBRACKET
+
+Terminals, with rules where they appear
+
+AT                   : 3
+BLAND                : 3
+CLOSEBRACKET         : 2 3
+DOT                  : 2
+HOUSE                : 2
+IDENTIFIER           : 2 2 3 3
+OPENBRACKET          : 2 3
+PUBTASK              : 3
+ROOM                 : 2
+error                : 
+
+Nonterminals, with rules where they appear
+
+program              : 0
+statement            : 1
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . statement
+    (2) statement -> . HOUSE IDENTIFIER DOT ROOM IDENTIFIER OPENBRACKET CLOSEBRACKET
+    (3) statement -> . PUBTASK AT IDENTIFIER BLAND IDENTIFIER OPENBRACKET CLOSEBRACKET
+
+    HOUSE           shift and go to state 3
+    PUBTASK         shift and go to state 4
+
+    program                        shift and go to state 1
+    statement                      shift and go to state 2
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> statement .
+
+    $end            reduce using rule 1 (program -> statement .)
+
+
+state 3
+
+    (2) statement -> HOUSE . IDENTIFIER DOT ROOM IDENTIFIER OPENBRACKET CLOSEBRACKET
+
+    IDENTIFIER      shift and go to state 5
+
+
+state 4
+
+    (3) statement -> PUBTASK . AT IDENTIFIER BLAND IDENTIFIER OPENBRACKET CLOSEBRACKET
+
+    AT              shift and go to state 6
+
+
+state 5
+
+    (2) statement -> HOUSE IDENTIFIER . DOT ROOM IDENTIFIER OPENBRACKET CLOSEBRACKET
+
+    DOT             shift and go to state 7
+
+
+state 6
+
+    (3) statement -> PUBTASK AT . IDENTIFIER BLAND IDENTIFIER OPENBRACKET CLOSEBRACKET
+
+    IDENTIFIER      shift and go to state 8
+
+
+state 7
+
+    (2) statement -> HOUSE IDENTIFIER DOT . ROOM IDENTIFIER OPENBRACKET CLOSEBRACKET
+
+    ROOM            shift and go to state 9
+
+
+state 8
+
+    (3) statement -> PUBTASK AT IDENTIFIER . BLAND IDENTIFIER OPENBRACKET CLOSEBRACKET
+
+    BLAND           shift and go to state 10
+
+
+state 9
+
+    (2) statement -> HOUSE IDENTIFIER DOT ROOM . IDENTIFIER OPENBRACKET CLOSEBRACKET
+
+    IDENTIFIER      shift and go to state 11
+
+
+state 10
+
+    (3) statement -> PUBTASK AT IDENTIFIER BLAND . IDENTIFIER OPENBRACKET CLOSEBRACKET
+
+    IDENTIFIER      shift and go to state 12
+
+
+state 11
+
+    (2) statement -> HOUSE IDENTIFIER DOT ROOM IDENTIFIER . OPENBRACKET CLOSEBRACKET
+
+    OPENBRACKET     shift and go to state 13
+
+
+state 12
+
+    (3) statement -> PUBTASK AT IDENTIFIER BLAND IDENTIFIER . OPENBRACKET CLOSEBRACKET
+
+    OPENBRACKET     shift and go to state 14
+
+
+state 13
+
+    (2) statement -> HOUSE IDENTIFIER DOT ROOM IDENTIFIER OPENBRACKET . CLOSEBRACKET
+
+    CLOSEBRACKET    shift and go to state 15
+
+
+state 14
+
+    (3) statement -> PUBTASK AT IDENTIFIER BLAND IDENTIFIER OPENBRACKET . CLOSEBRACKET
+
+    CLOSEBRACKET    shift and go to state 16
+
+
+state 15
+
+    (2) statement -> HOUSE IDENTIFIER DOT ROOM IDENTIFIER OPENBRACKET CLOSEBRACKET .
+
+    $end            reduce using rule 2 (statement -> HOUSE IDENTIFIER DOT ROOM IDENTIFIER OPENBRACKET CLOSEBRACKET .)
+
+
+state 16
+
+    (3) statement -> PUBTASK AT IDENTIFIER BLAND IDENTIFIER OPENBRACKET CLOSEBRACKET .
+
+    $end            reduce using rule 3 (statement -> PUBTASK AT IDENTIFIER BLAND IDENTIFIER OPENBRACKET CLOSEBRACKET .)
+

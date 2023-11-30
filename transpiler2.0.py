@@ -6,57 +6,8 @@
 
 from transpiler import keywords
 import re
+from templates import TokenTypes
 
-TokenTypes = {
-    "KEYWORD": "KEYWORD",
-    "IDENTIFIER": "IDENTIFIER",
-    "NUMBER": "NUMBER",
-    "STRING": "STRING",
-    "OPERATOR": "OPERATOR",
-    "COMMENT": "COMMENT",
-    "NEWLINE": "NEWLINE",
-    "EOF": "EOF",
-    "ERROR": "ERROR",
-    "NONE": "NONE",
-    "LBRACE": "LBRACE",
-    "RBRACE": "RBRACE",
-    "LPAREN": "LPAREN",
-    "RPAREN": "RPAREN",
-    "LBRACKET": "LBRACKET",
-    "RBRACKET": "RBRACKET",
-    "SEMICOLON": "SEMICOLON",
-    "COMMA": "COMMA",
-    "DOT": "DOT",
-    "COLON": "COLON",
-    "DOLLAR": "DOLLAR",
-    "AT": "AT",
-    "AMPERSAND": "AMPERSAND",
-    "CARET": "CARET",
-    "TILDE": "TILDE",
-    "PIPE": "PIPE",
-    "QUESTION": "QUESTION",
-    "EXCLAMATION": "EXCLAMATION",
-    "NEW": "NEW",
-    "IF": "IF",
-    "ELSE": "ELSE",
-    "WHILE": "WHILE",
-    "FOR": "FOR",
-    "SWITCH": "SWITCH",
-    "CASE": "CASE",
-    "DEFAULT": "DEFAULT",
-    "BREAK": "BREAK",
-    "CONTINUE": "CONTINUE",
-    "RETURN": "RETURN",
-    "PUBLIC": "PUBLIC",
-    "PRIVATE": "PRIVATE",
-    "PROTECTED": "PROTECTED",
-    "STATIC": "STATIC",
-    "CLASS": "CLASS",
-    "STRUCT": "STRUCT",
-    "ENUM": "ENUM",
-    "INTERFACE": "INTERFACE",
-    "NAMESPACE": "NAMESPACE",
-}
 
 class Error:
     # this class takes in the line number, the position of the error, the line for the error and the error message
@@ -339,6 +290,66 @@ class Lexer:
                 self.advance()
                 return token
                 
+            if self.current_char == 'using':
+                token = Token(TokenTypes["USING"], "using", self.line_num, self.pos)
+                self.tokens.append(token)
+                self.types.append(TokenTypes["USING"])
+                self.advance
+                return token
+            if self.current_char == 'switch':
+                token = Token(TokenTypes["SWITCH"], "switch", self.line_num, self.pos)
+                self.tokens.append(token)
+                self.types.append(TokenTypes["SWITCH"])
+                self.advance
+                return token
+            if self.current_char == 'stop':
+                token = Token(TokenTypes["USING"], "using", self.line_num, self.pos)
+                self.tokens.append(token)
+                self.types.append(TokenTypes["USING"])
+                self.advance
+                return token
+            if self.current_char == 'at':
+                token = Token(TokenTypes["USING"], "using", self.line_num, self.pos)
+                self.tokens.append(token)
+                self.types.append(TokenTypes["USING"])
+                self.advance
+                return token
+            if self.current_char == 'bland':
+                token = Token(TokenTypes["USING"], "using", self.line_num, self.pos)
+                self.tokens.append(token)
+                self.types.append(TokenTypes["USING"])
+                self.advance
+                return token
+            if self.current_char == 'struct':
+                token = Token(TokenTypes["STRUCT"], "struct", self.line_num, self.pos)
+                self.tokens.append(token)
+                self.types.append(TokenTypes["STRUCT"])
+                self.advance
+                return token
+            # if self.current_char == 'using':
+            #     token = Token(TokenTypes["USING"], "using", self.line_num, self.pos)
+            #     self.tokens.append(token)
+            #     self.types.append(TokenTypes["USING"])
+            #     self.advance
+            #     return token
+            # if self.current_char == 'using':
+            #     token = Token(TokenTypes["USING"], "using", self.line_num, self.pos)
+            #     self.tokens.append(token)
+            #     self.types.append(TokenTypes["USING"])
+            #     self.advance
+            #     return token
+            # if self.current_char == 'using':
+            #     token = Token(TokenTypes["USING"], "using", self.line_num, self.pos)
+            #     self.tokens.append(token)
+            #     self.types.append(TokenTypes["USING"])
+            #     self.advance
+            #     return token
+            # if self.current_char == 'using':
+            #     token = Token(TokenTypes["USING"], "using", self.line_num, self.pos)
+            #     self.tokens.append(token)
+            #     self.types.append(TokenTypes["USING"])
+            #     self.advance
+            #     return token
             
             
             
@@ -539,40 +550,57 @@ class Parser:
             
             
     def parse(self):
-        # Define a dictionary of token types and their corresponding parse methods
-        parse_methods = {
-            "KEYWORD": self.parse_keyword,
-            "IDENTIFIER": self.parse_identifier,
-            "NUMBER": self.parse_number,
-            "STRING": self.parse_string,
-            "OPERATOR": self.parse_operator,
-            "COMMENT": self.parse_comment,
-            "NEWLINE": self.parse_newline,
-            "EOF": self.parse_eof,
-            
-        }
-
         while self.current_token is not None:
-            # Get the parse method for the current token type
-            parse_method = parse_methods.get(self.current_type)
+            if self.current_token.type == 'IDENTIFIER':
+                print(f'Identifier: {self.current_token.value}')
+            elif self.current_token.type == 'LBRACE':
+                self.parse_block()
+            elif self.current_token.type == 'KEYWORD':
+                self.parse_keyword()
+            elif self.current_token.type == 'STRING':
+                self.parse_string()
+            elif self.current_token.type == 'USING':
+                self.parse_import()
+            elif self.current_token.type == 'SWITCH':
+                self.parse_switch(self)
+            elif self.current_token.type == 'CASE':
+                self.parse_case(self)
+            elif self.current_token.type == 'DEFAULT':
+                self.parse_default(self)
+                
+            self.advance()
 
-            if parse_method is not None:
-                # Call the parse method
-                parse_method()
-            else:
-                # Raise an error if the token type is not recognized
-                self.error(f"Invalid token type: {self.current_type}")
-
-        return self.tokens, self.types
-
+    def parse_block(self):
+        print('Start of block')
+        self.advance()  # Skip past the opening brace
+        while self.current_token is not None and self.current_token.type != 'RBRACE':
+            if self.current_token.type == 'IDENTIFIER':
+                print(f'Identifier: {self.current_token.value}')
+            self.advance()
+        print('End of block')
+        
+    def parse_import(self):
+        print('Start of import')
+        self.advance()  # Skip past the 'using' keyword
+        while self.current_token is not None and self.current_token.type == 'IDENTIFIER':
+            print(f'Import: {self.current_token.value}')
+            self.advance()
+        print('End of import')
+        
     def parse_keyword(self):
         # Define a dictionary of keywords and their corresponding parse methods
         keyword_methods = {
-            "new": self.parse_new,
-            "if": self.parse_if,
-            "else": self.parse_else,
-            "while": self.parse_while,
-
+            "new": self.parse_new(self),
+            "if": self.parse_if(self),
+            "else": self.parse_else(self),
+            "while": self.parse_while(self),
+            "using": self.parse_import(self),
+            "for": self.parse_for(self),
+            "switch": self.parse_switch(self),
+            "case": self.parse_case(self),
+            "default": self.parse_default(self),
+            "break": self.parse_break(self),
+            
         }
 
         # Get the parse method for the current keyword

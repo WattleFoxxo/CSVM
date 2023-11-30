@@ -6,7 +6,7 @@ import time
 
 import argparse
 import ctypes
-import re
+
 from errors import *
 import glob
 import os
@@ -129,6 +129,9 @@ keywords = [
     '//',
     
 ]
+import re
+
+
 def InvalidSystax(lnumber, error):
     """Prints the error and the line number
 
@@ -161,332 +164,60 @@ def check_transpiled_code(non_transpiled_code, keywords, translation_dict):
         ignore_line = False
     return True
 
-class Token:
-    def __init__(self, type_, value=None):
-        self.type = type_
-        self.value = value
-    def __repr__(self):
-        if self.value: return f'{self.type}:{self.value}'
-        return f'{self.type}'
-    def __str__(self):
-        return self.__repr__()
-    def __eq__(self, other):
-        return self.type == other.type and self.value == other.value
-    def __ne__(self, other):
-        return not self.__eq__(other)
-    def __hash__(self):
-        return hash(self.type) + hash(self.value)
-    
-
-class Tokens:
-    
-    # numbers
-    NUMBERS = "0123456789"
-    
-    TT_INT = "INT"
-    TT_STR = "STRING"
-    TT_FLOAT = "FLOAT"
-    TT_BOOL = "BOOL"
-    TT_FOR = "FOR"
-    TT_VAR = "VAR"
-    TT_WHILE = "WHILE"
-    TT_STOP = "STOP"
-    TT_CONTINUE = "CONTINUE"
-    TT_CRLBRKTLFT = "{"
-    TT_CRLBRKTRTE = "}"
-    TT_WAIT = "WAIT"
-    TT_TRUE = "TRUE"
-    TT_FALSE = "FALSE"
-    TT_PUBLIC = "PUBLIC"
-    TT_PRIVATE = "PRIVATE"
-    TT_STATIC = "STATIC"
-    TT_VOID ="VOID"
-    TT_RDBRKTLFT = "("
-    TT_RDBRKTRTE = ")"
-    TT_IF = "IF"
-    TT_ELSE = "ELSE"
-    TT_CATCH = "CATCH"
-    TT_AS = "AS"
-    TT_IDENTIFIER = "IDENTIFIER"
-    TT_EQUALS = "="
-    TT_PLUS = "+"
-    TT_MINUS = "-"
-    TT_TIMES = "*"
-    TT_DIVIDE = "/"
-    TT_MODULO = "%"
-    TT_POWER = "^"
-    TT_DOT = "."
-    TT_COMMA = ","
-    TT_COLON = ":"
-    TT_LSQBRACKET = "["
-    TT_RSQBRACKET = "]"
-    TT_AT = "@"
-    TT_HASH = "#"
-    TT_DOLLAR = "$"
-    TT_TILDE = "~"
-    TT_BACKTICK = "`"
-    TT_NOT_EQUALS = "!="
-    TT_GREATER_THAN = ">"
-    TT_LESS_THAN = "<"
-    TT_AND = "&&"
-    TT_OR = "||"
-    TT_NEWLINE = "\n"
-    TT_EOF = "EOF"
-    TT_ERROR = "ERROR"
-    TT_COMMENT = "//"
-    TT_COMMENT2 = "/*"
-    TT_COMMENT3 = "*/"
-    TT_COMMENT4 = "///"
-    
-    
-# class Transpile:
-#     # take in input text, seperate the lines, and only translate the words if the word is matching certan rules defined in the Transpile class
-#     def __init__(self, text):
-#         self.text = text
-#         self.pos = -1
-#         self.current_char = None
-#         self.advance()
-
-#     def make_number(self):
-#         num_str = ""
-#         dot_count = 0
-#         while self.current_char != None and self.current_char in Tokens.NUMBERS + ".":
-#             if self.current_char == ".":
-#                 if dot_count == 1: break
-#                 dot_count += 1
-#                 num_str += "."
-#             else:
-#                 num_str += self.current_char
-#             self.advance()
-#         if dot_count == 0:
-#             return Token(Tokens.TT_INT, int(num_str))
-#         else:
-#             return Token(Tokens.TT_FLOAT, float(num_str))
-#     def make_identifier(self):
-#         id_str = ""
-#         while self.current_char != None and self.current_char in "abcdefghijklmnopqrstuvwxyz":
-#             id_str += self.current_char
-#             self.advance()
-#         return Token(Tokens.TT_IDENTIFIER, id_str)
-#     def make_string(self):
-#         string = ""
-#         self.advance()
-#         while self.current_char != None and self.current_char != '"':
-#             string += self.current_char
-#             self.advance()
-#         self.advance()
-#         return Token(Tokens.TT_STR, string)
-#     def make_plus(self):
-#         self.advance()
-#         return Token(Tokens.TT_PLUS)
-#     def make_minus(self):
-#         self.advance()
-#         return Token(Tokens.TT_MINUS)
-#     def make_times(self):
-#         self.advance()
-#         return Token(Tokens.TT_TIMES)
-#     def make_divide(self):
-#         self.advance()
-#         return Token(Tokens.TT_DIVIDE)
-#     def make_lparen(self):
-#         self.advance()
-#         return Token(Tokens.TT_RDBRKTLFT)
-#     def make_rparen(self):
-#         self.advance()
-#         return Token(Tokens.TT_RDBRKTRTE)
-#     def make_lbracket(self):
-#         self.advance()
-#         return Token(Tokens.TT_CRLBRKTLFT)
-#     def make_rbracket(self):
-#         self.advance()
-#         return Token(Tokens.TT_CRLBRKTRTE)
-#     def make_equals(self):
-#         self.advance()
-#         return Token(Tokens.TT_EQUALS)
-#     def make_not_equals(self):
-#         self.advance()
-#         if self.current_char == "=":
-#             self.advance()
-#             return Token(Tokens.TT_NOT_EQUALS)
-#         return Token(Tokens.TT_ERROR)
-#     def make_greater_than(self):
-#         self.advance()
-#         if self.current_char == "=":
-#             self.advance()
-#             return Token(Tokens.TT_GREATER_THAN)
-#         return Token(Tokens.TT_GREATER_THAN)
-#     def make_less_than(self):
-#         self.advance()
-#         if self.current_char == "=":
-#             self.advance()
-#             return Token(Tokens.TT_LESS_THAN)
-#         return Token(Tokens.TT_LESS_THAN)
-#     def make_and(self):
-#         self.advance()
-#         if self.current_char == "&":
-#             self.advance()
-#             return Token(Tokens.TT_AND)
-#         return Token(Tokens.TT_ERROR)
-#     def make_or(self):
-#         self.advance()
-#         if self.current_char == "|":
-#             self.advance()
-#             return Token(Tokens.TT_OR)
-#         return Token(Tokens.TT_ERROR)
-#     def make_dot(self):
-#         self.advance()
-#         return Token(Tokens.TT_DOT)
-#     def make_comma(self):
-#         self.advance()
-#         return Token(Tokens.TT_COMMA)
-#     def make_colon(self):
-#         self.advance()
-#         return Token(Tokens.TT_COLON)
-#     def make_lsqbracket(self):
-#         self.advance()
-#         return Token(Tokens.TT_LSQBRACKET)
-#     def make_rsqbracket(self):
-#         self.advance()
-#         return Token(Tokens.TT_RSQBRACKET)
-#     def make_modulo(self):
-#         self.advance()
-#         return Token(Tokens.TT_MODULO)
-#     def make_power(self):
-#         self.advance()
-#         return Token(Tokens.TT_POWER)
-#     def make_at(self):
-#         self.advance()
-#         return Token(Tokens.TT_AT)
-#     def make_hash(self):
-#         self.advance()
-#         return Token(Tokens.TT_HASH)
-#     def make_dollar(self):
-#         self.advance()
-#         return Token(Tokens.TT_DOLLAR)
-#     def make_tilde(self):
-#         self.advance()
-#         return Token(Tokens.TT_TILDE)
-#     def make_backtick(self):
-#         self.advance()
-#         return Token(Tokens.TT_BACKTICK)
-#     def make_newline(self):
-#         self.advance()
-#         return Token(Tokens.TT_NEWLINE)
-#     def make_eof(self):
-#         self.advance()
-#         return Token(Tokens.TT_EOF)
-#     def make_error(self):
-#         self.advance()
-#         return Token(Tokens.TT_ERROR)
-#     def make_comment(self):
-#         self.advance()
-#         return Token(Tokens.TT_COMMENT)
-#     def make_comment2(self):
-#         self.advance()
-#         return Token(Tokens.TT_COMMENT2)
-#     def make_comment3(self):
-#         self.advance()
-#         return Token(Tokens.TT_COMMENT3)
-#     def make_comment4(self):
-#         self.advance()
-#         return Token(Tokens.TT_COMMENT4)
-#     def make_for(self):
-#         self.advance()
-#         return Token(Tokens.TT_FOR)
-#     def make_var(self):
-#         self.advance()
-#         return Token(Tokens.TT_VAR)
-#     def make_while(self):
-#         self.advance()
-#         return Token(Tokens.TT_WHILE)
-#     def make_stop(self):
-#         self.advance()
-#         return Token(Tokens.TT_STOP)
-#     def make_continue(self):
-#         self.advance()
-#         return Token(Tokens.TT_CONTINUE)
-#     def make_wait(self):
-#         self.advance()
-#         return Token(Tokens.TT_WAIT)
-#     def make_true(self):
-#         self.advance()
-#         return Token(Tokens.TT_TRUE)
-#     def make_forloop(self):
-#         self.advance()
-#         return Token(Tokens.TT_FORLOOP)
-        
-         
-            
-# class ParseResult:
-#     def __init__(self):
-#         self.error = None
-#         self.node = None
-#         self.advance_count = 0
-#         self.to_reverse_count = 0
-#     def register_advancement(self):
-#         self.advance_count += 1
-#     def register(self, res):
-#         self.advance_count += res.advance_count
-#         if res.error: self.error = res.error
-#         return res.node
-#     def try_register(self, res):
-#         if res.error:
-#             self.to_reverse_count = res.advance_count
-#             return None
-#         return self.register(res)
-#     def success(self, node):
-#         self.node = node
-#         return self
-#     def failure(self, error):
-#         if not self.error or self.advance_count == 0:
-#             self.error = error
-#         return self
-    
-    
-    
 
 
 
 
+def parse_string(string):
+    match = re.match(r'^["\'](.*)["\']$', string)
+    if match:
+        return match.group(1)
+    else:
+        raise ValueError("Invalid string format. String must start and end with a quote.")
 
 def transpile(event): # this is for transpiling
-     """ Transpile the input text into C# code.
-     Args:
-         event (_str_): The input text to transpile.
-     Returns:
-         _str_: The transpiled C# code.
-     """
-     lines = event.splitlines()
-     translated_lines = []
-     # Apply translation line by line based on the dictionary
-     for line in lines:
-         # Split the line into words and punctuation marks
-         words = re.split(r'(\W+)', line)
-         translated_words = []
-         try:
-             check_transpiled_code(line, keywords,translation_dict)
-         except Exception as e:
-             print_errors(line, e)
-         for word in words: # get the input text
-             try:
-                 # Convert word to lower case
-                 lower_word = word.lower()
-                 if lower_word in translation_dict:
-                     # Preserve the original case of the word
-                     if word[0].isupper():
-                         translated_words.append(translation_dict[lower_word].capitalize())
-                     else:
-                         translated_words.append(translation_dict[lower_word])
-                 else: #if the word is not in the dictionary
-                     translated_words.append(word)
-             except Exception as e:
-                 print(f"Error translating word '{word}': {e}")
-                 translated_words.append(word)
-         translated_line = "".join(translated_words)
-         translated_lines.append(translated_line)
-     translated_text = "\n".join(translated_lines)
-     return translated_text
-    
+    """ Transpile the input text into C# code.
+    Args:
+        event (_str_): The input text to transpile.
+    Returns:
+        _str_: The transpiled C# code.
+    """
+    lines = event.splitlines()
+    translated_lines = []
+    # Apply translation line by line based on the dictionary
+    for line in lines:
+        # Split the line into words and punctuation marks
+        words = re.split(r'(\W+)', line)
+        translated_words = []
+        try:
+            check_transpiled_code(line, keywords,translation_dict)
+        except Exception as e:
+            print_errors(line, e)
+        for word in words: # get the input text
+            try:
+                # Convert word to lower case
+                lower_word = word.lower()
+                # Initialize translated_word as None
+                translated_word = None
+                # check if lower word comes across strings
+                if lower_word.startswith(("'", '"')):
+                    # Parse the string and preserve the original case of the word
+                    translated_word = parse_string(word)
+                    translated_words.append(translated_word)
+                # check if lower word is in the dictionary
+                elif lower_word in translation_dict:
+                    # Preserve the original case of the word
+                    translated_word = translation_dict[lower_word].capitalize() if word[0].isupper() else translation_dict[lower_word]
+                else: #if the word is not in the dictionary
+                    translated_word = word
+                translated_words.append(translated_word)
+            except Exception as e:
+                print(f"Error translating word '{word}': {e}")
+                translated_words.append(word)
+        translated_line = "".join(translated_words)
+        translated_lines.append(translated_line)
+    translated_text = "\n".join(translated_lines)
+    return translated_text
 
 def createoutput(translated_text): # this is for creating files
     """Create the output file.`
