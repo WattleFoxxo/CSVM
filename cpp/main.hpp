@@ -7,6 +7,7 @@
 #include <QMainWindow>
 #include <QTextEdit>
 #include <QMenuBar>
+#include <string>
 
 void print(const char* str)
 {

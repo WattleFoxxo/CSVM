@@ -15,6 +15,9 @@ void printwelcome()
 
 int main(int argc, char** argv)
 {
+    //string
+   
+    print()
     printwelcome();
     print("making window...");
     QApplication app(argc, argv);

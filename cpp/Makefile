@@ -377,3 +377,5 @@ uninstall:  FORCE
 
 FORCE:
 
+cubescript:
+	$(CC) -o cubescript csvm.cpp cubescript.hpp
