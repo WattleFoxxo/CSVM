@@ -1,9 +1,9 @@
 // include the packages we need
 use std::io;
-use std::cmp::Ordering;
-fn print(msg: &str){
-    println!("{}", msg);
-}
+
+
+mod header;
+
 fn main() {
     //take in input
     let mut cmd = String::new();
@@ -27,5 +27,13 @@ fn main() {
 }
 }
 fn help(){
-    print("help - display this message");
+    header::print("help - display this message");
+}
+
+fn createprojectdll(){
+
+    //create a new dll project for CSharp
+
+
+
 }

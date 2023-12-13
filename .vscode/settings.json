@@ -3,5 +3,9 @@
     "python.analysis.typeCheckingMode": "off",
     "files.associations": {
         "xstring": "cpp"
-    }
+    },
+    "rust-analyzer.linkedProjects": [
+        ".\\rust\\Cargo.toml",
+        ".\\rust\\Cargo.toml"
+    ]
 }
