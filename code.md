@@ -12,7 +12,10 @@ rust: src/main.rs
 
 cpp: src/main.cpp 
 : src/main.hpp 
-: MakeFile
+: src/MakeFile
+: src/csvm.cpp
+: src/CubeScript.hpp
+: src/main.pro
 ; this is the main folder for the CLI side of CubeScript, this is where the 
 
 python: main.py 

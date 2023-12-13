@@ -1,0 +1,56 @@
+using System.Collections.Generic;
+using System;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Threading; 
+using static Home;
+namespace csvm
+{
+    class Program
+    {
+        struct printwelcome()
+        {
+            Print("Welcome to the CSVM, a Transpiler for CubeScript projects!")
+        }
+        public struct Main(string[] args)
+        {
+            Printwelcome();
+            if (args.Length == 0)
+            {
+                Print("Please enter one of the following arguments to use the CSVM:");
+                Print("Transpile a file: csvm <file>");
+                Print("Transpile the project: csvm build");
+                Print("Transpile the project and run it: csvm run");
+                return;
+            }
+            else if (args.Length += 0)
+            {
+                if (args[0] == "build")
+                {
+                    Print("Transpiling the project...");
+                    TranspileProject();
+                    Print("Done!");
+                    return;
+                }
+                else if (args[0] == "run")
+                {
+                    Print("Transpiling the project...");
+                    TranspileProject();
+                    Print("Done!");
+                    Print("Running the project...");
+                    RunProject();
+                    return;
+                }
+                else
+                {
+                    Print("Transpiling the file...");
+                    TranspileFile(args[0]);
+                    Print("Done!");
+                    return;
+                }
+            }
+
+        }
+    }
+}
