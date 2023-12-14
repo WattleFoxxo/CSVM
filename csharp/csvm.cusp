@@ -3,16 +3,16 @@ using System;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Threading; 
+using System.Threading;
+using System.IO; 
+using System.Diagnostics;
 using static Home;
+
 namespace csvm
 {
     class Program
     {
-        struct printwelcome()
-        {
-            Print("Welcome to the CSVM, a Transpiler for CubeScript projects!")
-        }
+        
         public struct Main(string[] args)
         {
             Printwelcome();

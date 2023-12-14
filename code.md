@@ -16,7 +16,7 @@ cpp: src/main.cpp
 : src/csvm.cpp
 : src/CubeScript.hpp
 : src/main.pro
-; this is the main folder for the CLI side of CubeScript, this is where the 
+; this is the main folder for the CLI side of CubeScript, this is where the main checks and help documentation is not including the help.py file
 
 python: main.py 
 : CubeScriptLexer.py

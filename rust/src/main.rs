@@ -1,54 +1,57 @@
+use lib::print;
 // include the packages we need
 use lib::create_file_with_contents;
 use std::io;
+use std::env;
+use std::path::PathBuf;
 mod lib;
+fn get_current_dir() -> PathBuf {
+    env::current_dir().expect("Failed to get current directory")
+}
 
 fn main() {
+    
+    
+    const SUPPORTEDLANGUAGES: [&str; 4] = ["rust", "CSharp", "C", "C++"];
+    // Get the current directory
+    let CURRENT_DIR = get_current_dir();
+    
     //take in input
-    let mut cmd = String::new();
-    loop {
-        
-        println!("Enter a command: ");
-        io::stdin().read_line(&mut cmd)
+    //what type of project does the user want to make?
+    println!("Enter the language you want to use: ");
+    let mut lang = String::new();
+    io::stdin().read_line(&mut lang)
+        .expect("Failed to read line\n");
+    //check if the language is supported
+    if !SUPPORTEDLANGUAGES.contains(&lang.trim()){ // trim removes the newline character, which is needed for the contains function
+        println!("Invalid language"); // print error message
+        println!("please choose from the following languages:");
+        for language in SUPPORTEDLANGUAGES.iter(){ 
+            println!("{}", language);
+        }
+        return;
+    }
+    // whats the name of the project?
+    println!("Enter the name of the project: ");
+    let mut name = String::new();
+    io::stdin().read_line(&mut name)
         .expect("Failed to read line\n");
     
-    //parse input
-    match cmd.trim(){
-        // handle specific cases here
-        
-        "help" => {
-            help();
-        }
-        "createproject" => {
-            println!("Enter the language you want to use: ");
-            let mut lang = String::new();
-            io::stdin().read_line(&mut lang)
-            .expect("Failed to read line\n");
-            //
-            println!("Enter the name of the project: ");
-            let mut name = String::new();
-            io::stdin().read_line(&mut name)
-            .expect("Failed to read line\n");
-            //
-            println!("Enter the path to the project: ");
-            let mut path = String::new();
-            io::stdin().read_line(&mut path)
-            .expect("Failed to read line\n");
-            // 
-            createprojectexecutible(&lang.trim(), &name.trim(), &path.trim());
-        }
-        _ => {
-            println!("Invalid command\n");
-        }
-    }
-}
+    //does the user want it to be a dll or an executable?
+
+    // Use the current directory instead of asking for the path
+    let binding = CURRENT_DIR;
+    let path = &binding.to_str().expect("Failed to convert path to string");
+
+    createprojectexecutible(&lang.trim(), &name.trim(), &path);
 }
 fn help(){
     lib::print("help - display this message");
 }
 
 /// creates a new project for making a dll project in multiple languages
-fn createprojectdll(lang: &str, name: &str, path: &str){
+fn createprojectdll(lang: &str, name: &str, path: &str)
+{
 
     
     match lang {
@@ -82,7 +85,12 @@ fn createprojectdll(lang: &str, name: &str, path: &str){
         }
 
         _ => {
-            println!("Invalid language\n");
+            print("Invalid language");
+            print("please choose from the following languages:");
+            print("rust");
+            print("CSharp");
+            print("C");
+            print("C++");
         }
     }
 
@@ -137,7 +145,12 @@ fn createprojectexecutible(lang: &str, name: &str, path: &str)
         }
 
         _ => {
-            println!("Invalid language\n");
+            print("Invalid language\n");
+            print("please choose from the following languages:");
+            print("rust");
+            print("CSharp");
+            print("C");
+            print("C++");
         }
     }
 }
