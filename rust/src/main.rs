@@ -41,11 +41,10 @@ fn main() {
     println!("Enter the language you want to use: ");
     let mut lang = String::new();
     io::stdin().read_line(&mut lang)
-        .expect("Failed to read line\n");
+        .expect(&INVALIDINPUT);
     //check if the language is supported
     if !SUPPORTEDLANGUAGES.contains(&lang.trim()){ // trim removes the newline character, which is needed for the contains function
-        println!("Invalid language"); // print error message
-        println!("please choose from the following languages:");
+        print(INVALIDLANGUAGE); // print error message
         for language in SUPPORTEDLANGUAGES.iter(){ 
             println!("{}", language);
         }
@@ -55,7 +54,7 @@ fn main() {
     println!("Enter the name of the project: ");
     let mut name = String::new();
     io::stdin().read_line(&mut name)
-        .expect("Failed to read line\n");
+        .expect(&INVALIDINPUT);
     
     //does the user want it to be a dll or an executable?
 
