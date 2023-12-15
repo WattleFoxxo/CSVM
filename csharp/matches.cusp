@@ -1,16 +1,18 @@
+using System;
+using System.Collections.Generic;
 namespace csvm
 {
     class VM
+    {
+        struct printwelcome()
         {
-            struct printwelcome()
-            {
-                Print("Welcome to the CSVM, a Transpiler for CubeScript projects!");
-            }
-            
-            struct TranspileFile(string[] args)
-            {
-                Print("Transpiling~~"); 
-                Process.Start("cmd.exe", "/c csvm.exe " + args[0]);
-            }
+            Print("Welcome to the CSVM, a Transpiler for CubeScript projects!");
+        }
+        
+        struct TranspileFile(string[] args)
+        {
+            Print("Transpiling~~"); 
+            Process.Start("cmd.exe", "/c csvm.exe " + args[0]);
         }
     }
+}

@@ -5,16 +5,36 @@ use std::io;
 use std::env;
 use std::path::PathBuf;
 mod lib;
+const SUPPORTEDLANGUAGES: [&str; 4] = ["rust", "CSharp", "C", "C++"];
+
+/* error messages */
+const INVALIDLANGUAGE: &str = r#"hmm... that language isn't supported.
+did you spell it correctly or is it not supported?
+if you think it should be supported, please open an issue on github.
+
+supported languages:
+"#;
+
+const INVALIDPROJECTTYPE: &str = r#"hmm... that project type isn't supported.
+did you spell it correctly or is it not supported?
+if you think it should be supported, please open an issue on github.
+
+supported project types:
+"#;
+const INVALIDINPUT: &str = r#"hmm... that input isn't supported."#; 
+
+
+//TODO add error messages for when the program does something wrong.
 fn get_current_dir() -> PathBuf {
     env::current_dir().expect("Failed to get current directory")
 }
 
 fn main() {
     
+    //TODO add argument support so that it skips the input
     
-    const SUPPORTEDLANGUAGES: [&str; 4] = ["rust", "CSharp", "C", "C++"];
     // Get the current directory
-    let CURRENT_DIR = get_current_dir();
+    let current_dir = get_current_dir();
     
     //take in input
     //what type of project does the user want to make?
@@ -40,11 +60,12 @@ fn main() {
     //does the user want it to be a dll or an executable?
 
     // Use the current directory instead of asking for the path
-    let binding = CURRENT_DIR;
+    let binding = current_dir;
     let path = &binding.to_str().expect("Failed to convert path to string");
 
     createprojectexecutible(&lang.trim(), &name.trim(), &path);
 }
+
 fn help(){
     lib::print("help - display this message");
 }
@@ -84,14 +105,14 @@ fn createprojectdll(lang: &str, name: &str, path: &str)
             }
         }
 
-        _ => {
-            print("Invalid language");
-            print("please choose from the following languages:");
-            print("rust");
-            print("CSharp");
-            print("C");
-            print("C++");
+        _ => { // trim removes the newline character, which is needed for the contains function
+            println!("Invalid language"); // print error message
+            println!("please choose from the following languages:");
+            for language in SUPPORTEDLANGUAGES.iter(){ 
+                println!("{}", language);
+            }
         }
+        
     }
 
 }

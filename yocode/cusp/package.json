@@ -1,0 +1,25 @@
+{
+  "name": "cusp",
+  "displayName": "CubeScript",
+  "description": "the official OpenStudio CubeScript extention",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "cusp",
+      "aliases": ["CubeScript", "cusp"],
+      "extensions": [".cusp"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "cusp",
+      "scopeName": "source.cusp",
+      "path": "./syntaxes/cusp.tmLanguage.json"
+    }]
+  }
+}
