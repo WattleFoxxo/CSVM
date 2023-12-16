@@ -1,0 +1,64 @@
+﻿  csvm.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\filesystem(12): warning STL4038: The contents of <filesystem> are available only with C++17 or later.
+D:\postreset\repos\CSVM\cpp\csvm.cpp(16,10): error C2039: 'filesystem': is not a member of 'std'
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\iostream(18,1):
+  see declaration of 'std'
+  
+D:\postreset\repos\CSVM\cpp\csvm.cpp(16,10): error C3083: 'filesystem': the symbol to the left of a '::' must be a type
+D:\postreset\repos\CSVM\cpp\csvm.cpp(16,22): error C2039: 'path': is not a member of 'std'
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\iostream(18,1):
+  see declaration of 'std'
+  
+D:\postreset\repos\CSVM\cpp\csvm.cpp(16,22): error C2065: 'path': undeclared identifier
+D:\postreset\repos\CSVM\cpp\csvm.cpp(16,27): error C2146: syntax error: missing ';' before identifier 'currentPath'
+D:\postreset\repos\CSVM\cpp\csvm.cpp(16,27): error C2065: 'currentPath': undeclared identifier
+D:\postreset\repos\CSVM\cpp\csvm.cpp(16,46): error C2039: 'filesystem': is not a member of 'std'
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\iostream(18,1):
+  see declaration of 'std'
+  
+D:\postreset\repos\CSVM\cpp\csvm.cpp(16,46): error C3083: 'filesystem': the symbol to the left of a '::' must be a type
+D:\postreset\repos\CSVM\cpp\csvm.cpp(16,58): error C2039: 'current_path': is not a member of 'std'
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\iostream(18,1):
+  see declaration of 'std'
+  
+D:\postreset\repos\CSVM\cpp\csvm.cpp(16,58): error C3861: 'current_path': identifier not found
+D:\postreset\repos\CSVM\cpp\csvm.cpp(19,10): error C2039: 'vector': is not a member of 'std'
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\iostream(18,1):
+  see declaration of 'std'
+  
+D:\postreset\repos\CSVM\cpp\csvm.cpp(19,10): error C2065: 'vector': undeclared identifier
+D:\postreset\repos\CSVM\cpp\csvm.cpp(19,22): error C2275: 'std::string': expected an expression instead of a type
+D:\postreset\repos\CSVM\cpp\csvm.cpp(19,30): error C2065: 'filenames': undeclared identifier
+D:\postreset\repos\CSVM\cpp\csvm.cpp(22,40): error C2065: 'filenames': undeclared identifier
+D:\postreset\repos\CSVM\cpp\csvm.cpp(22,5): error C2530: 'filename': references must be initialized
+D:\postreset\repos\CSVM\cpp\csvm.cpp(22,38): error C2143: syntax error: missing ';' before ':'
+D:\postreset\repos\CSVM\cpp\csvm.cpp(22,49): error C2143: syntax error: missing ';' before ')'
+D:\postreset\repos\CSVM\cpp\csvm.cpp(24,14): error C2039: 'filesystem': is not a member of 'std'
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\iostream(18,1):
+  see declaration of 'std'
+  
+D:\postreset\repos\CSVM\cpp\csvm.cpp(24,14): error C3083: 'filesystem': the symbol to the left of a '::' must be a type
+D:\postreset\repos\CSVM\cpp\csvm.cpp(24,26): error C2039: 'path': is not a member of 'std'
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\iostream(18,1):
+  see declaration of 'std'
+  
+D:\postreset\repos\CSVM\cpp\csvm.cpp(24,26): error C2065: 'path': undeclared identifier
+D:\postreset\repos\CSVM\cpp\csvm.cpp(24,31): error C2146: syntax error: missing ';' before identifier 'filePath'
+D:\postreset\repos\CSVM\cpp\csvm.cpp(24,31): error C2065: 'filePath': undeclared identifier
+D:\postreset\repos\CSVM\cpp\csvm.cpp(24,42): error C2065: 'currentPath': undeclared identifier
+D:\postreset\repos\CSVM\cpp\csvm.cpp(25,18): error C2039: 'filesystem': is not a member of 'std'
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\iostream(18,1):
+  see declaration of 'std'
+  
+D:\postreset\repos\CSVM\cpp\csvm.cpp(25,18): error C3083: 'filesystem': the symbol to the left of a '::' must be a type
+D:\postreset\repos\CSVM\cpp\csvm.cpp(25,30): error C2039: 'exists': is not a member of 'std'
+  C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.38.33130\include\iostream(18,1):
+  see declaration of 'std'
+  
+D:\postreset\repos\CSVM\cpp\csvm.cpp(25,37): error C2065: 'filePath': undeclared identifier
+D:\postreset\repos\CSVM\cpp\csvm.cpp(25,30): error C3861: 'exists': identifier not found
+  main.cpp
+D:\postreset\repos\CSVM\cpp\main.hpp(6,10): error C1083: Cannot open include file: 'QApplication': No such file or directory
+  (compiling source file 'main.cpp')
+  
+  Generating Code...
