@@ -1,4 +1,3 @@
-# Module Overview
 """
 This module defines the CollapsibleApp class, providing a comprehensive help documentation interface for CubeScript users.
 The class offers methods to efficiently collapse or expand all sections, enhancing user experience.
@@ -117,6 +116,11 @@ CUSP 00014: Stack Overflow
 
 Exceeding the transpiler's call stack capacity results in this error. Prevent stack overflow by ensuring proper termination conditions in your recursive functions.
 """
+E15 = """
+CUSP 00015: Unsupported language
+
+the language you are trying to transpile is not supported by the transpiler. Please use a supported language.
+"""
 
 
 class CollapsibleApp(App[None]):
@@ -130,7 +134,7 @@ class CollapsibleApp(App[None]):
     def compose(self) -> ComposeResult:
         """Compose app with collapsible containers."""
         yield Footer()
-    
+
         with Collapsible(collapsed=True, title="How to get started"):
             yield Label(HowToGetStarted)
         with Collapsible(collapsed=True, title="Cusp 00001"):
@@ -161,6 +165,8 @@ class CollapsibleApp(App[None]):
             yield Label(E13)
         with Collapsible(collapsed=True, title="Cusp 00014"):
             yield Label(E14)
+        with Collapsible(collapsed=True, title="Cusp 00015"):
+            yield Label(E15)
         with Collapsible(collapsed=True, title="Errors"):
             yield Label(Errors)
         yield Markdown(
@@ -180,8 +186,8 @@ class CollapsibleApp(App[None]):
     
             Please report any errors to the GitHub page.
             
-            """)
-
+            """
+        )
 
     def action_collapse_or_expand(self, collapse: bool) -> None:
         for child in self.walk_children(Collapsible):

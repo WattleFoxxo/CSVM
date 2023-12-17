@@ -1,5 +1,5 @@
-import re
-from antlr4 import FileStream, CommonTokenStream
+from antlr4 import CommonTokenStream, FileStream
+
 from CubeScriptLexer import CubeScriptLexer
 from CubeScriptParser import CubeScriptParser
 from CubeScriptVisitor import CubeScriptVisitor
@@ -16,11 +16,10 @@ case = "case"
 breakstatement = "stop"
 
 
-
 #########################
 
 # Read the input from a file
-input_stream = FileStream('OpenStudioCLI.cusp')
+input_stream = FileStream("OpenStudioCLI.cusp")
 
 # Create a lexer and a token stream
 lexer = CubeScriptLexer(input_stream)
@@ -31,6 +30,7 @@ parser = CubeScriptParser(token_stream)
 tree = parser.program()
 
 # reform the tokens back in CSharp language
+
 
 class MyTranspiler(CubeScriptVisitor):
     def visitProgram(self, ctx):
@@ -44,13 +44,13 @@ class MyTranspiler(CubeScriptVisitor):
                 statements.append(statement)
 
         # Join the statements with newlines and return the result
-        return '\n'.join(statements)
+        return "\n".join(statements)
 
     def visitStatement(self, ctx):
         # Visit the expression and return the result
         statement = ctx.getText()
         return statement
-    
+
     def visitExpression(self, ctx):
         # Visit the expression and return the result
         expression = ctx.getText()
@@ -59,12 +59,12 @@ class MyTranspiler(CubeScriptVisitor):
             # Insert a space after "using"
             expression = importstatement + " " + expression[5:]
             expressions.append(expression.split())
-        
+
         elif expression.startswith("if"):
             # Insert a space after "if"
             expression = ifstatement + " " + expression[2:]
             expressions.append(expression.split())
-        
+
         else:
             # if the expression is not any of the above, then it is a function call
             for i in range(ctx.getChildCount()):
@@ -83,7 +83,7 @@ class MyTranspiler(CubeScriptVisitor):
             # if the expression is not any of the above, then it is a function call
             for i in range(ctx.getChildCount()):
                 switchblock.append(ctx.getChild(i).getText().split())
-    
+
     def visitIfStatement(self, ctx):
         # get the contents of the statement
         ifblocks = ctx.getText()
@@ -96,7 +96,7 @@ class MyTranspiler(CubeScriptVisitor):
             # if the expression is not any of the above, then it is a function call
             for i in range(ctx.getChildCount()):
                 ifblock.append(ctx.getChild(i).getText().split())
-    
+
     def visitFunction(self, ctx):
         # Visit the expression and return the result
         function = ctx.getText()
@@ -106,8 +106,12 @@ class MyTranspiler(CubeScriptVisitor):
             words = function.split()
             struct_index = words.index("struct")
             function_name = words[struct_index + 1]  # Extract the function name
-            function_args = words[struct_index + 2 : words.index("{")]  # Extract the function arguments
-            function_body = " ".join(words[words.index("{") + 1 : words.index("}")])  # Extract the function body
+            function_args = words[
+                struct_index + 2 : words.index("{")
+            ]  # Extract the function arguments
+            function_body = " ".join(
+                words[words.index("{") + 1 : words.index("}")]
+            )  # Extract the function body
             function = f"struct {function_name}({', '.join(function_args)})\n{{\n{function_body}\n}}"  # Format the function in C# syntax
             functions.append(function)
         else:
@@ -115,7 +119,7 @@ class MyTranspiler(CubeScriptVisitor):
             for i in range(ctx.getChildCount()):
                 functions.append(ctx.getChild(i).getText().split())
         print(functions)
-        
+
     def visitFunctionCall(self, ctx):
         # Visit the expression and return the result
         functionCall = ctx.getText()
@@ -129,22 +133,24 @@ class MyTranspiler(CubeScriptVisitor):
             for i in range(ctx.getChildCount()):
                 functionCalls.append(ctx.getChild(i).getText().split())
         print(functionCalls)
-        
+
     def visitFunctionDeclaration(self, ctx):
         # Visit the expression and return the result
         functionDeclaration = ctx.getText()
         functionDeclarations = []
         if functionDeclaration.startswith("struct"):
             # function declaration
-            functionDeclaration = functionDeclaration[:6] + " " + functionDeclaration[6:]
+            functionDeclaration = (
+                functionDeclaration[:6] + " " + functionDeclaration[6:]
+            )
             functionDeclarations.append(functionDeclaration.split())
         else:
             # if the expression is not any of the above, then it is a function call
             for i in range(ctx.getChildCount()):
                 functionDeclarations.append(ctx.getChild(i).getText().split())
         print(functionDeclarations)
-    
-    
+
+
 # usinginternet; not good
 # using internet; thats what we want
 # using <IDENTIFER>; thats what we want
@@ -154,11 +160,9 @@ def main():
     # Create a visitor and visit the tree
     visitor = MyTranspiler()
     code = visitor.visit(tree)
-    
+
     # Print the result
     print(code)
 
 
 main()
-
-
