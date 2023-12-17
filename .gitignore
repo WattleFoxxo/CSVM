@@ -12,6 +12,8 @@ __pycache__
 *.so
 rust/target
 
+**/target/
+
 # Ignore NuGet packages
 packages/
 build

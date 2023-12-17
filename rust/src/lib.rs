@@ -1,25 +1,99 @@
+use std::env;
+use std::fs::{File, OpenOptions};
+use std::io::{BufRead, BufReader, BufWriter, Seek, SeekFrom, Write};
 use std::path::Path;
-use std::fs::File;
-use std::io::prelude::*;
-pub fn print(message: &str) {
-    println!("{}", message);
+use std::process::Command;
+
+pub enum ProjectType {
+    Executable,
+    Library,
 }
 
 pub fn create_file_with_contents(
+    type_: ProjectType,
+    is_rust: bool,
     filename: &str,
     contents: &str,
     path: &str,
 ) -> std::io::Result<()> {
-    // Create the file path by joining the specified path and the filename
-    let file_path = Path::new(path).join(filename);
+    match type_ {
+        ProjectType::Executable => create_executable(is_rust, filename, contents, path),
+        ProjectType::Library => create_library(is_rust, filename, contents, path),
+    }
+}
 
-    // Create a file at the specified path
-    let mut file = File::create(&file_path)?;
+fn create_executable(
+    is_rust: bool,
+    filename: &str,
+    contents: &str,
+    path: &str,
+) -> std::io::Result<()> {
+    todo!()
+}
 
-    // Write the contents to the file
-    file.write_all(contents.as_bytes())?;
+fn create_library(
+    is_rust: bool,
+    filename: &str,
+    contents: &str,
+    path: &str,
+) -> std::io::Result<()> {
+    if is_rust {
+        // Get current_dir
+        let current_dir = env::current_dir().expect("Failed to get current directory");
 
-    // Return OK
+        // Set the path to the current directory + the specified path
+        let path = Path::new(&current_dir).join(path);
+
+        // Create the crate if it doesn't exist
+        Command::new("cargo")
+            .arg("new")
+            .arg("")
+            .arg("--lib")
+            .spawn()
+            .expect("Failed to create rust project");
+
+        // Read the Cargo.toml file and add the cdylib crate type
+        read_cargo_toml_and_add_dylib(&path)?;
+        Ok(())
+    } else {
+        let file_path = Path::new(path).join(filename);
+
+        // Create a file at the specified path
+        let mut file = File::create(&file_path)?;
+
+        // Write the contents to the file
+        file.write_all(contents.as_bytes())?;
+
+        // Return OK
+        Ok(())
+    }
+}
+
+fn read_cargo_toml_and_add_dylib(path: &Path) -> std::io::Result<()> {
+    let new_path = path;
+    let mut file = OpenOptions::new().write(true).read(true).open(path)?;
+    let reader = BufReader::new(&file);
+    let mut lines: Vec<String> = reader.lines().map(|l| l.expect("Can't get line")).collect();
+    lines[5] = "crate-type = [\"cdylib\"]".to_string();
+
+    file.set_len(0)?;
+    file.seek(SeekFrom::Start(0))?;
+
+    let temp_path = new_path.with_extension("tmp");
+    let temp_file = OpenOptions::new()
+        .write(true)
+        .create(true)
+        .open(&temp_path)?;
+    let mut writer = BufWriter::new(&temp_file);
+    for line in &lines {
+        writeln!(writer, "{}", line)?;
+    }
+    writer.flush()?;
+
+    // Replace the original file with the temporary file
+    std::fs::remove_file(&new_path)?;
+    std::fs::rename(&temp_path, &new_path)?;
+
     Ok(())
 }
 pub fn createprojectdll(lang: &str, name: &str, path: &str) {
