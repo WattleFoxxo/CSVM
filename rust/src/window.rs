@@ -1,24 +1,38 @@
-use gtk4 as gtk;
-use gtk::prelude::*;
-use gtk::{glib, Application, ApplicationWindow};
+use iced::{executor, Application, Command, Element, Settings, Text, Window};
+use iced::{executor, Application, Command, Element, Settings, Text, Window};
 
-fn windowz() -> glib::ExitCode {
-    let app = Application::builder()
-        .application_id("org.example.HelloWorld")
-        .build();
+pub struct HelloWorld;
+impl Application for HelloWorld {
+    type Executor = executor::Default;
+    type Message = ();
+    type Flags = ();
 
-    app.connect_activate(|app| {
-        // We create the main window.
-        let window = ApplicationWindow::builder()
-            .application(app)
-            .default_width(320)
-            .default_height(200)
-            .title("Hello, World!")
-            .build();
+    fn new(_flags: ()) -> (HelloWorld, Command<Self::Message>) {
+        (HelloWorld, Command::none())
+    }
 
-        // Show the window.
-        window.present();
-    });
+    fn title(&self) -> String {
+        String::from("Hello, world!")
+    }
 
-    app.run()
+    fn update(&mut self, _message: Self::Message) -> Command<Self::Message> {
+        Command::none()
+    }
+
+    fn view(&mut self) -> Element<Self::Message> {
+        Text::new("Hello, world!").into()
+    }
+
+    type Theme = iced::Default;
+
+    
+}
+
+pub fn windowz() {
+    HelloWorld::run(Settings {
+        window: Window::new()
+            .title("Hello, world!")
+            .size(200, 100),
+        ..Settings::default()
+    }); 
 }

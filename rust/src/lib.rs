@@ -1,6 +1,7 @@
 use std::path::Path;
 use std::fs::File;
 use std::io::prelude::*;
+use main::SUPPORTEDLANGUAGES;
 pub fn print(message: &str) {
     println!("{}", message);
 }
