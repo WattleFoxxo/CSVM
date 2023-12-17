@@ -10,3 +10,4 @@ crate-type = ["cdylib"]
 cargo-watch = "8.4.1"
 os_info = "3.7.0"
 slint = "1.3.2"
+gtk4 = "0.7.3"
