@@ -8,7 +8,7 @@ void test_checkcsvm()
     std::filesystem::path currentPath = "./";
 
     // Call the function
-    int result = checkcsvm();
+    int result = check();
 
     // Check the result
     assert(result == 0);
@@ -22,7 +22,7 @@ void test_checkcsvm()
     std::filesystem::remove(currentPath / "csvm");
 
     // Call the function
-    result = checkcsvm();
+    result = check();
 
     // Check the result
     assert(result == 1);
@@ -38,7 +38,7 @@ void test_checkcsvm()
     std::filesystem::remove(currentPath / "help");
 
     // Call the function
-    result = checkcsvm();
+    result = check();
 
     // Check the result
     assert(result == 1);

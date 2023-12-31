@@ -1,4 +1,4 @@
-# Generated from CubeScript.g4 by ANTLR 4.13.0
+# Generated from CubeScript.g4 by ANTLR 4.13.1
 from antlr4 import *
 if "." in __name__:
     from .CubeScriptParser import CubeScriptParser
@@ -106,6 +106,16 @@ class CubeScriptVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by CubeScriptParser#whileBlock.
     def visitWhileBlock(self, ctx:CubeScriptParser.WhileBlockContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CubeScriptParser#parameterList.
+    def visitParameterList(self, ctx:CubeScriptParser.ParameterListContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by CubeScriptParser#functionBody.
+    def visitFunctionBody(self, ctx:CubeScriptParser.FunctionBodyContext):
         return self.visitChildren(ctx)
 
 

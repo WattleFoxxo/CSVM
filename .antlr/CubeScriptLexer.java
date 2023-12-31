@@ -1,4 +1,4 @@
-// Generated from c:/Users/GAMER/source/repos/CSVM/cubescript.g4 by ANTLR 4.13.1
+// Generated from d://postreset//repos//CSVM//CubeScript.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
@@ -108,7 +108,7 @@ public class CubeScriptLexer extends Lexer {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "cubescript.g4"; }
+	public String getGrammarFileName() { return "CubeScript.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }

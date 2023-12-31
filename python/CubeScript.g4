@@ -30,15 +30,26 @@ ifBlock: IF '(' expression ')' '{' line* '}' (ELSE '{' line* '}')?;
 //while block
 whileBlock: WHILE '(' expression ')' '{' line* '}';
 
+
+parameterList: TYPE IDENTIFIER (',' TYPE IDENTIFIER)*;
+
+//function body
+functionBody: line*;
+
+
 //function call
-functionCall: IDENTIFIER '(' (expression (',' expression)*)? ')' ';';
+functionCall: 
+    IDENTIFIER '(' (expression (',' expression)*)? ')' ';'
+    | 'struct' IDENTIFIER '(' (parameterList)? ')' '{' functionBody '}'
+    ;
 
 //for block
 forBlock: FOR '(' expression '>' expression ')' '{' line* '}';
 
 //code block
 codeBlock: '{' line* '}';
-functionblock: STATES? IDENTIFIER '(' (IDENTIFIER (',' IDENTIFIER)*)? ')' codeBlock;
+functionblock: STATES? IDENTIFIER '(' (TYPE IDENTIFIER (',' TYPE IDENTIFIER)*)? ')' codeBlock;
+
 
 //return statement
 returnstatement: RETURN expression ';';
@@ -68,6 +79,7 @@ expression: assignment
 | includeStatement 
 | arrayDeclaration
 | constant
+
 | expression multOp expression
 | expression addOp expression
 | expression cmpOp expression
@@ -125,7 +137,7 @@ RETURN: 'return';
 SWITCH: 'switch';
 CASE: 'at';
 DEFAULT: 'bland';
-STATES: 'public'| 'private' | 'protected'| 'static';
+STATES: 'public' | 'private' | 'protected' | 'static' | 'struct';
 switchBlock: SWITCH '(' expression ')' '{' switchCase* defaultCase? '}';
 switchCase: CASE constant ':' line*;
 defaultCase: DEFAULT ':' line*;

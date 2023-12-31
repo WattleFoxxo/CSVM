@@ -2,8 +2,17 @@
 use creator::{
     create_file_with_contents, create_project_dylib, create_project_executable, SuppportedLanguages,
 };
+use std::array;
 use std::env;
 use std::io;
+use std::panic;
+use log;
+use std::env::args;
+mod window;
+mod other;
+
+
+
 
 /* error messages */
 const INVALIDLANGUAGE: &str = r#"hmm... that language isn't supported.
@@ -22,10 +31,27 @@ supported project types:
 const INVALIDINPUT: &str = r#"hmm... that input isn't supported."#;
 
 fn main() {
-    //TODO add argument support so that it skips the input
+    let args = env::args().collect::<Vec<String>>(); // Collect command line arguments into a vector
 
-    // Get the current directory
-    let current_dir = env::current_dir().expect("Failed to get current directory");
+    if args.len() > 1 {
+        // Execute the block of code if there are command line arguments
+        let mut arrayforargs = Vec::new(); // Declare arrayforargs as a vector
+        for arg in args.iter().skip(1) {
+            // Process each command line argument here
+            println!("Command line argument: {}", arg);
+            arrayforargs.push(arg.to_string()); // Use push method to add elements to the vector
+        }
+        if arrayforargs.len() >= 4 {
+            if arrayforargs[0] == "create" {
+                let name = String::from(&arrayforargs[1]);
+                let lang = String::from(&arrayforargs[2]);
+                let path = String::from(&arrayforargs[3]);
+                create_project_executable(&lang, &name, &path);
+            }
+        }
+    } else {
+        // Execute the rest of the code if there are no command line arguments
+        let current_dir = env::current_dir().expect("Failed to get current directory");
 
     //take in input
     //what type of project does the user want to make?
@@ -42,7 +68,8 @@ fn main() {
         for language in SuppportedLanguages::enumerate() {
             println!("{}", language);
         }
-        return;
+        log::error!("CUSP 000015"); // log the error
+        panic!("CUSP 000015"); // exit the program
     }
     // whats the name of the project?
     println!("Enter the name of the project: ");
@@ -56,4 +83,5 @@ fn main() {
     let path = &binding.to_str().expect("Failed to convert path to string");
 
     create_project_executable(&lang.trim(), &name.trim(), &path);
+}
 }

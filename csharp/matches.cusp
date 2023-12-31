@@ -7,12 +7,30 @@ namespace csvm
         struct printwelcome()
         {
             Print("Welcome to the CSVM, a Transpiler for CubeScript projects!");
+            Print("Please enter a command to continue.");
         }
         
-        struct TranspileFile(string[] args)
+        struct TranspileCSFile(string[] args)
         {
             Print("Transpiling~~"); 
-            Process.Start("cmd.exe", "/c csvm.exe " + args[0]);
+            Process.Start("/addons/CubeScriptVM/CSTranspiler.exe", args[0]);
         }
+        struct TranspileCPPFile(string[] args)
+        {
+            Print("Transpiling~~");
+            Process.Start("/addons/CubeScriptVM/CPPTranspiler.exe",args[0]);
+        }
+        struct TranspileCFile(string[] args)
+        {
+            Print("Transpiling~~");
+            Process.Start("/addons/CubeScriptVM/CTranspiler.exe",args[0]);
+        }
+
+        struct TranspileRustFile(string[] args)
+        {
+            Print("Transpiling~~");
+            Process.Start("/addons/CubeScriptVM/RustTranspiler.exe",args[0]);
+        }
+
     }
 }

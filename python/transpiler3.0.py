@@ -3,7 +3,7 @@ from antlr4 import CommonTokenStream, FileStream
 from CubeScriptLexer import CubeScriptLexer
 from CubeScriptParser import CubeScriptParser
 from CubeScriptVisitor import CubeScriptVisitor
-
+import re
 #### CSharp language ####
 
 importstatement = "using"
@@ -71,6 +71,22 @@ class MyTranspiler(CubeScriptVisitor):
                 expressions.append(ctx.getChild(i).getText().split())
         print(expressions)
 
+    def visitSwitchStatement(self, ctx):
+        # get the contents of the statement
+        switchstatements = ctx.getText()
+        switchstatement = []
+        if switchstatements.startswith("switch"):
+            # Insert a space after "switch"
+            switchstatements = switchstatement + " " + switchstatements[6:]
+            switchstatement.append(switchstatements.split())
+        else:
+            # if the expression is not any of the above, then it is a function call
+            for i in range(ctx.getChildCount()):
+                switchstatement.append(ctx.getChild(i).getText().split())
+                
+    def visitAddOp(self, ctx: CubeScriptParser.AddOpContext):
+        return super().visitAddOp(ctx)
+
     def visitSwitchBlock(self, ctx: CubeScriptParser.SwitchBlockContext):
         # get the contents of the statement
         switchblocks = ctx.getText()
@@ -97,29 +113,32 @@ class MyTranspiler(CubeScriptVisitor):
             for i in range(ctx.getChildCount()):
                 ifblock.append(ctx.getChild(i).getText().split())
 
+    import re
+
     def visitFunction(self, ctx):
         # Visit the expression and return the result
         function = ctx.getText()
         functions = []
         if "struct" in function:
             # function declaration
-            words = function.split()
-            struct_index = words.index("struct")
-            function_name = words[struct_index + 1]  # Extract the function name
-            function_args = words[
-                struct_index + 2 : words.index("{")
-            ]  # Extract the function arguments
-            function_body = " ".join(
-                words[words.index("{") + 1 : words.index("}")]
-            )  # Extract the function body
-            function = f"struct {function_name}({', '.join(function_args)})\n{{\n{function_body}\n}}"  # Format the function in C# syntax
-            functions.append(function)
+            match = re.search(r'struct\s+(\w+)\s*\((.*?)\)\s*\{(.*?)\}', function, re.DOTALL)
+            if match:
+                function_name = match.group(1)  # Extract the function name
+                function_args = match.group(2).split()  # Extract the function arguments
+                function_body = match.group(3).strip()  # Extract the function body and strip leading/trailing whitespace
+                function_args = [arg.strip() for arg in function_args]  # Split arguments word by word
+                function_body = function_body.split()  # Split function body word by word
+                function = f"public {function_name}({', '.join(function_args)})\n{{\n{' '.join(function_body)}\n}}"  # Format the function in C# syntax
+                functions.append(function)
+            else:
+                print("No match found for function name.")
         else:
             # if the expression is not any of the above, then it is a function call
             for i in range(ctx.getChildCount()):
                 functions.append(ctx.getChild(i).getText().split())
+                
         print(functions)
-
+        
     def visitFunctionCall(self, ctx):
         # Visit the expression and return the result
         functionCall = ctx.getText()
@@ -130,8 +149,9 @@ class MyTranspiler(CubeScriptVisitor):
             functionCalls.append(functionCall.split())
         else:
             # if the expression is not any of the above, then it is a function call
-            for i in range(ctx.getChildCount()):
-                functionCalls.append(ctx.getChild(i).getText().split())
+            function_name = ctx.getChild(0).getText()
+            arguments = [ctx.getChild(i).getText() for i in range(1, ctx.getChildCount())]
+            functionCalls.append([function_name, arguments])
         print(functionCalls)
 
     def visitFunctionDeclaration(self, ctx):

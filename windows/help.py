@@ -119,7 +119,7 @@ Exceeding the transpiler's call stack capacity results in this error. Prevent st
 E15 = """
 CUSP 00015: Unsupported language
 
-the language you are trying to transpile is not supported by the transpiler. Please use a supported language.
+the language you are trying to transpile is not supported by the transpiler. Please use a supported language or download an addon.
 """
 
 

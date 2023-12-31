@@ -11,12 +11,19 @@ struct Main()
 {
     Print("Hello World!");
     string input = ReadLine();
-    switch (input)
-    {
-        at "1":
-            Print("Hey!");
-            stop;
+    switch (input) {
+      at "help":
+        Print("Help is not available");
+        Print("fuck you, lol");
+        stop;
+      bland:
+        stop;
+    }  
+  
 
-    }
+}
 
+struct add(int a, int b)
+{
+  return a + b;
 }

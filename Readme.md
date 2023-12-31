@@ -5,3 +5,5 @@
 CubeScript! an interactive programming language based on the C Style syntax. It is designed to be simple, fast, and easy to use. It is a compiled language, and is designed to be compiled into multiple different programming languages!
 
 this is the repository for the official Transpiler, written in Python. It is currently in development, and is not ready for use.
+
+you can use it if you build everything from source but we would recommend you wait until we have a stable release.
