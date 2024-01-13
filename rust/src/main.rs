@@ -28,24 +28,24 @@ if you think it should be supported, please open an issue on github.
 
 supported project types:
 "#;
-const INVALIDINPUT: &str = r#"hmm... that input isn't supported."#;
+const INVALIDINPUT: &str = r#"hmm... seems like whatever you put in, i couldn't understand. i guess try again? "#;
 
 fn main() {
     let args = env::args().collect::<Vec<String>>(); // Collect command line arguments into a vector
 
     if args.len() > 1 {
         // Execute the block of code if there are command line arguments
-        let mut arrayforargs = Vec::new(); // Declare arrayforargs as a vector
+        let mut array = Vec::new(); // Declare arrayforargs as a vector
         for arg in args.iter().skip(1) {
             // Process each command line argument here
             println!("Command line argument: {}", arg);
-            arrayforargs.push(arg.to_string()); // Use push method to add elements to the vector
+            array.push(arg.to_string()); // Use push method to add elements to the vector
         }
-        if arrayforargs.len() >= 4 {
-            if arrayforargs[0] == "create" {
-                let name = String::from(&arrayforargs[1]);
-                let lang = String::from(&arrayforargs[2]);
-                let path = String::from(&arrayforargs[3]);
+        if array.len() >= 4 {
+            if array[0] == "create" {
+                let name = String::from(&array[1]);
+                let lang = String::from(&array[2]);
+                let path = String::from(&array[3]);
                 create_project_executable(&lang, &name, &path);
             }
         }
