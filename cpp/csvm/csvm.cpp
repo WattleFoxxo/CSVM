@@ -1,6 +1,11 @@
 #include <string>
-#include "cubescript.hpp"
 #include <cstdlib>
+#include <cstdio>
+#include <fstream>
+#include <filesystem>
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
 /// check Function for the CSVM
 /// @param argc The number of arguments passed to the program
 /// @param argv The arguments passed to the program
