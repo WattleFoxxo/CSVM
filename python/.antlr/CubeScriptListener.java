@@ -1,4 +1,4 @@
-// Generated from d://postreset//repos//CSVM//python//CubeScript.g4 by ANTLR 4.13.1
+// Generated from d:/postreset/repos/CSVM/python/CubeScript.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -236,6 +236,26 @@ public interface CubeScriptListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitWhileBlock(CubeScriptParser.WhileBlockContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CubeScriptParser#parameterList}.
+	 * @param ctx the parse tree
+	 */
+	void enterParameterList(CubeScriptParser.ParameterListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CubeScriptParser#parameterList}.
+	 * @param ctx the parse tree
+	 */
+	void exitParameterList(CubeScriptParser.ParameterListContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CubeScriptParser#functionBody}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctionBody(CubeScriptParser.FunctionBodyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CubeScriptParser#functionBody}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctionBody(CubeScriptParser.FunctionBodyContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CubeScriptParser#functionCall}.
 	 * @param ctx the parse tree

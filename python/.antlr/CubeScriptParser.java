@@ -1,4 +1,4 @@
-// Generated from d://postreset//repos//CSVM//python//CubeScript.g4 by ANTLR 4.13.1
+// Generated from d:/postreset/repos/CSVM/python/CubeScript.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -130,6 +130,14 @@ public class CubeScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_program; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterProgram(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitProgram(this);
+		}
 	}
 
 	public final ProgramContext program() throws RecognitionException {
@@ -193,6 +201,14 @@ public class CubeScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_line; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterLine(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitLine(this);
+		}
 	}
 
 	public final LineContext line() throws RecognitionException {
@@ -277,6 +293,14 @@ public class CubeScriptParser extends Parser {
 			return getRuleContext(ArrayDeclarationContext.class,0);
 		}
 		public ArrayDeclarationexpContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterArrayDeclarationexp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitArrayDeclarationexp(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class BreakexpContext extends StatementContext {
@@ -284,6 +308,14 @@ public class CubeScriptParser extends Parser {
 			return getRuleContext(BreakContext.class,0);
 		}
 		public BreakexpContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterBreakexp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitBreakexp(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class FunctionCallExpContext extends StatementContext {
@@ -291,6 +323,14 @@ public class CubeScriptParser extends Parser {
 			return getRuleContext(FunctionCallContext.class,0);
 		}
 		public FunctionCallExpContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterFunctionCallExp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitFunctionCallExp(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class UsingStatementexpContext extends StatementContext {
@@ -298,6 +338,14 @@ public class CubeScriptParser extends Parser {
 			return getRuleContext(UsingStatementContext.class,0);
 		}
 		public UsingStatementexpContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterUsingStatementexp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitUsingStatementexp(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class IncludeStatementexpContext extends StatementContext {
@@ -305,6 +353,14 @@ public class CubeScriptParser extends Parser {
 			return getRuleContext(IncludeStatementContext.class,0);
 		}
 		public IncludeStatementexpContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterIncludeStatementexp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitIncludeStatementexp(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class FunctionblockexpContext extends StatementContext {
@@ -312,11 +368,27 @@ public class CubeScriptParser extends Parser {
 			return getRuleContext(FunctionblockContext.class,0);
 		}
 		public FunctionblockexpContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterFunctionblockexp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitFunctionblockexp(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class CommentexpContext extends StatementContext {
 		public TerminalNode Comment() { return getToken(CubeScriptParser.Comment, 0); }
 		public CommentexpContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterCommentexp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitCommentexp(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class IfblockexpContext extends StatementContext {
@@ -324,6 +396,14 @@ public class CubeScriptParser extends Parser {
 			return getRuleContext(IfBlockContext.class,0);
 		}
 		public IfblockexpContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterIfblockexp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitIfblockexp(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionexpContext extends StatementContext {
@@ -331,6 +411,14 @@ public class CubeScriptParser extends Parser {
 			return getRuleContext(ExpressionContext.class,0);
 		}
 		public ExpressionexpContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterExpressionexp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitExpressionexp(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class AssignmentexpContext extends StatementContext {
@@ -338,6 +426,14 @@ public class CubeScriptParser extends Parser {
 			return getRuleContext(AssignmentContext.class,0);
 		}
 		public AssignmentexpContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterAssignmentexp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitAssignmentexp(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ForblockexpContext extends StatementContext {
@@ -345,6 +441,14 @@ public class CubeScriptParser extends Parser {
 			return getRuleContext(ForBlockContext.class,0);
 		}
 		public ForblockexpContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterForblockexp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitForblockexp(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ReturnstatementexpContext extends StatementContext {
@@ -352,6 +456,14 @@ public class CubeScriptParser extends Parser {
 			return getRuleContext(ReturnstatementContext.class,0);
 		}
 		public ReturnstatementexpContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterReturnstatementexp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitReturnstatementexp(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class ImportStatementexpContext extends StatementContext {
@@ -359,6 +471,14 @@ public class CubeScriptParser extends Parser {
 			return getRuleContext(ImportStatementContext.class,0);
 		}
 		public ImportStatementexpContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterImportStatementexp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitImportStatementexp(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class SwitchBlockexpContext extends StatementContext {
@@ -366,6 +486,14 @@ public class CubeScriptParser extends Parser {
 			return getRuleContext(SwitchBlockContext.class,0);
 		}
 		public SwitchBlockexpContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterSwitchBlockexp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitSwitchBlockexp(this);
+		}
 	}
 	@SuppressWarnings("CheckReturnValue")
 	public static class WhileblockexpContext extends StatementContext {
@@ -373,6 +501,14 @@ public class CubeScriptParser extends Parser {
 			return getRuleContext(WhileBlockContext.class,0);
 		}
 		public WhileblockexpContext(StatementContext ctx) { copyFrom(ctx); }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterWhileblockexp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitWhileblockexp(this);
+		}
 	}
 
 	public final StatementContext statement() throws RecognitionException {
@@ -525,6 +661,14 @@ public class CubeScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_assignment; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterAssignment(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitAssignment(this);
+		}
 	}
 
 	public final AssignmentContext assignment() throws RecognitionException {
@@ -571,6 +715,14 @@ public class CubeScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_ifBlock; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterIfBlock(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitIfBlock(this);
+		}
 	}
 
 	public final IfBlockContext ifBlock() throws RecognitionException {
@@ -663,6 +815,14 @@ public class CubeScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_whileBlock; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterWhileBlock(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitWhileBlock(this);
+		}
 	}
 
 	public final WhileBlockContext whileBlock() throws RecognitionException {
@@ -725,6 +885,14 @@ public class CubeScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_parameterList; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterParameterList(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitParameterList(this);
+		}
 	}
 
 	public final ParameterListContext parameterList() throws RecognitionException {
@@ -781,6 +949,14 @@ public class CubeScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_functionBody; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterFunctionBody(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitFunctionBody(this);
+		}
 	}
 
 	public final FunctionBodyContext functionBody() throws RecognitionException {
@@ -836,6 +1012,14 @@ public class CubeScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_functionCall; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterFunctionCall(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitFunctionCall(this);
+		}
 	}
 
 	public final FunctionCallContext functionCall() throws RecognitionException {
@@ -948,6 +1132,14 @@ public class CubeScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_forBlock; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterForBlock(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitForBlock(this);
+		}
 	}
 
 	public final ForBlockContext forBlock() throws RecognitionException {
@@ -1012,6 +1204,14 @@ public class CubeScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_codeBlock; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterCodeBlock(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitCodeBlock(this);
+		}
 	}
 
 	public final CodeBlockContext codeBlock() throws RecognitionException {
@@ -1070,6 +1270,14 @@ public class CubeScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_functionblock; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterFunctionblock(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitFunctionblock(this);
+		}
 	}
 
 	public final FunctionblockContext functionblock() throws RecognitionException {
@@ -1150,6 +1358,14 @@ public class CubeScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_returnstatement; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterReturnstatement(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitReturnstatement(this);
+		}
 	}
 
 	public final ReturnstatementContext returnstatement() throws RecognitionException {
@@ -1188,6 +1404,14 @@ public class CubeScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_importStatement; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterImportStatement(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitImportStatement(this);
+		}
 	}
 
 	public final ImportStatementContext importStatement() throws RecognitionException {
@@ -1245,6 +1469,14 @@ public class CubeScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_includeStatement; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterIncludeStatement(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitIncludeStatement(this);
+		}
 	}
 
 	public final IncludeStatementContext includeStatement() throws RecognitionException {
@@ -1305,6 +1537,14 @@ public class CubeScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_arrayDeclaration; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterArrayDeclaration(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitArrayDeclaration(this);
+		}
 	}
 
 	public final ArrayDeclarationContext arrayDeclaration() throws RecognitionException {
@@ -1372,6 +1612,14 @@ public class CubeScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_usingStatement; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterUsingStatement(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitUsingStatement(this);
+		}
 	}
 
 	public final UsingStatementContext usingStatement() throws RecognitionException {
@@ -1480,6 +1728,14 @@ public class CubeScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_expression; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterExpression(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitExpression(this);
+		}
 	}
 
 	public final ExpressionContext expression() throws RecognitionException {
@@ -1986,6 +2242,14 @@ public class CubeScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_multOp; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterMultOp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitMultOp(this);
+		}
 	}
 
 	public final MultOpContext multOp() throws RecognitionException {
@@ -2024,6 +2288,14 @@ public class CubeScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_addOp; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterAddOp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitAddOp(this);
+		}
 	}
 
 	public final AddOpContext addOp() throws RecognitionException {
@@ -2062,6 +2334,14 @@ public class CubeScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_cmpOp; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterCmpOp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitCmpOp(this);
+		}
 	}
 
 	public final CmpOpContext cmpOp() throws RecognitionException {
@@ -2101,6 +2381,14 @@ public class CubeScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_boolOp; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterBoolOp(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitBoolOp(this);
+		}
 	}
 
 	public final BoolOpContext boolOp() throws RecognitionException {
@@ -2136,6 +2424,14 @@ public class CubeScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_constant; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterConstant(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitConstant(this);
+		}
 	}
 
 	public final ConstantContext constant() throws RecognitionException {
@@ -2174,6 +2470,14 @@ public class CubeScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_break; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterBreak(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitBreak(this);
+		}
 	}
 
 	public final BreakContext break_() throws RecognitionException {
@@ -2216,6 +2520,14 @@ public class CubeScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_switchBlock; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterSwitchBlock(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitSwitchBlock(this);
+		}
 	}
 
 	public final SwitchBlockContext switchBlock() throws RecognitionException {
@@ -2290,6 +2602,14 @@ public class CubeScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_switchCase; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterSwitchCase(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitSwitchCase(this);
+		}
 	}
 
 	public final SwitchCaseContext switchCase() throws RecognitionException {
@@ -2345,6 +2665,14 @@ public class CubeScriptParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_defaultCase; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).enterDefaultCase(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CubeScriptListener ) ((CubeScriptListener)listener).exitDefaultCase(this);
+		}
 	}
 
 	public final DefaultCaseContext defaultCase() throws RecognitionException {

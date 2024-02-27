@@ -1,4 +1,4 @@
-// Generated from d://postreset//repos//CSVM//python//CubeScript.g4 by ANTLR 4.13.1
+// Generated from d:/postreset/repos/CSVM/python/CubeScript.g4 by ANTLR 4.13.1
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -251,6 +251,30 @@ public class CubeScriptBaseListener implements CubeScriptListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitWhileBlock(CubeScriptParser.WhileBlockContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterParameterList(CubeScriptParser.ParameterListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitParameterList(CubeScriptParser.ParameterListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunctionBody(CubeScriptParser.FunctionBodyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunctionBody(CubeScriptParser.FunctionBodyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
