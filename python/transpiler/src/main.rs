@@ -8,10 +8,12 @@
 
 
 
-use parser;
-use lexer::Lexer;
-use parser::Parser;
-use lexer::Token;
+mod lexer;
+mod parser;
+mod tests;
+mod tokens;
+use crate::lexer::Lexer;
+use std::collections::VecDeque;
 use std::collections::HashMap;
 use std::fs::File;
 use std::io::prelude::*;
@@ -25,7 +27,8 @@ use std::path::Path;
 
 
 fn main() {
-    let mut lexer = Lexer::new();
+    let mut lexer = Lexer::
+    Lexer::new();
     // read an input file
     let input = std::fs::read("src/testcase.cusp").unwrap();
     let input = String::from_utf8(input).unwrap();
