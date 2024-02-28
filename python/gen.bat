@@ -1,0 +1,1 @@
+java -jar antlr.jar -Dlanguage=Python3 -visitor -o python/ -lib python/ -package python3 -Xexact-output-dir CubeScript.g4

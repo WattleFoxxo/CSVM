@@ -1,0 +1,7 @@
+using internet;
+using system;
+
+struct main(string[] args)
+{
+    print(a + b);
+}

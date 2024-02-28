@@ -1,8 +1,8 @@
 from antlr4 import CommonTokenStream, FileStream
 
-from CubeScriptLexer import CubeScriptLexer
-from CubeScriptParser import CubeScriptParser
-from CubeScriptVisitor import CubeScriptVisitor
+from python.CubeScriptLexer import CubeScriptLexer
+from python.CubeScriptParser import CubeScriptParser
+from python.CubeScriptVisitor import CubeScriptVisitor
 import re
 #### CSharp language ####
 
@@ -37,7 +37,7 @@ sizeofstatement = "sizeof"
 #########################
 
 # Read the input from a file
-input_stream = FileStream("OpenStudioCLI.cusp")
+input_stream = FileStream("cat.cusp")
 
 # Create a lexer and a token stream
 lexer = CubeScriptLexer(input_stream)
@@ -49,23 +49,28 @@ tree = parser.program()
 
 class CubeScriptVisitor(CubeScriptVisitor):
     def visitProgram(self, ctx: CubeScriptParser.ProgramContext):
-        def visitProgram(self, ctx: CubeScriptParser.ProgramContext):
-            print("Program")
-            self.visitChildren(ctx)
-            return
+        for statement in ctx.getChildren():
+            print(self.visit(statement))
 
 
-
-# Move the main() function below the MyTranspiler class definition
+        def visitExpression(self, ctx: CubeScriptParser.ExpressionContext):
+            if ctx.multOp():
+                return self.visit(ctx.expression(0)) * self.visit(ctx.expression(1))
+            elif ctx.addOp():
+                left_expr = self.visit(ctx.expression(0))
+                right_expr = self.visit(ctx.expression(1))
+                if left_expr is None or right_expr is None:
+                    return None
+                return left_expr + right_expr
+          
 def main():
     # Create a CubeScript() visitor
     visitor = CubeScriptVisitor()
-
+    print(visitor)
     # Visit the parse tree
-    code = visitor.visit(tree)
-
+    result = visitor.visitProgram(tree)
     # Print the result
-    print(code)
+    print(result)
 
 if __name__ == "__main__":
     main()
