@@ -13,104 +13,105 @@ impl Lexer {
         Self { tokens: Vec::new() }
     }
     pub fn lex(&mut self, code: &str) {
-        let mut iter = code.chars().peekable();
-        while let Some(c) = iter.next() {
-            match c {
-                '+' => self.tokens.push(Token::Plus),
-                '-' => self.tokens.push(Token::Minus),
-                '*' => self.tokens.push(Token::Star),
-                '/' => self.tokens.push(Token::Slash),
-                '(' => self.tokens.push(Token::LParen),
-                ')' => self.tokens.push(Token::RParen),
-                '{' => self.tokens.push(Token::LBrace),
-                '}' => self.tokens.push(Token::RBrace),
-                ';' => self.tokens.push(Token::Semicolon),
-                '=' => self.tokens.push(Token::Equal),
-                '[' => self.tokens.push(Token::LBracket),
-                ']' => self.tokens.push(Token::RBracket),
-                '.' => self.tokens.push(Token::Dot),
-                ',' => self.tokens.push(Token::Comma),
-                ':' => self.tokens.push(Token::Colon),
-                '"' => {
-                    let mut string = String::new();
-                    while let Some(&c) = iter.peek() {
-                        if c == '"' {
-                            iter.next();
-                            break;
-                        }
-                        string.push(c);
-                        iter.next();
-                    }
-                    self.tokens.push(Token::String(string));
+        //string lex
+        let mut string = String::new();
+        let mut in_string = false;
+        //number lex
+        let mut number = String::new();
+        let mut in_number = false;
+        //ident lex
+        let mut ident = String::new();
+        let mut in_ident = false;
+        //comment lex
+        let mut in_comment = false;
+        let mut in_block_comment = false;
+        let mut comment = String::new();
+        //operator lex
+        let mut operator = String::new();
+        let mut in_operator = false;
+        //tokenize the input
+        
+        for c in code.chars() {
+            if in_string {
+                if c == '"' {
+                    self.tokens.push(Token::String(string.clone()));
+                    string.clear();
+                    in_string = false;
+                } else {
+                    string.push(c);
                 }
-                'a'..='z' | 'A'..='Z' => {
-                    let mut ident = String::new();
+            } else if in_number {
+                if c.is_numeric() {
+                    number.push(c);
+                } else {
+                    self.tokens.push(Token::Number(number.parse().unwrap()));
+                    number.clear();
+                    in_number = false;
+                }
+            } else if in_ident {
+                if c.is_alphanumeric() {
                     ident.push(c);
-                    while let Some(&c) = iter.peek() {
-                        if c.is_alphanumeric() || c == '_' {
-                            ident.push(c);
-                            iter.next();
-                        } else if c == ':' {
-                            ident.push(c);
-                            iter.next();
-                            if let Some(&c) = iter.peek() {
-                                if c == ':' {
-                                    ident.push(c);
-                                    iter.next();
-                                }
-                            }
-                        } else if c == '.' {
-                            ident.push(c);
-                            iter.next();
-                        } else if c == '(' {
-                            ident.push(c);
-                            iter.next();
-                            if let Some(&c) = iter.peek() {
-                                if c == ')' {
-                                    ident.push(c);
-                                    iter.next();
-                                }
-                            }
-                        } else {
-                            break;
+                } else {
+                    self.tokens.push(Token::Ident(ident.clone()));
+                    ident.clear();
+                    in_ident = false;
+                }
+            } else if in_comment {
+                if c == '\n' {
+                    self.tokens.push(Token::String(comment.clone()));
+                    comment.clear();
+                    in_comment = false;
+                } else {
+                    comment.push(c);
+                }
+            } else if in_block_comment {
+                if c == '*' {
+                    in_block_comment = false;
+                }
+            } else if in_operator {
+                if c == '+' || c == '-' || c == '*' || c == '/' {
+                    operator.push(c);
+                } else {
+                    self.tokens.push(Token::Operator(operator.chars().next().unwrap()));
+                    operator.clear();
+                    in_operator = false;
+                }
+            } else {
+                match c {
+                    's' => {
+                        // struct
+                        if code.chars().nth(1).unwrap() == 't' && code.chars().nth(2).unwrap() == 'r' && code.chars().nth(3).unwrap() == 'u' && code.chars().nth(4).unwrap() == 'c' && code.chars().nth(5).unwrap() == 't' {
+                            self.tokens.push(Token::Struct("struct".to_string(), Vec::new(), Vec::new()));
                         }
                     }
-                    self.tokens.push(Token::Ident(ident));
-                }
-                '0'..='9' => {
-                    let mut num = String::new();
-                    num.push(c);
-                    while let Some(&c) = iter.peek() {
-                        if c.is_numeric() {
-                            num.push(c);
-                            iter.next();
-                        } else if c == '.' {
-                            num.push(c);
-                            iter.next();
-                        } else if c == 'e' || c == 'E' {
-                            num.push(c);
-                            iter.next();
-                        } else if c == '+' || c == '-' {
-                            num.push(c);
-                            iter.next();
-                        } else {
-                            break;
+                    '"' => {
+                        in_string = true;
+                    }
+                    '0'..='9' => {
+                        in_number = true;
+                        number.push(c);
+                    }
+                    'a'..='z' | 'A'..='Z' => {
+                        in_ident = true;
+                        ident.push(c);
+                    }
+                    '/' => {
+                        if code.chars().nth(1).unwrap() == '/' {
+                            in_comment = true;
+                        } else if code.chars().nth(1).unwrap() == '*' {
+                            in_block_comment = true;
                         }
                     }
-                    self.tokens.push(Token::Number(num.parse().unwrap()));
+                    '+' | '-' | '*' | '/' => {
+                        in_operator = true;
+                        operator.push(c);
+                    }
+                    _ => {}
                 }
-                '+' | '-' | '*' | '/' => {
-                    self.tokens.push(Token::Operator(c));
-                }
-                ' ' | '\n' | '\t' | '\r' | '\0' | '\x0C' => {}
-                _ => panic!("Unexpected character: {}", c),
             }
         }
-    }
 }
-
-
-
+}
 #[derive(Debug, PartialEq)]
 
 pub struct Parser {
@@ -359,7 +360,7 @@ pub fn transpile(node: Node) -> String {
         Node::Semicolon => ";\n".to_string(),
         Node::EOF => "".to_string(),
         Node::Struct(name, args, body) => {
-            let mut result = format!("struct {} {{\n", name);
+            let mut result = format!("struct {} {{ \n", name);
             for arg in args {
                 result.push_str(&transpile(arg));
             }
@@ -375,6 +376,7 @@ pub fn transpile(node: Node) -> String {
                 result.push_str(&transpile(arg));
             }
             result.push_str(");\n");
+            println!("{}", result);
             result
         }
         Node::Ident(name) => format!("{} ", name),
