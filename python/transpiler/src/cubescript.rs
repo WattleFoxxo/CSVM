@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 
 // lexer, tokens and parser for CubeScript
 
@@ -6,6 +7,8 @@
 pub struct Lexer {
     pub tokens: Vec<Token>,
 }
+
+// array for tokens
 
 
 impl Lexer {
@@ -31,6 +34,8 @@ impl Lexer {
         let mut in_operator = false;
         //tokenize the input
         
+
+
         for c in code.chars() {
             if in_string {
                 if c == '"' {
@@ -78,22 +83,45 @@ impl Lexer {
                 }
             } else {
                 match c {
-                    's' => {
-                        // struct
-                        if code.chars().nth(1).unwrap() == 't' && code.chars().nth(2).unwrap() == 'r' && code.chars().nth(3).unwrap() == 'u' && code.chars().nth(4).unwrap() == 'c' && code.chars().nth(5).unwrap() == 't' {
-                            self.tokens.push(Token::Struct("struct".to_string(), Vec::new(), Vec::new()));
-                        }
+                    ' ' | '\t' | '\n' => {}
+                    '{' => {
+                        self.tokens.push(Token::LBrace);
+                    }
+                    '}' => {
+                        self.tokens.push(Token::RBrace);
+                    }
+                    ',' => {
+                        self.tokens.push(Token::Comma);
                     }
                     '"' => {
                         in_string = true;
                     }
+                    '(' => {
+                        self.tokens.push(Token::LParen);
+                    }
+                    ')' => {
+                        self.tokens.push(Token::RParen);
+                    }
+                    '/' => {
+                        // check if seccond shash is present
+                        if code.chars().nth(1).unwrap() == '/' {
+                            in_comment = true;
+                        } else if code.chars().nth(1).unwrap() == '*' {
+                            in_block_comment = true;
+                        }
+                    }
+
                     '0'..='9' => {
                         in_number = true;
                         number.push(c);
                     }
                     'a'..='z' | 'A'..='Z' => {
+                        //get the character that we just checked for
                         in_ident = true;
                         ident.push(c);
+                    }
+                    ';' => {
+                        self.tokens.push(Token::Semicolon);
                     }
                     '/' => {
                         if code.chars().nth(1).unwrap() == '/' {
@@ -102,16 +130,38 @@ impl Lexer {
                             in_block_comment = true;
                         }
                     }
-                    '+' | '-' | '*' | '/' => {
+                    '+' | '-' | '*' | '/'| '='| '>' | '<'| '!' | '|' | '&'| '^'| '%'| '~'| '?'| ':' => {
                         in_operator = true;
                         operator.push(c);
                     }
                     _ => {}
                 }
+
             }
+
         }
+        // after doing char by char, now we can do string searching.
+
+            for i in 0..self.tokens.len() {
+                if self.tokens[i] == Token::Ident("struct".to_string()) {
+                    let mut args = Vec::new();
+                    let mut body: Vec<Token> = Vec::new();
+                    let mut j = i + 1;
+                    while self.tokens[j] != Token::LBrace {
+                        args.push(self.tokens[j].clone());
+                        j += 1;
+                    }
+                }
+            }
+
+            self.tokens.push(Token::EOF);
+        
+
+
+
+    }
 }
-}
+
 #[derive(Debug, PartialEq)]
 
 pub struct Parser {
@@ -136,37 +186,7 @@ impl Parser {
         let mut nodes = Vec::new();
         for token in &self.tokens
         {
-            match token {
-                Token::Number(num) => {
-                    nodes.push(Node::Number(*num));
-                }
-                Token::Add(left, op, right) => {
-                    nodes.push(Node::Add(*left, *op, *right));
-                }
-                Token::Sub(left, op, right) => {
-                    nodes.push(Node::Sub(*left, *op, *right));
-                }
-                Token::Mul(left, op, right) => {
-                    nodes.push(Node::Mul(*left, *op, *right));
-                }
-                Token::Div(left, op, right) => {
-                    nodes.push(Node::Div(*left, *op, *right));
-                }
-                Token::String(string) => {
-                    nodes.push(Node::String(string.clone()));
-                }
-                Token::Ident(ident) => {
-                    nodes.push(Node::Ident(ident.clone()));
-                }
-            // new line after each token
-                Token::Semicolon => {
-                    nodes.push(Node::Semicolon);
-                }
-                Token::EOF => {
-                    nodes.push(Node::EOF);
-                }
-                _ => {}
-            }
+            println!("{:?}\n", token );
         }
         nodes
     }
@@ -244,6 +264,7 @@ pub enum Token {
     Increment,
     Decrement,
     Operator(char),
+    clone,
     
 }
 
@@ -395,3 +416,4 @@ pub fn transpile(node: Node) -> String {
         }
     }
 }
+
