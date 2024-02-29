@@ -19,11 +19,7 @@ cpp: src/main.cpp
 ; this is the main folder for the CLI side of CubeScript, this is where the main checks and help documentation is not including the help.py file
 
 python: main.py 
-: CubeScriptLexer.py
-: CubeScriptParser.py
-: CubeScriptListener.py
-: CubeScriptVisitor.py
-: transpiler3.0.py
-: updater.py
-: version.py
+: transpiler
+: help.py
+
 ; this is the main folder of CubeScript, this is where the code is transpiled into CSharp code or any of the supported languages

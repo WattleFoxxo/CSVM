@@ -1,7 +1,12 @@
-using internet;
-using system;
-
-struct main(string[] args)
+using home;
+struct main(string args) 
 {
-    print(a + b);
+    print("Hello, World!");
+    While True{
+        string input = ReadLine();
+        if (input == "exit") {
+            break;
+        }
+        print("You entered: " + input);
+    }
 }

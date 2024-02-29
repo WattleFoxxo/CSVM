@@ -1,37 +1,48 @@
-///struct main (string[] args)
-/// {
-///   print("Hello, world!");
-/// }
-/// demo cubescript code
-///
+#![feature(try_blocks)]
+
+//struct main (string[] args)
+// {
+//   print("Hello, world!");
+// }
+// demo cubescript code
+//
 
 
 
 
-mod lexer;
+
+
 mod cubescript;
-mod tests;
-mod tokens;
-use crate::lexer::Lexer;
-use std::collections::VecDeque;
-use std::collections::HashMap;
-use std::fs::File;
-use std::io::prelude::*;
-use std::io::BufReader;
-use std::path::Path;
+
+use crate::cubescript::Node;
 
 
-
-
-
-
+use crate::cubescript::Parser;
 
 fn main() {
-    let mut lexer = Lexer::
-    Lexer::new();
-    // read an input file
-    let input = std::fs::read("src/testcase.cusp").unwrap();
-    let input = String::from_utf8(input).unwrap();
-    lexer.lex(&input);
-    println!("{:?}", lexer.tokens)
+    let result: Result<(), std::io::Error> = try {
+        let mut lexer = cubescript::Lexer::new();
+        // read an input file
+        let input = std::fs::read("src/testcase.cusp").unwrap();
+        // strip the newlines including any whitespace and tabs
+        let input = String::from_utf8_lossy(&input).replace("\n", "").replace("\t", "").replace(" ", "");
+        // tokenize the input
+        println!("{}", input);
+        lexer.lex(&input);
+        println!("{:?}", lexer.tokens);
+        let parser = cubescript::Parser::new(lexer.tokens).parse(); // Wrap lexer.tokens in a Vec
+        println!("\n {:?}", parser);
+        
+        let transpiled_code = cubescript::transpile(Node::Program(parser));
+
+        
+        println!("\n {:?}", transpiled_code);
+
+    };
+
+    if let Err(error) = result {
+        // Handle the error here
+        println!("An error occurred: {}", error);
+    }
 }
+    
