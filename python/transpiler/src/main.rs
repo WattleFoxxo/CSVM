@@ -9,7 +9,7 @@
 
 
 mod lexer;
-mod parser;
+mod cubescript;
 mod tests;
 mod tokens;
 use crate::lexer::Lexer;
