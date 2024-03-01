@@ -25,7 +25,7 @@ fn main() {
         // read an input file
         let input = std::fs::read("src/testcase.cusp").unwrap();
         // strip the newlines including any whitespace and tabs
-        let input = String::from_utf8_lossy(&input).replace("\n", "").replace("\t", "").replace(" ", "");
+        let input = String::from_utf8_lossy(&input).to_string();
         // tokenize the input
         println!("{}", input);
         lexer.lex(&input);

@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 
 // lexer, tokens and parser for CubeScript
 
@@ -7,6 +8,7 @@ pub struct Lexer {
     pub tokens: Vec<Token>,
 }
 
+// array for tokens
 
 impl Lexer {
     pub fn new() -> Self {
@@ -30,7 +32,7 @@ impl Lexer {
         let mut operator = String::new();
         let mut in_operator = false;
         //tokenize the input
-        
+
         for c in code.chars() {
             if in_string {
                 if c == '"' {
@@ -78,42 +80,129 @@ impl Lexer {
                 }
             } else {
                 match c {
-                    's' => {
-                        // struct
-                        if code.chars().nth(1).unwrap() == 't' && code.chars().nth(2).unwrap() == 'r' && code.chars().nth(3).unwrap() == 'u' && code.chars().nth(4).unwrap() == 'c' && code.chars().nth(5).unwrap() == 't' {
-                            self.tokens.push(Token::Struct("struct".to_string(), Vec::new(), Vec::new()));
-                        }
+                    ' ' | '\t' | '\n' => {}
+                    '{' => {
+                        self.tokens.push(Token::LBrace);
+                    }
+                    '}' => {
+                        self.tokens.push(Token::RBrace);
+                    }
+                    ',' => {
+                        self.tokens.push(Token::Comma);
                     }
                     '"' => {
-                        in_string = true;
-                    }
-                    '0'..='9' => {
-                        in_number = true;
-                        number.push(c);
-                    }
-                    'a'..='z' | 'A'..='Z' => {
-                        in_ident = true;
-                        ident.push(c);
-                    }
-                    '/' => {
-                        if code.chars().nth(1).unwrap() == '/' {
-                            in_comment = true;
-                        } else if code.chars().nth(1).unwrap() == '*' {
-                            in_block_comment = true;
+                        for c in code.chars() {
+                            if in_string {
+                                // Handle string characters
+                                if c == '"' {
+                                    self.tokens.push(Token::String(string.clone()));
+                                    string.clear();
+                                    in_string = false;
+                                } else {
+                                    string.push(c);
+                                }
+                            } else if in_ident {
+                                // Handle identifiers (functions/variables)
+                                if c.is_alphanumeric() || c == '_' {
+                                    ident.push(c);
+                                } else if c == '(' {
+                                    // Start of function call
+                                    self.tokens.push(Token::Call(ident.clone(), Vec::new()));
+                                    ident.clear();
+                                    in_ident = false;
+                                } else {
+                                    // End of identifier, push as token
+                                    self.tokens.push(Token::Ident(ident.clone()));
+                                    ident.clear();
+                                    in_ident = false;
+                                }
+                            } else {
+                                match c {
+                                    // Handle other characters and tokens
+                                    
+                                    '\0'..='/' => {
+                                        self.tokens.push(Token::Operator(c));
+                                    }
+                                    ':'..='\u{d7ff}' => {
+                                        self.tokens.push(Token::Operator(c));
+                                    }
+                                    '\u{e000}'..='\u{10ffff}' => {
+                                        self.tokens.push(Token::Operator(c));
+                                    }
+                                    '0'..='9' => {
+                                        for c in code.chars() {
+                                            if in_number {
+                                                if c.is_numeric() {
+                                                    number.push(c);
+                                                } else {
+                                                    self.tokens.push(
+                                                        Token::Number(number.parse().unwrap())
+                                                    );
+                                                    number.clear();
+                                                    in_number = false;
+                                                }
+                                            } else {
+                                                in_number = true;
+                                                number.push(c);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }let mut in_struct_block = false;
+                        let mut block_depth = 0;
+                        let mut index = 0;
+                        let mut field = String::new();
+                        let mut struct_fields = Vec::new();
+                        let mut struct_name = String::new();
+
+                        for token in self.tokens.iter().skip(index + 2) {
+                            match token {
+                                Token::Ident(ident) => {
+                                    struct_name = ident.clone();
+                                }
+                                _ => {}
+                            }
                         }
-                    }
-                    '+' | '-' | '*' | '/' => {
-                        in_operator = true;
-                        operator.push(c);
+
+                        
+
+                        // Parse struct block
+                        for token in self.tokens.iter().skip(index + 3) {
+                            match token {
+                                Token::LBrace => {
+                                    in_struct_block = true;
+                                    block_depth += 1;
+                                }
+                                Token::RBrace => {
+                                    block_depth -= 1;
+                                    if block_depth == 0 {
+                                        break; // End of struct block
+                                    }
+                                }
+                                Token::Ident(ident) if in_struct_block && block_depth == 1 => {
+                                    field = ident.clone();
+                                    struct_fields.push(field.clone());
+                                }
+                                _ => {}
+                            }
+                        }
+
+                        // Now we have the struct name and struct fields
+                        println!("Struct Name: {}", struct_name);
+                        println!("Struct Fields: {:?}", struct_fields);
                     }
                     _ => {}
                 }
             }
-        }
-}
-}
-#[derive(Debug, PartialEq)]
+            // after doing char by char, now we can do string searching.
 
+            self.tokens.push(Token::EOF);
+        }
+    }
+}
+
+#[derive(Debug, PartialEq)]
 pub struct Parser {
     pub tokens: Vec<Token>,
 }
@@ -125,48 +214,13 @@ impl Parser {
         self.tokens.get(0)
     }
     pub fn next(&mut self) -> Option<Token> {
-        if self.tokens.is_empty() {
-            None
-        } else {
-            Some(self.tokens.remove(0))
-        }
+        if self.tokens.is_empty() { None } else { Some(self.tokens.remove(0)) }
     }
 
     pub fn parse(&self) -> Vec<Node> {
         let mut nodes = Vec::new();
-        for token in &self.tokens
-        {
-            match token {
-                Token::Number(num) => {
-                    nodes.push(Node::Number(*num));
-                }
-                Token::Add(left, op, right) => {
-                    nodes.push(Node::Add(*left, *op, *right));
-                }
-                Token::Sub(left, op, right) => {
-                    nodes.push(Node::Sub(*left, *op, *right));
-                }
-                Token::Mul(left, op, right) => {
-                    nodes.push(Node::Mul(*left, *op, *right));
-                }
-                Token::Div(left, op, right) => {
-                    nodes.push(Node::Div(*left, *op, *right));
-                }
-                Token::String(string) => {
-                    nodes.push(Node::String(string.clone()));
-                }
-                Token::Ident(ident) => {
-                    nodes.push(Node::Ident(ident.clone()));
-                }
-            // new line after each token
-                Token::Semicolon => {
-                    nodes.push(Node::Semicolon);
-                }
-                Token::EOF => {
-                    nodes.push(Node::EOF);
-                }
-                _ => {}
-            }
+        for token in &self.tokens {
+            println!("{:?}\n", token);
         }
         nodes
     }
@@ -186,7 +240,6 @@ pub enum Node {
     Program(Vec<Node>),
     Semicolon,
     EOF,
-
 }
 #[derive(Debug, PartialEq)]
 pub enum Token {
@@ -244,7 +297,7 @@ pub enum Token {
     Increment,
     Decrement,
     Operator(char),
-    
+    clone,
 }
 
 // built in functions
@@ -275,7 +328,7 @@ fn add(args: Vec<Node>) -> Node {
         }
     }
     Node::Number(result)
-} 
+}
 fn sub(args: Vec<Node>) -> Node {
     let mut result = 0;
     for arg in args {
@@ -333,7 +386,6 @@ fn list(args: Vec<Node>) -> Node {
 
 fn tuple(args: Vec<Node>) -> Node {
     Node::Struct("Tuple ".to_string(), args, Vec::new())
-    
 }
 
 fn string(args: Vec<Node>) -> Node {
@@ -353,7 +405,6 @@ fn path(args: Vec<Node>) -> Node {
 pub fn program(nodes: Vec<Node>) -> Node {
     Node::Program(nodes)
 }
-
 
 pub fn transpile(node: Node) -> String {
     match node {
