@@ -1,4 +1,4 @@
-cargo-features = ["test-dummy-unstable"]
+# cargo-features = ["test-dummy-unstable"]
 [package]
 name = "transpiler"
 version = "0.1.0"

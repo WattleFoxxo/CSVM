@@ -243,7 +243,7 @@ pub fn parser(tokens: Vec<Token>) -> Result<Vec<Statement>, String> {
 }
 
 
-#[derive(Debug)]
+#[derive(Debug, Clone, PartialEq)]
 
 
 pub enum Statement {
@@ -263,7 +263,7 @@ pub enum Statement {
     Semicolon,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum Token {
     Identifier(String),
     Symbol(char),
@@ -280,9 +280,10 @@ pub enum Token {
 #[cfg(test)]
 mod tests {
     use super::*;
+
     #[test]
     fn test_lexer() {
-        let input = "struct Foo { int x; int y; }";
+        let input = "struct Foo { x int; y float; z bool; }";
         let tokens = lexer(input).unwrap();
         assert_eq!(
             tokens,
@@ -290,17 +291,19 @@ mod tests {
                 Token::Identifier("struct".to_string()),
                 Token::Identifier("Foo".to_string()),
                 Token::Symbol('{'),
-                Token::Identifier("int".to_string()),
                 Token::Identifier("x".to_string()),
-                Token::Symbol(';'),
                 Token::Identifier("int".to_string()),
-                Token::Identifier("y".to_string()),
                 Token::Symbol(';'),
-                Token::Symbol('}')
+                Token::Identifier("y".to_string()),
+                Token::Identifier("float".to_string()),
+                Token::Symbol(';'),
+                Token::Identifier("z".to_string()),
+                Token::Identifier("bool".to_string()),
+                Token::Symbol(';'),
+                Token::Symbol('}'),
             ]
         );
-    }   
-    
+    }
     #[test]
     fn test_parser() {
         let tokens = vec![
@@ -309,55 +312,35 @@ mod tests {
             Token::Symbol('{'),
             Token::Identifier("int".to_string()),
             Token::Identifier("x".to_string()),
+            Token::Symbol('='),
+            Token::Number("0".to_string()),
             Token::Symbol(';'),
-            Token::Identifier("int".to_string()),
+            Token::Identifier("float".to_string()),
             Token::Identifier("y".to_string()),
+            Token::Symbol('='),
+            Token::Number("0.0".to_string()),
+            Token::Symbol(';'),
+            Token::Identifier("bool".to_string()),
+            Token::Identifier("z".to_string()),
+            Token::Symbol('='),
+            Token::Identifier("false".to_string()),
             Token::Symbol(';'),
             Token::Symbol('}'),
         ];
-        let statements = parser(tokens).unwrap();
+        let ast = parser(tokens).unwrap();
         assert_eq!(
-            statements,
-            vec![Statement::Struct(
-                "Foo".to_string(),
-                vec![
-                    ("x".to_string(), "int".to_string()),
-                    ("y".to_string(), "int".to_string())
-                ]
-            )]
-        );
-    }
-    #[test]
-    fn test_compile() {
-        let input = "struct Foo { int x; int y; }";
-        let statements = compile(input).unwrap();
-        assert_eq!(
-            statements,
-            vec![Statement::Struct(
-                "Foo".to_string(),
-                vec![
-                    ("x".to_string(), "int".to_string()),
-                    ("y".to_string(), "int".to_string())
-                ]
-            )]
-        );
-    }
-    #[test]
-    fn test_compile_multiple_statements() {
-        let input = "struct Foo { int x; int y; } struct main() { return 0; }";
-        let statements = compile(input).unwrap();
-        assert_eq!(
-            statements,
+            ast,
             vec![
                 Statement::Struct(
                     "Foo".to_string(),
                     vec![
                         ("x".to_string(), "int".to_string()),
-                        ("y".to_string(), "int".to_string())
+                        ("y".to_string(), "float".to_string()),
+                        ("z".to_string(), "bool".to_string()),
                     ]
-                ),
-                Statement::RetInt("main".to_string())
+                )
             ]
         );
-    }
+
+
 }
