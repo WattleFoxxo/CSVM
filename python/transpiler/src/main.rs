@@ -25,12 +25,18 @@ fn main() {
         // read an input file
         let input = std::fs::read("src/testcase.cusp").unwrap();
         // strip the newlines including any whitespace and tabs
-        let input = String::from_utf8_lossy(&input);
+        let input = String::from_utf8_lossy(&input).replace("\n", "").replace("\t", "").replace(" ", "");
         // tokenize the input
         println!("{}", input);
         lexer.lex(&input);
         println!("{:?}", lexer.tokens);
-        Parser::new(lexer.tokens).parse();
+        let parser = cubescript::Parser::new(lexer.tokens).parse(); // Wrap lexer.tokens in a Vec
+        println!("\n {:?}", parser);
+        
+        let transpiled_code = cubescript::transpile(Node::Program(parser));
+
+        
+        println!("\n {:?}", transpiled_code);
 
     };
 

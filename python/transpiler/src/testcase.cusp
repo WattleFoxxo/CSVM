@@ -7,32 +7,6 @@ struct main(string args)
         if (input == "exit") {
             break;
         }
-        // print maths
-        else if input = "maths"
-        {
-            print("You entered: " + input);
-            print("Enter the first number");
-            int num1 = int.Parse(ReadLine());
-            print("Enter the second number");
-            int num2 = int.Parse(ReadLine());
-            print("Enter the operation");
-            string operation = ReadLine();
-            if (operation == "+") {
-                print(num1 + num2);
-            }
-            else if (operation == "-") {
-                print(num1 - num2);
-            }
-            else if (operation == "*") {
-                print(num1 * num2);
-            }
-            else if (operation == "/") {
-                print(num1 / num2);
-            }
-            else {
-                print("Invalid operation");
-            }
-        }
         print("You entered: " + input);
     }
 }
