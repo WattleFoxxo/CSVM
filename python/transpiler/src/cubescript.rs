@@ -9,7 +9,6 @@ pub struct Lexer {
 }
 
 // array for tokens
-use std::fmt::Display;
 
 
 impl Lexer {
@@ -17,23 +16,6 @@ impl Lexer {
         Self { tokens: Vec::new() }
     }
     pub fn lex(&mut self, code: &str) {
-        
-        let mut token_types = HashMap::new();
-        token_types.insert(Token::Ident("struct".to_string()), "struct");
-        token_types.insert(Token::Ident("call".to_string()), "call");
-        token_types.insert(Token::Ident("if".to_string()), "if");
-        token_types.insert(Token::Ident("else".to_string()), "else");
-        token_types.insert(Token::Ident("while".to_string()), "while");
-        token_types.insert(Token::Ident("for".to_string()), "for");
-        token_types.insert(Token::Ident("return".to_string()), "return");
-        token_types.insert(Token::Ident("break".to_string()), "break");
-        token_types.insert(Token::Ident("continue".to_string()), "continue");
-        token_types.insert(Token::Ident("true".to_string()), "true");
-        token_types.insert(Token::Ident("false".to_string()), "false");
-        token_types.insert(Token::Ident("null".to_string()), "null");
-        token_types.insert(Token::Ident("print".to_string()), "print");
-        token_types.insert(Token::Ident("println".to_string()), "println");
-       
         //string lex
         let mut string = String::new();
         let mut in_string = false;
@@ -160,57 +142,27 @@ impl Lexer {
         }
         // after doing char by char, now we can do string searching.
 
-            // for i in 0..self.tokens.len() {
-            //     //convert the token to a string for binary operations
-            //     let token = &self.tokens[i];
+            for i in 0..self.tokens.len() {
+                if self.tokens[i] == Token::Ident("struct".to_string()) {
+                    let mut args = Vec::new();
+                    let mut body: Vec<Token> = Vec::new();
+                    let mut j = i + 1;
+                    while self.tokens[j] != Token::LBrace {
+                        args.push(self.tokens[j].clone());
+                        j += 1;
+                    }
+                }
+            }
 
-            //     let token_str = format!("{:?}", token);
-
-            //     //check if the token is a binary operator
-            //     if token_str.contains("Operator") {
-            //         if token_str.contains("+") {
-            //             self.tokens[i] = Token::Plus;
-            //         } else if token_str.contains("-") {
-            //             self.tokens[i] = Token::Minus;
-            //         } else if token_str.contains("*") {
-            //             self.tokens[i] = Token::Star;
-            //         } else if token_str.contains("/") {
-            //             self.tokens[i] = Token::Slash;
-            //         } else if token_str.contains("=") {
-            //             self.tokens[i] = Token::Equal;
-            //         } else if token_str.contains(">") {
-            //             self.tokens[i] = Token::Greater;
-            //         } else if token_str.contains("<") {
-            //             self.tokens[i] = Token::Less;
-            //         } else if token_str.contains("!") {
-            //             self.tokens[i] = Token::Bang;
-            //         } else if token_str.contains("|") {
-            //             self.tokens[i] = Token::Or;
-            //         } else if token_str.contains("&") {
-            //             self.tokens[i] = Token::And;
-            //         } else if token_str.contains("^") {
-            //             self.tokens[i] = Token::Caret;
-            //         } else if token_str.contains("%") {
-            //             self.tokens[i] = Token::Mod;
-            //         } else if token_str.contains("~") {
-            //             self.tokens[i] = Token::Tilde;
-            //         } else if token_str.contains("?") {
-            //             self.tokens[i] = Token::Question;
-            //         } else if token_str.contains(":") {
-            //             self.tokens[i] = Token::Colon;
-            //         }
-            //     }
-               
-            
-        
             self.tokens.push(Token::EOF);
         
 
 
-            }
-    }
--
 
+    }
+}
+
+#[derive(Debug, PartialEq)]
 
 pub struct Parser {
     pub tokens: Vec<Token>,
@@ -240,7 +192,7 @@ impl Parser {
     }
 }
 
-
+#[derive(Debug, PartialEq)]
 pub enum Node {
     Struct(String, Vec<Node>, Vec<Node>),
     Call(String, Vec<Node>),
@@ -256,19 +208,8 @@ pub enum Node {
     EOF,
 
 }
-
-
-
-impl std::fmt::Debug for Token {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{:?}", self);
-        Ok(())
-    }
-}
-#[derive(Eq, Hash, PartialEq)]
+#[derive(Debug, PartialEq)]
 pub enum Token {
-  
-    
     Struct(String, Vec<Token>, Vec<Token>),
     Call(String, Vec<Token>),
     Ident(String),
@@ -296,8 +237,6 @@ pub enum Token {
     Star,
     Slash,
     Bang,
-    Mod,
-    Question,
     Tilde,
     Caret,
     And,
@@ -325,88 +264,75 @@ pub enum Token {
     Increment,
     Decrement,
     Operator(char),
-    Comment(String),
-    BlockComment(String),
-    If,
-    Else,
-    While,
-    For,
-    Foreach,
-    Break,
-    Continue,
-    Goto,
-    Return,
-   
-
+    clone,
     
 }
 
+// built in functions
 
-// // built in functions
+fn print(args: Vec<Node>) -> Node {
+    for arg in args {
+        match arg {
+            Node::Number(num) => {
+                println!("{}", num);
+            }
+            Node::String(string) => {
+                println!("{}", string);
+            }
+            _ => {}
+        }
+    }
+    Node::Number(0)
+}
 
-// fn print(args: Vec<Node>) -> Node {
-//     for arg in args {
-//         match arg {
-//             Node::Number(num) => {
-//                 println!("{}", num);
-//             }
-//             Node::String(string) => {
-//                 println!("{}", string);
-//             }
-//             _ => {}
-//         }
-//     }
-//     Node::Number(0)
-// }
-
-// fn add(args: Vec<Node>) -> Node {
-//     let mut result = 0;
-//     for arg in args {
-//         match arg {
-//             Node::Number(num) => {
-//                 result += num;
-//             }
-//             _ => {}
-//         }
-//     }
-//     Node::Number(result)
-// } 
-// fn sub(args: Vec<Node>) -> Node {
-//     let mut result = 0;
-//     for arg in args {
-//         match arg {
-//             Node::Number(num) => {
-//                 result -= num;
-//             }
-//             _ => {}
-//         }
-//     }
-//     Node::Number(result)
-// }
-// fn mul(args: Vec<Node>) -> Node {
-//     let mut result = 1;
-//     for arg in args {
-//         match arg {
-//             Node::Number(num) => {
-//                 result *= num;
-//             }
-//             _ => {}
-//         }
-//     }
-//     Node::Number(result)
-// }
-// fn div(args: Vec<Node>) -> Node {
-//     let mut result = 1;
-//     for arg in args {
-//         match arg {
-//             Node::Number(num) => {
-//                 result /= num;
-//             }
-//             _ => {}
-//         }
-//     }
-//     Node::Number(result)
-// }
+fn add(args: Vec<Node>) -> Node {
+    let mut result = 0;
+    for arg in args {
+        match arg {
+            Node::Number(num) => {
+                result += num;
+            }
+            _ => {}
+        }
+    }
+    Node::Number(result)
+} 
+fn sub(args: Vec<Node>) -> Node {
+    let mut result = 0;
+    for arg in args {
+        match arg {
+            Node::Number(num) => {
+                result -= num;
+            }
+            _ => {}
+        }
+    }
+    Node::Number(result)
+}
+fn mul(args: Vec<Node>) -> Node {
+    let mut result = 1;
+    for arg in args {
+        match arg {
+            Node::Number(num) => {
+                result *= num;
+            }
+            _ => {}
+        }
+    }
+    Node::Number(result)
+}
+fn div(args: Vec<Node>) -> Node {
+    let mut result = 1;
+    for arg in args {
+        match arg {
+            Node::Number(num) => {
+                result /= num;
+            }
+            _ => {}
+        }
+    }
+    Node::Number(result)
+}
 
 // built in structs
 

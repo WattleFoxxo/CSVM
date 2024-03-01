@@ -30,7 +30,7 @@ fn main() {
         println!("{}", input);
         lexer.lex(&input);
         println!("{:?}", lexer.tokens);
-        // Parser::new(lexer.tokens).parse();
+        Parser::new(lexer.tokens).parse();
 
     };
 
